@@ -351,7 +351,7 @@ Content-Type: application/json
 {
   "shipment": {
     "user": {
-      "id": "18d347d2-90bd-41c2-b362-e8e2989df7ee"
+      "id": "683c8c53-8dbb-45e2-b43c-ebab801e097a"
     },
     "status": {
       "id": 13,
@@ -366,21 +366,21 @@ Content-Type: application/json
       "name": "Juan Pedro"
     },
     "locationFrom": {
-      "id": "16",
-      "location": "Rincón Largo"
-    },
-    "locationTo": {
       "id": "1",
       "location": "E30"
     },
-    "date": "2024-02-05T14:00:00"
+    "locationTo": {
+      "id": "3",
+      "location": "Rincón Largo"
+    },
+    "date": "2024-02-08T11:02:00"
   },
   "cintas": [
     {
-      "id": "d6607367-ae66-4612-bf75-da7fc0708c0f"
+      "id": "517a3ec8-c3f5-4249-8a9d-f83bae2bb30c"
     },
     {
-      "id": "b2082810-7e64-465b-a8b2-fab462c9b7c7"
+      "id": "bd3ad0a1-dd02-4a04-b8dd-eecf9881547f"
     }
   ]
 }
