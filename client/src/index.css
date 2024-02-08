@@ -1,0 +1,164 @@
+html {
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: 'Noto Sans', sans-serif;	font-size: 16px;
+	-ms-text-size-ajust: 100%;
+	-moz-text-size-ajust: 100%;
+	-webkit-text-size-ajust: 100%;
+	text-size-adjust: 100%;
+	color: #000;
+}
+
+.content, .content-fluid {
+	display: block;
+	width: 100%;
+	margin: auto;
+}
+
+.content { max-width: 1200px; }
+
+.item-block {
+	display: block;
+	padding: 16px;
+	padding: 1rem;
+}
+
+.row-item{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:root{
+	--main-color: #0033A1;
+	--background-page: rgb(247, 248, 248);
+	--background-white: #FFF;
+	--background-gray: #6F6F6F;
+	--text-white: #FFF;
+	--borderWhite: #FFF;
+	--text-gray: #6F6F6F;
+	--border-gray: #CDCDCD;
+	--background-red: #F21D2F;
+	--background-green: #0DA200;
+	--background-button-primary: #0511F2;
+	--background-button-primary-hover: #040fd3;
+	--error: red;
+}
+
+body {
+	margin: 0;
+  overflow-x: hidden;
+	background-color: rgb(247, 248, 248);
+}
+
+*, *::after, *::before {
+	-ms-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+a { 
+	color: #4171ae;
+	text-decoration: none ;
+ }
+
+a:hover { color: #1c4885; }
+
+h1 { 
+	font-size: 32px;
+	font-size: 2rem;
+}
+
+h2 { 
+	font-size: 24px;
+	font-size: 1.5rem;
+}
+
+h3 { 
+	font-size: 24px;
+	font-size: 1.5rem;
+}
+
+h4 { 
+	font-size: 20px;
+	font-size: 1.25rem;
+}
+
+h5, a, abbr, b, code, dfn, em, i, li, mark, p, pre, strong { 
+	font-size: 16px;
+	font-size: 1rem;
+}
+
+h6, small { 
+	font-size: 12px;
+	font-size: .75rem;
+	font-weight: 400;
+}
+
+li {
+	margin-left: 16px;
+	margin-left: 1rem;
+	list-style-type: inherit;
+	list-style-position: inside;
+}
+
+abbr, dfn, em, i { font-style: italic; }
+
+b, strong {  font-weight: bold; }
+
+code, pre { font-family: monospace; }
+
+hr { 
+	margin: 16px auto;
+	margin: 1rem auto;
+	width: 100%;
+	border: thin solid #000;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary { display: block; }
+
+table { 
+	border-collapse: collapse; 
+}
+
+td, th {
+	text-align: left;
+  padding: 0.9rem 0.75rem;
+	border-bottom: 1px solid var(--border-gray);
+	color: var(--text-gray);
+}
+
+th {
+	font-weight: bold;
+	padding: 0 0.75rem 0.9rem 0.75rem;
+	border: 0;
+}
+
+audio, canvas, img, iframe, progress, svg, video {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+button, input[type="button"], input[type="submit"], input[type="reset"], input[type="file"], input[type="checkbox"], input[type="radio"], label, select { cursor: pointer; }
+
+*[disabled] {
+	cursor: default;
+	color: #999;
+	background-color: #DDD;
+}
+
+textarea { resize:none; }
+
+::-moz-selection {
+	color: #FFF;
+	background-color: #CCC;
+}
+
+::selection {
+	color: #FFF;
+	background-color: #CCC;
+}

@@ -1,0 +1,12 @@
+.reception-screen-title {
+  color: var(--text-gray);
+  position: relative;
+}
+
+
+.reception-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-top: 1rem;
+}

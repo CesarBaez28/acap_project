@@ -1,0 +1,9 @@
+.button-container-add-evidence {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem
+}
+
+.drop-zone-add-file {
+  margin-bottom: 1rem;
+}

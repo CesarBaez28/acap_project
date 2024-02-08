@@ -1,0 +1,18 @@
+.title-shipment-details {
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+}
+
+.shipment-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.table-details-shipments {
+  margin-top: 1rem;
+}
+
+.confirm-shipment-container {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,15 @@
+.side-bar {
+  background-color: var(--background-gray);    
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  color: var(--text-white);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 300;
+}
+
+.options {
+  padding: .5rem .3rem 0 .3rem ;
+}

@@ -1,0 +1,297 @@
+### Register
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "bf9d6beb-8fda-4515-8d4b-ca090d8717a1",
+  "username": "LuisAlmonte",
+  "email": "LuisAlmonte@gmail.com",
+  "password": "LuisAlmonte123#",
+  "employeeNumber": "acap2930",
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "creationDate": "2033-12-21T00:00:00",
+  "status": 1
+}
+
+### Edit user
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "bf9d6beb-8fda-4515-8d4b-ca090d8717a1",
+  "username": "LuisAlmonte",
+  "email": "LuisAlmonte@gmail.com",
+  "password": "LuisAlmonte123#",
+  "employeeNumber": "acap2930",
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "creationDate": "2033-12-21T00:00:00",
+  "status": 1
+}
+
+### Login 
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "employeeNumber": "acap2950",
+  "password": "CesarBaez123#"
+}
+
+### Search users
+GET http://localhost:8080/users/search?search=Empleado&userId=40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### find all users by status
+GET http://localhost:8080/users/find/1/40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### Assing privileges of a position
+POST http://localhost:8080/privileges
+Content-Type: application/json
+
+{
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "privileges": [
+    {
+      "id": 1,
+      "privilege": "Eliminar cinta"
+    },
+    {
+      "id": 2,
+      "privilege": "Visualizar usuarios"
+    },
+    {
+      "id": 3,
+      "privilege": "Crear usuario"
+    }
+  ]
+}
+
+### Remove privileges of a position
+POST http://localhost:8080/privileges/remove
+Content-Type: application/json
+
+{
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "privileges": [
+    {
+      "id": 4,
+      "privilege": "Eliminar cinta"
+    },
+    {
+      "id": 5,
+      "privilege": "Visualizar usuarios"
+    },
+    {
+      "id": 6,
+      "privilege": "Crear usuario"
+    }
+  ]
+}
+
+### Get privileges by position
+POST http://localhost:8080/privileges/get
+Content-Type: application/json
+
+{
+  "id": 1,
+  "position": "administrador"
+}
+
+### Insert and update cinta 
+POST http://localhost:8080/cintas
+Content-Type: application/json
+
+{
+  "id": "45d6a40e-2103-4f92-867c-64ec184090af",
+  "location": {
+    "id": "1",
+    "location": "E30"
+  },
+  "statusCinta": {
+    "id": "1",
+    "state": "Vigente"
+  },
+  "label": "GR4MARL5",
+  "description": "",
+  "creationDate": "2033-12-15T00:00:00",
+  "expiryDate": "2037-12-15T00:00:00",
+  "rententionDate": "2043-12-15T00:00:00",
+  "status": 1
+}
+
+### Delete a cinta (Change status to false and statusCinta to Eliminado)
+PUT http://localhost:8080/cintas/delete/43509b6c-d2e8-4615-9679-11996922cb22
+Content-Type: application/json
+
+{
+  "id": "3",
+  "state": "Eliminado"
+}
+
+### Get all status
+GET http://localhost:8080/status/findAll
+
+### Save a status
+POST http://localhost:8080/status/save
+Content-Type: application/json
+
+{
+  "description": "",
+  "state": "Dañado"
+}
+
+### Get all folders
+GET http://localhost:8080/folders/findAll
+
+### Get all positions
+GET http://localhost:8080/positions/findAll
+
+### Save a position
+POST http://localhost:8080/positions/save
+Content-Type: application/json
+
+{
+  "description": "",
+  "position": "Empleado",
+  "status": 1
+}
+
+### Get all locations
+GET http://localhost:8080/location/findAll
+
+### Save a location
+POST http://localhost:8080/location/save
+Content-Type: application/json
+
+{
+  "location": "La Vega",
+  "description": "",
+  "status": 1
+}
+
+### Get all cintas
+GET http://localhost:8080/cintas/1
+
+### Search cintas
+GET http://localhost:8080/cintas/search/vigente
+
+### Search cintas with Dates
+GET http://localhost:8080/cintas/searchWithDates?search=Caducado&begin=2023-12-14T00:00:00&end=2023-12-17T20:00:00
+
+### Get all the cintas between dates
+GET http://localhost:8080/cintas/findByDate?begin=2023-12-14T00:00:00&end=2023-12-18T20:00:00&status=1
+
+### Generate code bar of a cinta
+GET http://localhost:8080/cintas/barcode/GR4MARL5
+
+### Generate Pdf
+POST http://localhost:8080/cintas/pdf
+Content-Type: application/json
+
+### Generate Excel
+POST http://localhost:8080/cintas/excel
+Content-Type: application/json
+
+### Save a folder
+POST http://localhost:8080/folders/save
+Content-Type: application/json
+
+{
+  "name": "2025",
+  "description": "",
+  "status": 1
+}
+
+### Save and edit an evidence
+POST http://localhost:8080/evidence
+Content-Type: application/json
+
+{
+  "folders": {
+    "name": "2027",
+    "description": "",
+    "status": 1
+  },
+  "evidence": [
+    {
+      "path": "folder/evidence",
+      "name": "excel",
+      "size": "6MB",
+      "extension": "xlsx",
+      "evidenceDate": "2033-12-20T00:00:00"
+    },
+    {
+      "path": "folder/evidence",
+      "name": "image3",
+      "size": "4MB",
+      "extension": "JPG",
+      "evidenceDate": "2033-12-20T00:00:00"
+    }
+  ]
+}
+
+### Find all evidence by folder
+POST http://localhost:8080/evidence/search
+Content-Type: application/json
+
+{
+  "id": 8,
+  "name": "2028",
+  "description": "",
+  "status": 1
+}
+
+### Save and edit an evidence
+POST http://localhost:8080/evidence/save
+Content-Type: application/json
+
+{
+  "id": 20, 
+  "path": "folder/evidence",
+  "name": "image234532",
+  "size": "4MB",
+  "extension": "JPG",
+  "evidenceDate": "2033-12-20T00:00:00"
+}
+
+### Remove avidence of a folder
+POST http://localhost:8080/evidence/remove
+Content-Type: application/json
+
+{
+  "folders": {
+    "id": 8,
+    "name": "2028",
+    "description": "",
+    "status": 1
+  },
+  "evidence": [
+    {
+      "id": 19,
+      "path": "folder/evidence",
+      "name": "excel",
+      "size": "6MB",
+      "extension": "xlsx",
+      "evidenceDate": "2033-12-20T00:00:00"
+    },
+    {
+      "id": 20,
+      "path": "folder/evidence",
+      "name": "image3",
+      "size": "4MB",
+      "extension": "JPG",
+      "evidenceDate": "2033-12-20T00:00:00"
+    }
+  ]
+}

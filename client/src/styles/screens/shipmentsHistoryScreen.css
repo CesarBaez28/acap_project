@@ -1,0 +1,28 @@
+.shipmets-history-title {
+  color: var(--text-gray);
+}
+
+.input-area-shipmets-history-screen {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.icon-search-shipmets-history-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-date-search-shipmets-history {
+  border: solid 1px var(--main-color);
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+
+.shipments-history-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-top: 1rem;
+}

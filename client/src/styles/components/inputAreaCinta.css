@@ -1,0 +1,70 @@
+.input-area-cinta {
+  margin-top: 1rem;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.input-area-cinta-container {
+  display: flex;
+  gap: .7rem;
+  padding: .5rem 0;
+}
+
+.input-group-cinta {
+  display: flex;
+  align-items: center;
+}
+
+.input-search-cinta {
+  color: var(--text-gray);
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  border-right: 0;
+  height: 100%;
+  padding: .2rem .3rem;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.icon-search-cinta {
+  display: flex;
+  align-items: center;
+}
+
+.button-search {
+  padding: .2rem;
+  height: 100%;
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  background-color: var(--background-white);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.button-search:hover {
+  background-color: #0051ff1a;
+}
+
+.input-date {
+  border: solid 1px var(--main-color);
+  border-radius: 5px;
+  padding: .5rem;
+}
+
+.button-pdf {
+  background-color: var(--background-red);
+  padding: .3rem;
+  border: 0;
+  border-radius: 10px;
+}
+
+.button-excel {
+  background-color: var(--background-green);
+  padding: .3rem;
+  border: 0;
+  border-radius: 10px;
+}
+
+.report-group {
+  gap: .7rem;
+}

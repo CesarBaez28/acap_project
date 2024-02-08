@@ -1,0 +1,39 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  width: 100%;
+  background-color: var(--main-color);
+  position: fixed;
+  top: 0;
+  z-index: 200;
+}
+
+.header {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.buttons-header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1 1 auto;
+  margin-right: .5rem;
+}
+
+.button-header {
+  display: flex;
+  align-items: center;
+  color: var(--text-white);
+  border: 0;
+  background-color: var(--main-color);
+}
+
+.button-profile {
+  gap: .3rem;
+}
+
+.button-notification {
+  margin-right: .4rem;
+}

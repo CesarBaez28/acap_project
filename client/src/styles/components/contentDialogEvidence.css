@@ -1,0 +1,5 @@
+.button-container-edit-evidence {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}

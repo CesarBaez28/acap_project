@@ -1,0 +1,445 @@
+### Register
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "LuisAlmonte",
+  "email": "LuisAlmonte@gmail.com",
+  "password": "LuisAlmonte123#",
+  "employeeNumber": "acap2930",
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "location": {
+    "id": 1,
+    "name": "E30"
+  },
+  "creationDate": "2033-12-21T00:00:00",
+  "status": 1
+}
+
+### Edit user
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "25cf94ec-0ddd-4979-b9bd-3f8d739c2c50",
+  "username": "LuisAlmonte",
+  "email": "LuisAlmonte@gmail.com",
+  "password": "LuisAlmonte123#",
+  "employeeNumber": "acap2930",
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "creationDate": "2033-12-21T00:00:00",
+  "status": 1
+}
+
+### change password user
+PUT http://localhost:8080/users/update/password/40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+Content-Type: application/json
+
+{
+  "currentPassword": "CesarBaez123#",
+  "newPassword": "CesarBaez123#"
+}
+
+### Login 
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "employeeNumber": "acap2950",
+  "password": "CesarBaez123#"
+}
+
+### Get all branchOffices
+GET http://localhost:8080/branchOffices/findAll
+
+### Save branchOffice
+POST http://localhost:8080/branchOffices/save
+Content-Type: application/json
+
+{
+  "name": "La vega",
+  "status": 1
+}
+
+### Search users
+GET http://localhost:8080/users/search?search=Empleado&userId=40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### find all users by status
+GET http://localhost:8080/users/find/1/40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### Assing privileges of a position
+POST http://localhost:8080/privileges
+Content-Type: application/json
+
+{
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "privileges": [
+    {
+      "id": 1,
+      "privilege": "Eliminar cinta"
+    },
+    {
+      "id": 2,
+      "privilege": "Visualizar usuarios"
+    },
+    {
+      "id": 3,
+      "privilege": "Crear usuario"
+    }
+  ]
+}
+
+### Remove privileges of a position
+POST http://localhost:8080/privileges/remove
+Content-Type: application/json
+
+{
+  "position": {
+    "id": 1,
+    "position": "administrador"
+  },
+  "privileges": [
+    {
+      "id": 4,
+      "privilege": "Eliminar cinta"
+    },
+    {
+      "id": 5,
+      "privilege": "Visualizar usuarios"
+    },
+    {
+      "id": 6,
+      "privilege": "Crear usuario"
+    }
+  ]
+}
+
+### Get privileges by position
+POST http://localhost:8080/privileges/get
+Content-Type: application/json
+
+{
+  "id": 1,
+  "position": "administrador"
+}
+
+### Get all privileges 
+GET http://localhost:8080/privileges/findAll
+
+### Insert and update cinta 
+POST http://localhost:8080/cintas
+Content-Type: application/json
+
+{
+  "id": "19a7125a-2a04-4924-890e-9411d3933568",
+  "location": {
+    "id": "1",
+    "location": "E30"
+  },
+  "statusCinta": {
+    "id": "1",
+    "state": "Vigente"
+  },
+  "label": "GR6SABL6",
+  "description": "",
+  "creationDate": "2033-12-15T00:00:00",
+  "expiryDate": "2037-12-15T00:00:00",
+  "rententionDate": "2043-12-15T00:00:00",
+  "status": 1
+}
+
+### Delete a cinta (Change status to false and statusCinta to Eliminado)
+PUT http://localhost:8080/cintas/delete/43509b6c-d2e8-4615-9679-11996922cb22
+Content-Type: application/json
+
+{
+  "id": "3",
+  "state": "Eliminado"
+}
+
+### Change locations of multiple cintas
+PUT http://localhost:8080/cintas/changeLocations
+Content-Type: application/json
+
+{
+  "ids": [
+    "4506e5ad-a409-470a-8b75-003eb91af610",
+    "51d86808-92a5-4378-8e17-40d14de987bf"
+  ],
+  "location": {
+    "id": "2",
+    "location": "Centro de datos"
+  }
+}
+
+### Get all status
+GET http://localhost:8080/status/findAll
+
+### Save a status
+POST http://localhost:8080/status/save
+Content-Type: application/json
+
+{
+  "description": "",
+  "state": "Dañado"
+}
+
+### Get all folders
+GET http://localhost:8080/folders/findAll
+
+### Get all positions
+GET http://localhost:8080/positions/findAll
+
+### Save a position
+POST http://localhost:8080/positions/save
+Content-Type: application/json
+
+{
+  "description": "",
+  "position": "Empleado",
+  "status": 1
+}
+
+### Get all locations
+GET http://localhost:8080/location/findAll
+
+### Save a location
+POST http://localhost:8080/location/save
+Content-Type: application/json
+
+{
+  "location": "La Vega",
+  "description": "",
+  "status": 1
+}
+
+### Get all cintas
+GET http://localhost:8080/cintas/1
+
+### get cinta by label
+GET http://localhost:8080/cintas/findByLabel/GR4JUEL6
+
+### Search cintas
+GET http://localhost:8080/cintas/search/vigente
+
+### Search cintas with Dates
+GET http://localhost:8080/cintas/searchWithDates?search=Caducado&begin=2023-12-14T00:00:00&end=2023-12-17T20:00:00
+
+### Get all the cintas between dates
+GET http://localhost:8080/cintas/findByDate?begin=2023-12-14T00:00:00&end=2023-12-18T20:00:00&status=1
+
+### Generate code bar of a cinta
+GET http://localhost:8080/cintas/barcode/GR4MARL5
+
+### Generate Pdf
+POST http://localhost:8080/cintas/pdf
+Content-Type: application/json
+
+### Generate Excel
+POST http://localhost:8080/cintas/excel
+Content-Type: application/json
+
+### Save a folder
+POST http://localhost:8080/folders/save
+Content-Type: application/json
+
+{
+  "name": "2025",
+  "description": "",
+  "status": 1
+}
+
+### Save and edit an evidence
+POST http://localhost:8080/evidence
+Content-Type: application/json
+
+{
+  "folders": {
+    "name": "2027",
+    "description": "",
+    "status": 1
+  },
+  "evidence": [
+    {
+      "path": "folder/evidence",
+      "name": "excel",
+      "size": "6MB",
+      "extension": "xlsx",
+      "evidenceDate": "2033-12-20T00:00:00"
+    },
+    {
+      "path": "folder/evidence",
+      "name": "image3",
+      "size": "4MB",
+      "extension": "JPG",
+      "evidenceDate": "2033-12-20T00:00:00"
+    }
+  ]
+}
+
+### Find all evidence by folder
+POST http://localhost:8080/evidence/search
+Content-Type: application/json
+
+{
+  "id": 8,
+  "name": "2028",
+  "description": "",
+  "status": 1
+}
+
+### Save and edit an evidence
+POST http://localhost:8080/evidence/save
+Content-Type: application/json
+
+{
+  "id": 20, 
+  "path": "folder/evidence",
+  "name": "image234532",
+  "size": "4MB",
+  "extension": "JPG",
+  "evidenceDate": "2033-12-20T00:00:00"
+}
+
+### Remove avidence of a folder
+POST http://localhost:8080/evidence/remove
+Content-Type: application/json
+
+{
+  "folders": {
+    "id": 8,
+    "name": "2028",
+    "description": "",
+    "status": 1
+  },
+  "evidence": [
+    {
+      "id": 19,
+      "path": "folder/evidence",
+      "name": "excel",
+      "size": "6MB",
+      "extension": "xlsx",
+      "evidenceDate": "2033-12-20T00:00:00"
+    },
+    {
+      "id": 20,
+      "path": "folder/evidence",
+      "name": "image3",
+      "size": "4MB",
+      "extension": "JPG",
+      "evidenceDate": "2033-12-20T00:00:00"
+    }
+  ]
+}
+
+### Download folder
+GET http://localhost:8080/evidence/download/2022
+
+### Save cintas shipment
+POST http://localhost:8080/shipments/save
+Content-Type: application/json
+
+{
+  "shipment": {
+    "user": {
+      "id": "18d347d2-90bd-41c2-b362-e8e2989df7ee"
+    },
+    "status": {
+      "id": 13,
+      "state": "Pendiente"
+    },
+    "signature": {
+      "id": 1,
+      "path": "signature/JuanPedro"
+    },
+    "driver": {
+      "id": 1,
+      "name": "Juan Pedro"
+    },
+    "locationFrom": {
+      "id": "16",
+      "location": "Rincón Largo"
+    },
+    "locationTo": {
+      "id": "1",
+      "location": "E30"
+    },
+    "date": "2024-02-05T14:00:00"
+  },
+  "cintas": [
+    {
+      "id": "d6607367-ae66-4612-bf75-da7fc0708c0f"
+    },
+    {
+      "id": "b2082810-7e64-465b-a8b2-fab462c9b7c7"
+    }
+  ]
+}
+
+### Get cintas shipment by shipment
+GET http://localhost:8080/shipments/getAllByShipment?id=a1377b9c-ff0b-4ea0-a996-4432ec321840
+
+### Get top 15 cintas shipment by user
+GET http://localhost:8080/shipments/getTop15ByUser?userId=40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### Get top 15 shipment by user
+GET http://localhost:8080/shipments/fintTop15ByUser?userId=40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
+
+### Get shipments by user and between dates
+GET http://localhost:8080/shipments/findByUserAndBetweenDates/40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef/2024-01-20T13:48:00/2024-01-26T13:48:00
+
+### Get shipments by location and status
+GET http://localhost:8080/shipments/findByStatusAndLocation/13/16
+
+### Get all shipments between date
+GET http://localhost:8080/shipments/findByDateBetween/2024-01-20T00:00:00/2024-01-31T13:48:00
+
+### Delete shipment by Id
+DELETE http://localhost:8080/shipments/deleteById/e5cb61ca-e339-4556-b32b-082b9f579926
+
+### save cintas received
+POST http://localhost:8080/receiveCintas/save
+Content-Type: application/json
+
+{
+  "status": {
+    "id": 11
+  },
+  "shipment": {
+    "id": "8406fa8c-47fa-4ca6-83e8-28f13e5db141"
+  },
+  "userReceived": {
+    "id": "40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef"
+  },
+  "dateReceived": "2024-01-31T16:20:00"
+}
+
+### Get received cintas by location and status
+GET http://localhost:8080/receiveCintas/findByStatusAndLocationTo/11/16
+
+### Get received cintas by location and between date
+GET http://localhost:8080/receiveCintas/findByLocationToAndBetweenDate/16/2024-01-30T00:00:00/2024-01-31T13:48:00
+
+### Get received cintas between date
+GET http://localhost:8080/receiveCintas/findByDateReceived/2024-01-20T00:00:00/2024-01-31T23:59:00
+
+### Save a Driver
+POST Http://localhost:8080/drivers/save
+Content-Type: application/json
+
+{
+  "name": "Santiago Fernández",
+  "status": 1
+}
+
+### Get all drivers
+GET Http://localhost:8080/drivers/findAll

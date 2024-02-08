@@ -1,0 +1,16 @@
+.button-create-container {
+  display: flex;
+}
+
+.button-create {
+  font-size: .9rem;
+  color: var(--main-color);
+  background-color: var(--background-white);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: solid 1px var(--main-color);
+  border-radius: 8px;
+  padding: .3rem .5rem;
+  font-weight: bold;
+}

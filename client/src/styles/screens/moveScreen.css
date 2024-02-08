@@ -1,0 +1,23 @@
+.move-screen-title {
+  color: var(--text-gray);
+}
+
+.input-move-screen-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 0.4rem;
+}
+
+.button-container-move-screen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.items-section-move-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem; 
+}

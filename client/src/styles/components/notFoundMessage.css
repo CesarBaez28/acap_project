@@ -1,0 +1,10 @@
+.not-found-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found-text {
+  color: var(--text-gray);
+}

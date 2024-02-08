@@ -1,0 +1,13 @@
+.canvas-sing {
+  border: solid 1px var(--border-gray);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 200px;
+}
+
+.button-sing-container {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}

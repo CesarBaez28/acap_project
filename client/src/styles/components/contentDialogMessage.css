@@ -1,0 +1,16 @@
+.dialog-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+.dialog-message-text {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.button-dialo-message {
+  text-align: center;
+}

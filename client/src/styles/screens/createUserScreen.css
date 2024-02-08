@@ -1,0 +1,31 @@
+.create-user-title {
+  color: var(--text-gray);
+}
+
+.input-section-create-user {
+  margin-top: 1rem; 
+}
+
+.button-container-create-user {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.info-password {
+  margin-top: 1rem;
+}
+
+.info-card{
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  background-color: var(--background-white);
+}
+
+.info-card-container {
+  padding: 1rem;
+}
+
+.p-info-card-password {
+  margin-bottom: .5rem;
+}

@@ -1,0 +1,18 @@
+.accees-denied-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: .6rem;
+}
+
+.access-denied-title {
+  color: var(--text-gray);
+}
+
+.access-denied-text {
+  text-align: center;
+  max-width: 300px;
+  color: var(--text-gray);
+}

@@ -1,0 +1,39 @@
+.container-drop-zone {
+  border: solid 1px var(--border-gray);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: var(--background-white);
+}
+
+.dropzone {
+  margin: .4rem;
+  border: dotted 2px var(--main-color);
+  border-radius: 8px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropzone-files {
+  margin-top: .6rem;
+}
+
+.files-dropzone {
+  color: var(--text-gray);
+  overflow-x: hidden;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.files-list-dropzone {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.text-dropzone {
+  color: var(--text-gray);
+  text-align: center;
+}

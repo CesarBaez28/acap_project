@@ -1,0 +1,16 @@
+.title-create-folder {
+  color: var(--text-gray);
+}
+
+.input-section-create-folder {
+  margin-top: 1rem;
+}
+
+.button-container-create-folder {
+  display: flex;
+  gap: .4rem;
+}
+
+.drop-zone-create-folder {
+  margin-bottom: 1rem;
+}

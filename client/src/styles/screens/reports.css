@@ -1,0 +1,14 @@
+.report-title {
+  color: var(--text-gray);
+}
+
+.reports-input-section {
+  margin-top: 1rem;
+}
+
+.reports-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}

@@ -1,0 +1,29 @@
+.received-cintas-screen-title {
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+}
+
+.input-area-received-cintas-screen {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.icon-search-received-cintas-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-date-search-received-cintas {
+  border: solid 1px var(--main-color);
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+
+.received-cintas-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-top: 1rem;
+}

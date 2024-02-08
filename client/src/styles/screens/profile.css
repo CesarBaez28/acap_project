@@ -1,0 +1,41 @@
+.profile-title {
+  color: var(--text-gray);
+}
+
+.section-user-info {
+  margin-top: 1rem;
+}
+
+.user-info {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.user-info-title {
+  font-weight: bold;
+}
+
+.user-info-data {
+  color: var(--text-gray);
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.user-info-button {
+  display: flex;
+  align-items: center;
+}
+
+.section-security-account {
+  margin-top: 1rem;
+}
+
+.change-password-container {
+  margin-top: 1rem;
+}

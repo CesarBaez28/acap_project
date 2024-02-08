@@ -1,0 +1,27 @@
+.input-container {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+
+.input {
+  margin-top: 0.3rem;
+  padding: 5px;
+	padding: .5rem;
+  font-size: 16px;
+	font-size: 1rem;
+	border: solid 1px var(--border-gray);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.label {
+  font-weight: 300;
+  color: var(--main-color);
+}
+
+.error {
+  margin-top: 0.2rem;
+  font-weight: 300;
+  color: var(--error);
+  font-size: 0.9rem;
+}

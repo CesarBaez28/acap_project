@@ -1,0 +1,52 @@
+.title-user-screen {
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+}
+
+.input-area-users {
+  margin-top: 1rem;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.input-area-users-container {
+  width: 100%;
+  display: flex;
+  gap: .7rem;
+  padding: .5rem 0;
+}
+
+.input-group-users {
+  display: flex;
+  align-items: center;
+}
+
+.input-search-users {
+  color: var(--text-gray);
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  border-right: 0;
+  height: 100%;
+  padding: .6rem .3rem;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.button-search-user {
+  padding: .2rem;
+  height: 100%;
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  background-color: var(--background-white);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.button-search-user:hover {
+  background-color: #0051ff1a;
+}
+
+.icon-search-users {
+  display: flex;
+  align-items: center;
+}

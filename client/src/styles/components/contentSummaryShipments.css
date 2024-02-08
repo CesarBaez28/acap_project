@@ -1,0 +1,33 @@
+
+.content-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.view-details-summary {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.title-sumary-content {
+  color: var(--text-gray);
+}
+
+.text-summary-container {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+@media (min-width: 0) and (max-width: 48em) {
+  .content-summary-container {
+    gap: 1rem;
+  }
+
+  .view-details-summary {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,53 @@
+.button-container-move-cinta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.input-search-dialog-move-cinta {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-search-move-cinta {
+  height: 100%;
+  width: 100%;
+  color: var(--text-gray);
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  padding: .4rem .3rem;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.button-search-move-screen {
+  padding: .4rem;
+  font-size: 1rem;
+  border: solid 1px var(--main-color);
+  background-color: var(--background-white);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.icon-search-move-cinta {
+  display: flex;
+  align-items: center;
+}
+
+.input-search-dialog-move-cinta-container {
+  display: flex;
+  width: 30%;
+}
+
+.section-table-dialog-move-cinta {
+  border: solid 1px var(--border-gray);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.checkBox-move-cinta {
+  width: 1.2rem;
+  height: 1.2rem;
+}

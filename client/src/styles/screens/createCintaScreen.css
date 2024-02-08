@@ -1,0 +1,29 @@
+.create-cinta-title {
+  color: var(--text-gray);
+}
+
+.input-section-create-cinta {
+  margin-top: 1.2rem;
+}
+
+.button-container-create-cinta {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.expiry-date-container {
+  display: flex;
+  width: 100%;
+}
+
+.expiry-date-buttons-container {
+  margin-left: 0.3rem;
+  margin-top: 1.2rem;
+}
+
+.expiry-date-buttons {
+  display: flex;
+  gap: 0.3rem;
+}
+

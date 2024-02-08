@@ -1,0 +1,16 @@
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.link {
+  letter-spacing: 0.7px;
+  color: var(--text-white);
+  padding-bottom: 2rem;
+}
+
+.link:hover {
+  color: var(--text-white);
+}

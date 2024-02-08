@@ -1,0 +1,17 @@
+.input-select-evidence-container {
+  margin-top: 1rem;
+  gap: .6rem;
+  display: flex;
+  align-items: center;
+}
+
+.title-evidence {
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+}
+
+.buttons-evidence-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
