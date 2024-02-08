@@ -64,7 +64,9 @@ const Content = () => {
   }
 
   const handleRegister = async () => {
-    console.log("register")
+    if (signatureData !== null && cintas.length !== 0 && locationValue !== null &&  driverValue !== null) {
+      console.log("register")
+    }
   }
 
   return <>
@@ -136,7 +138,6 @@ const Content = () => {
     <Dialog
       ContentDialog={
         <ContentDialogSignature
-          data={signatureData}
           setData={setSignatureData}
           setModalShow={setModalShowSignature}
         />
