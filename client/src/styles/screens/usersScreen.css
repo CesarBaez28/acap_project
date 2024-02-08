@@ -3,10 +3,18 @@
   margin-bottom: 1rem;
 }
 
+/*Ocultar scroll Chrome, Safari y Opera*/
+.input-area-users::-webkit-scrollbar{
+  display: none;
+}
+
 .input-area-users {
   margin-top: 1rem;
   display: flex;
   overflow-x: scroll;
+  /*Ocultar scroll IE, EDGE y Firefox*/
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .input-area-users-container {

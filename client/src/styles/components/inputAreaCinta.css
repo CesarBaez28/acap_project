@@ -1,4 +1,11 @@
+/*Ocultar scroll Chrome, Safari y Opera*/
+.input-area-cinta::-webkit-scrollbar {
+  display: none;
+}
+
 .input-area-cinta {
+  /*Ocultar scroll IE, EDGE y Firefox*/
+  -ms-overflow-style: none;
   margin-top: 1rem;
   display: flex;
   overflow-x: scroll;

@@ -24,4 +24,12 @@
 .input-modal-container {
   max-height: 580px;
   overflow-y: scroll;
+  /*Ocultar scroll IE, EDGE y Firefox*/
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/*Ocultar scroll Chrome, Safari y Opera*/
+.input-modal-container::-webkit-scrollbar{
+  display: none;
 }

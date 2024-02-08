@@ -7,7 +7,14 @@
   color: var(--text-white);
   overflow-x: hidden;
   overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   z-index: 300;
+}
+
+/*Ocultar scroll Chrome, Safari y Opera*/
+.side-bar::-webkit-scrollbar{
+  display: none;
 }
 
 .options {
