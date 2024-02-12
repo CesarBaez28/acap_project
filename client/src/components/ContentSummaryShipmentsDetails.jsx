@@ -1,6 +1,13 @@
+import { getSignatureImage } from '../api/getSignatureImage'
 import '../styles/components/contentSummaryShipments.css'
+import { ButtonSecundary } from './ButtonSecondary'
 
 export function ContentSummaryShipmentsDetails({ shipments }) {
+
+  const viewSignature = async () => {
+    await getSignatureImage(shipments.signature.path)
+  }
+
   return <>
     <div className="content-summary col-12 col-md-4">
 
@@ -28,7 +35,20 @@ export function ContentSummaryShipmentsDetails({ shipments }) {
 
       <div className='text-summary-container'>
         <p className='title-sumary-content'>Firma</p>
-        <p>Ver firma</p>
+        <ButtonSecundary
+          onClick={viewSignature}
+          styles={{
+            display: "flex",
+            alignItems: 'center',
+            padding: "0",
+            color: "#0033a1",
+            border: "0",
+            borderRadius: "0",
+            backgroundColor: "#FFF"
+          }}
+        >
+          <span> Ver firma </span>
+        </ButtonSecundary>
       </div>
 
       <div className='text-summary-container'>

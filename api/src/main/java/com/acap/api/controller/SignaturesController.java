@@ -2,20 +2,32 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.dto.SignatureDownLoadDTO;
 import com.acap.api.dto.SignatureUploadDTO;
 import com.acap.api.model.Signatures;
 import com.acap.api.service.SignaturesService;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping(path = "signatures")
@@ -70,4 +82,26 @@ public class SignaturesController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while saving the image");
     }
   }
+
+  @PostMapping("/downLoad")
+  public ResponseEntity<Object> downLoadSignature(@RequestBody SignatureDownLoadDTO signature) {
+    try {
+      String path = signature.getPath();
+
+      String imagePath = imageUploadDir + File.separator + path;
+
+      BufferedImage image = ImageIO.read(new File(imagePath));
+
+      return ResponseEntity
+          .ok()
+          .contentType(MediaType.IMAGE_JPEG)
+          .body(image);
+
+    } catch (Exception e) {
+      return ResponseEntity
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("Error while downloading the signature image: " + e.getMessage());
+    }
+  }
+
 }
