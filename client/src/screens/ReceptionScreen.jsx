@@ -9,10 +9,20 @@ import { UserContext } from "../contexts/userContext"
 import { useGetShipmentsByStatusAndLocation } from "../hooks/useGetShipmentsByStatusAndLocation"
 import { NotFoundMessage } from "../components/NotFoundMessage"
 import { ConditionalRender } from "../components/ConditionalRender"
+import { filterDataById } from "../utils/filterData"
+import { deleteShipment } from "../api/deleteShipment"
 
 const Content = () => {
   const { user } = useContext(UserContext)
   const [shipments, setShipments, isLoading] = useGetShipmentsByStatusAndLocation(user.location.id)
+
+  const handleDelete = async (id) => {
+    const response = await deleteShipment(id)
+    if (response === 200) {
+      filterDataById(shipments, setShipments, id);
+    }
+  }
+
   return <>
     <h2 className="reception-screen-title">Recepción de envíos</h2>
 
@@ -24,7 +34,11 @@ const Content = () => {
               key={item.id}
               date={item.formattedDate}
               title={"Movimiento de cinta"}
-              content={<ContentSummaryShipments detailsScreen={'/reception/details'} shipments={item} />}
+              content={<ContentSummaryShipments 
+                detailsScreen={'/reception/details'} 
+                deleteFunction={() => handleDelete(item.id)}
+                shipments={item} 
+              />}
             />
           ))
         ) : (

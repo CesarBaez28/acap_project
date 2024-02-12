@@ -4,8 +4,14 @@ import TrashSvg from '../assets/trash.svg?react'
 import '../styles/components/contentSummaryShipments.css'
 import { PENDING_STATUS_ID } from "../constants"
 import { ButtonSecundary } from "./ButtonSecondary"
+import { getSignatureImage } from "../api/getSignatureImage"
 
 export function ContentSummaryShipments({ shipments, detailsScreen, deleteFunction }) {
+
+  const viewSignature = async () => {
+    await getSignatureImage(shipments.signature.path)
+  }
+
   return <>
     <div className="content-summary col-12 col-md-4">
 
@@ -33,7 +39,20 @@ export function ContentSummaryShipments({ shipments, detailsScreen, deleteFuncti
 
       <div className='text-summary-container'>
         <p className='title-sumary-content'>Firma</p>
-        <p>Ver firma</p>
+        <ButtonSecundary
+          onClick={viewSignature}
+          styles={{
+            display: "flex",
+            alignItems: 'center',
+            padding: "0",
+            color: "#0033a1",
+            border: "0",
+            borderRadius: "0",
+            backgroundColor: "#FFF"
+          }}
+        >
+          <span> Ver firma </span>
+        </ButtonSecundary>
       </div>
 
       <div className='text-summary-container'>
@@ -64,10 +83,10 @@ export function ContentSummaryShipments({ shipments, detailsScreen, deleteFuncti
       {shipments.status.id === PENDING_STATUS_ID
         ?
         <ButtonSecundary
-          onClick = {deleteFunction}
-          styles={{display: "flex", alignItems: 'center', padding: ".4rem .6rem", }}
+          onClick={deleteFunction}
+          styles={{ display: "flex", alignItems: 'center', padding: ".4rem .6rem", }}
         >
-          <TrashSvg style={{fill: "#0033a1"}} />
+          <TrashSvg style={{ fill: "#0033a1" }} />
           <span> Cancelar envío </span>
         </ButtonSecundary>
         : null

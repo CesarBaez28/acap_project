@@ -24,9 +24,14 @@ import { useGetPartialLocations } from '../hooks/useGetPartialLocations.js'
 import { getCintaByLabel } from '../api/getCintaByLabel.js'
 import { processedCintasData } from '../utils/processedCintasData.js'
 import { useBarcodeScanner } from '../hooks/useBarcodeScanner.js'
+import { uploadSignatureImage } from '../api/upLoadSignatureImage.js'
+import { saveSignaturePath } from '../api/saveSignaturePath.js'
+import { saveShipment } from '../api/saveShipment.js'
+import { useNavigate } from 'react-router-dom'
 
 const Content = () => {
   const { user } = useContext(UserContext)
+  const navigate = useNavigate()
   const [locations, setLocations] = useGetPartialLocations([NOT_BRANCH_OFFICES, user.location.location].flat())
   const [drivers, setDrivers] = useGetDrivers()
   const [locationValue, setLocationValue] = useState(null)
@@ -64,7 +69,15 @@ const Content = () => {
   }
 
   const handleRegister = async () => {
-    console.log("register")
+    if (signatureData !== null && cintas.length !== 0 && locationValue !== null && driverValue !== null) {
+      const driver = drivers.find(({ id }) => id === driverValue)
+      const locationTo = locations.find(({ id }) => id === locationValue)
+      const locationFrom = user.location
+      const filePath = await uploadSignatureImage(signatureData, driver.name)
+      const signature = await saveSignaturePath(filePath)
+      const shipment = await saveShipment({ dataShipment: { user, signature, driver, locationFrom, locationTo }, cintas: cintas })
+      navigate('/shipments')
+    }
   }
 
   return <>
@@ -136,7 +149,6 @@ const Content = () => {
     <Dialog
       ContentDialog={
         <ContentDialogSignature
-          data={signatureData}
           setData={setSignatureData}
           setModalShow={setModalShowSignature}
         />
@@ -145,7 +157,6 @@ const Content = () => {
       title={'Firmar'}
       open={modalShowSignature}
     />
-
   </>
 }
 

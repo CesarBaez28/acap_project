@@ -34,7 +34,7 @@ public class ShipmentsCintasController {
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting cintas shipment");
     }
-  }
+}
 
   @GetMapping("/getAllByShipment")
   public ResponseEntity<Object> getAllByShipment(@RequestParam UUID id) {
@@ -52,7 +52,7 @@ public class ShipmentsCintasController {
       List<ShipmentsCintas> shipmentCinta = shipmentsCintasService.saveShipmentsCintas(data);
       return ResponseEntity.status(HttpStatus.CREATED).body(shipmentCinta);   
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering cintas shipment");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering cintas shipment: " + e.getMessage());
     }
   }
 }
