@@ -21,12 +21,6 @@ export async function doneSigning() {
 
   /* Get base64String */
   let response = await sign.GetSignatureImage();
-  let returnString = ''
-
-  if (response != null) {
-    let location = response.search("base64,");
-    returnString = response.slice(location + 7, response.length);
-  }
 
   let lCDTablet = Topaz.Canvas.LCDTablet;
   await lCDTablet.ClearTablet();
@@ -36,7 +30,7 @@ export async function doneSigning() {
   await sigWindow.Sign.SignComplete();
 
   deleteTags()
-  return returnString
+  return response
 }
 
 /* Clear signature */
@@ -56,7 +50,7 @@ export async function clearSign() {
 
 export function deleteTags() {
   // Get all <myextdataelem> tags 
-  var myextdataelems = document.querySelectorAll("myextdataelem")
+  let myextdataelems = document.querySelectorAll("myextdataelem")
 
   // Delete all <myextdataelem> tags
   myextdataelems.forEach(function (element) {
@@ -67,14 +61,14 @@ export function deleteTags() {
 async function ValidateLCDDemo() {
 
   isValidDemo = true;
-  var isInstalled = document.documentElement.getAttribute('SigPlusExtLiteExtension-installed');
+  let isInstalled = document.documentElement.getAttribute('SigPlusExtLiteExtension-installed');
   if (!isInstalled) {
     isValidDemo = false;
     alert("Topaz SigPlusExtLite extension is either not installed or disabled. Please install or enable extension.");
     return;
   }
   if (navigator.userAgent.indexOf("Firefox") != -1) {
-    var extensionVersion = document.documentElement.getAttribute('Extension-version');
+    let extensionVersion = document.documentElement.getAttribute('Extension-version');
     if (extensionVersion == null) {
       isValidDemo = false;
       alert("A new version of the SigPlusExtLite extension is available: https://addons.mozilla.org/en-US/firefox/addon/topaz-sigplusextlite-extension/. \nIt is highly recommended that the new extension be installed.");
@@ -83,11 +77,10 @@ async function ValidateLCDDemo() {
   }
 
   let global = Topaz.Global;
-  var response = await global.GetDeviceStatus();
+  let response = await global.GetDeviceStatus();
   if (response == 0) {
     isValidDemo = false;
     alert("Topaz SigPlusExtLite could not find a topaz device attached.");
-    return;
   }
   else if (response == -2) {
     isValidDemo = false;

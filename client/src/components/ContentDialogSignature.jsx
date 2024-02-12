@@ -1,8 +1,6 @@
 import { ButtonSecundary } from "./ButtonSecondary"
 import '../styles/components/contentDialogSignature.css'
-import { startSigning } from "../utils/singWithTopazSystem"
-import { clearSign } from "../utils/singWithTopazSystem"
-import { doneSigning } from "../utils/singWithTopazSystem"
+import { startSigning, clearSign, doneSigning } from "../utils/singWithTopazSystem"
 
 export function ContentDialogSignature({setData, setModalShow }) {
 
@@ -13,6 +11,7 @@ export function ContentDialogSignature({setData, setModalShow }) {
   const handleDone = async () => {
     const stringBase64 = await doneSigning()
     setData(stringBase64)
+    setModalShow(false)
   }
 
   const handleErase = async () => {
