@@ -1,26 +1,38 @@
 package com.acap.api.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.acap.api.model.Shipments;
 import com.acap.api.repository.ShipmentsCintasRepository;
 import com.acap.api.repository.ShipmentsRepository;
+import com.acap.api.repository.SignaturesRepository;
 
 @Service
 public class ShipmentsService {
   private final ShipmentsRepository shipmentsRepository;
   private final ShipmentsCintasRepository shipmentsCintasRepository;
+  private SignaturesRepository signaturesRepository;
 
-  public ShipmentsService(ShipmentsRepository shipmentsRepository, ShipmentsCintasRepository shipmentsCintasRepository) {
+  @Value("${evidence.upload-signatures-dir}")
+  private String imageUploadDir;
+
+  public ShipmentsService(ShipmentsRepository shipmentsRepository, ShipmentsCintasRepository shipmentsCintasRepository, SignaturesRepository signaturesRepository) {
     this.shipmentsRepository = shipmentsRepository;
     this.shipmentsCintasRepository = shipmentsCintasRepository;
+    this.signaturesRepository = signaturesRepository;
   }
 
   public List<Shipments> findTop15ByUserId(UUID userId) {
@@ -49,8 +61,19 @@ public class ShipmentsService {
       // Eliminar registros en shipments_cintas asociados a este shipment
       shipmentsCintasRepository.deleteByShipments(shipment);
 
+      // Eliminar imagen de la firma asociada a este shipment
+      Path filePath = Paths.get(imageUploadDir, shipment.getSignature().getPath());
+      if (Files.exists(filePath)) { try {
+        Files.delete(filePath);
+      } catch (IOException e) {
+        e.printStackTrace();
+      } }
+
       // Eliminar el shipment
       shipmentsRepository.delete(shipment);
+
+      // Eiminar ruta de la firma en Base de datos
+      signaturesRepository.deleteById(shipment.getSignature().getId());
     }
   }
 }
