@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 export const API = 'http://localhost:8080'
+export const WebSocketUrl = 'ws://localhost:8080/notifications'
 export const LOCATIONS_NOT_ALLOWED_TO_MOVE_CINTAS = ['Rincón Largo']
 export const NOT_BRANCH_OFFICES = ['Centro de datos']
 export const SUPER_USER_BRANCH_OFFICE = 'E30'

@@ -39,6 +39,9 @@ public class Shipments {
   @OneToMany(mappedBy = "shipment")
   private Set<CintasReceived> cintasReceived;
 
+  @OneToMany(mappedBy = "shipment")
+  private Set<ShipmentsNotifications> shipmentsNotifications;
+
   @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinColumn(name = "driver_id", nullable = false)
   private Drivers driver;
