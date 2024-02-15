@@ -28,6 +28,9 @@ import { uploadSignatureImage } from '../api/upLoadSignatureImage.js'
 import { saveSignaturePath } from '../api/saveSignaturePath.js'
 import { saveShipment } from '../api/saveShipment.js'
 import { useNavigate } from 'react-router-dom'
+import { sendMessage } from '../api/webSocket.js'
+import { saveShipmentNotification } from '../api/saveShipmentNotification.js'
+import { formatDate, getDataObject } from '../utils/formatDateData.js'
 
 const Content = () => {
   const { user } = useContext(UserContext)
@@ -76,6 +79,17 @@ const Content = () => {
       const filePath = await uploadSignatureImage(signatureData, driver.name)
       const signature = await saveSignaturePath(filePath)
       const shipment = await saveShipment({ dataShipment: { user, signature, driver, locationFrom, locationTo }, cintas: cintas })
+      const message = "Tiene un envío a su sucursal" 
+      const shipmetNotification = await saveShipmentNotification({dataNotification: {shipment: shipment[0].shipments, message}});
+
+      const dataObject = getDataObject(shipment[0].shipments.date)
+      const formattedDate = formatDate(dataObject)
+      sendMessage({
+        message: message,
+        date: formattedDate,
+        location: shipment[0].shipments.locationTo.location
+      })
+
       navigate('/shipments')
     }
   }

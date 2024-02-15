@@ -37,3 +37,54 @@
 .button-notification {
   margin-right: .4rem;
 }
+
+.notifications-count-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.notification-count {
+  position: absolute;
+  background-color: var(--background-red);
+  border-radius: 50%;
+  padding: 2px 6px;
+  top: -6px;
+  right: -5px;
+}
+
+.notifications-pop-up-container {
+  position: absolute;
+  background-color: var(--background-white);
+  box-shadow: 0 1px 2px #0000005e;
+  bottom: -505px;
+  right: 40px;
+  /*Ocultar scroll IE, EDGE y Firefox*/
+  -ms-overflow-style: none;
+  overflow-y: scroll;
+}
+
+.notifications-pop-up-container::-webkit-scrollbar{
+  display: none;
+} 
+
+.notifications-pop-up {
+  padding: 1rem;
+  width: 250px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.notification-text {
+  padding: .4rem .4rem;
+  border-left: 2px solid var(--main-color);
+  font-size: .8rem;
+  color: var(--text-gray);
+  font-weight: bold;
+}
+
+.notification-not-found {
+  text-align: center;
+}

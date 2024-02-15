@@ -100,8 +100,6 @@ public class ShipmentsCintasService {
         cintas.stream().map(Cintas::getId).collect(Collectors.toList()));
 
 
-    System.out.println(cintasData);
-
     List<ShipmentsCintas> shipmentsCintas = new ArrayList<>();
     for (Cintas cinta : cintasData) {
       ShipmentsCintas shipmentCinta = new ShipmentsCintas(cinta, shipment);

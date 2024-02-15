@@ -17,7 +17,7 @@ import { useGetShipmentsCintas } from '../hooks/useGetShipmentsCintas'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ButtonSecundary } from '../components/ButtonSecondary'
 import { saveCintasReceived } from '../api/saveCintasReceived'
-import { DELIVERED_STATUS_ID, RECEIVED_STATUS_ID } from '../constants'
+import { RECEIVED_STATUS_ID } from '../constants'
 import { useContext, useState } from 'react'
 import { UserContext } from '../contexts/userContext'
 

@@ -1,18 +1,32 @@
 import { WebSocketUrl } from "../constants"
 
-export const socket = new WebSocket(WebSocketUrl)
+let socket = null
+let onMessageCallback = null
 
-export function onMessage(messageCallback) {
+export function createSocket(requestParam) {
+  const socketUrlWithParam = `${WebSocketUrl}?param=${requestParam}`
+  
+  socket = new WebSocket(socketUrlWithParam)
+
   socket.onmessage = (event) => {
     const message = event.data
-    messageCallback(message)
-  }
+    if (onMessageCallback) {
+      onMessageCallback(message)
+    }
+  };
 
-  socket.onerror = (error) => {
-    console.error("WebSocket error:", error)
-  }
+  return socket
 }
 
-export function sendMessage(message) {
-  socket.send(message)
+export function onMessage(messageCallback) {
+  onMessageCallback = messageCallback;
+}
+
+export function sendMessage(messageObject) {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    const jsonString = JSON.stringify(messageObject);
+    socket.send(jsonString);
+  } else {
+    console.error("WebSocket is not open.");
+  }
 }

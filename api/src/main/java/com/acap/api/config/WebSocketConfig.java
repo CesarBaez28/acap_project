@@ -9,17 +9,18 @@ import com.acap.api.service.NotificationsService;
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer{
+public class WebSocketConfig implements WebSocketConfigurer {
+
 
   private final NotificationsService notificationsService;
 
-  public WebSocketConfig (NotificationsService notificationsService) {
+  public WebSocketConfig(NotificationsService notificationsService) {
     this.notificationsService = notificationsService;
   }
 
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     registry.addHandler(notificationsService, "/notifications")
-            .setAllowedOrigins("*");
+        .setAllowedOrigins("*");
   }
 }

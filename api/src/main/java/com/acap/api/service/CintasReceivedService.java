@@ -15,11 +15,13 @@ import com.acap.api.model.Cintas;
 import com.acap.api.model.CintasReceived;
 import com.acap.api.model.Shipments;
 import com.acap.api.model.ShipmentsCintas;
+import com.acap.api.model.ShipmentsNotifications;
 import com.acap.api.model.Status;
 import com.acap.api.model.User;
 import com.acap.api.repository.CintasReceivedRepository;
 import com.acap.api.repository.CintasRepository;
 import com.acap.api.repository.ShipmentsCintasRepository;
+import com.acap.api.repository.ShipmentsNotificationsRepository;
 import com.acap.api.repository.ShipmentsRepository;
 import com.acap.api.repository.StatusRepository;
 import com.acap.api.repository.UserRepository;
@@ -32,6 +34,7 @@ public class CintasReceivedService {
   private final UserRepository userRepository;
   private final ShipmentsRepository shipmentsRepository;
   private final CintasRepository cintasRepository;
+  private final ShipmentsNotificationsRepository shipmentsNotificationsRepository;
 
   public CintasReceivedService(
       CintasReceivedRepository cintasReceivedRepository,
@@ -39,7 +42,8 @@ public class CintasReceivedService {
       StatusRepository statusRepository,
       UserRepository userRepository,
       ShipmentsRepository shipmentsRepository,
-      CintasRepository cintasRepository) {
+      CintasRepository cintasRepository, 
+      ShipmentsNotificationsRepository shipmentsNotificationsRepository) {
 
     this.cintasReceivedRepository = cintasReceivedRepository;
     this.shipmentsCintasRepository = shipmentsCintasRepository;
@@ -47,6 +51,7 @@ public class CintasReceivedService {
     this.userRepository = userRepository;
     this.shipmentsRepository = shipmentsRepository;
     this.cintasRepository = cintasRepository;
+    this.shipmentsNotificationsRepository = shipmentsNotificationsRepository;
   }
 
   public CintasReceived saveCintasReceived (CintasReceived cintasReceived) {
@@ -71,6 +76,8 @@ public class CintasReceivedService {
       cinta.setLocation(cintasReceived.getShipment().getLocationTo());
       cintas.add(cinta);
     }
+
+    shipmentsNotificationsRepository.deleteByShipments(cintasReceived.getShipment());
     
     cintasRepository.saveAll(cintas);
     

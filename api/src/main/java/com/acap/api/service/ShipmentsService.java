@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.acap.api.model.Shipments;
 import com.acap.api.repository.ShipmentsCintasRepository;
+import com.acap.api.repository.ShipmentsNotificationsRepository;
 import com.acap.api.repository.ShipmentsRepository;
 import com.acap.api.repository.SignaturesRepository;
 
@@ -24,15 +25,21 @@ import com.acap.api.repository.SignaturesRepository;
 public class ShipmentsService {
   private final ShipmentsRepository shipmentsRepository;
   private final ShipmentsCintasRepository shipmentsCintasRepository;
-  private SignaturesRepository signaturesRepository;
+  private final SignaturesRepository signaturesRepository;
+  private final ShipmentsNotificationsRepository shipmentsNotificationsRepository;
 
   @Value("${evidence.upload-signatures-dir}")
   private String imageUploadDir;
 
-  public ShipmentsService(ShipmentsRepository shipmentsRepository, ShipmentsCintasRepository shipmentsCintasRepository, SignaturesRepository signaturesRepository) {
+  public ShipmentsService(ShipmentsRepository shipmentsRepository,
+      ShipmentsCintasRepository shipmentsCintasRepository,
+      SignaturesRepository signaturesRepository,
+      ShipmentsNotificationsRepository shipmentsNotificationsRepository) {
+        
     this.shipmentsRepository = shipmentsRepository;
     this.shipmentsCintasRepository = shipmentsCintasRepository;
     this.signaturesRepository = signaturesRepository;
+    this.shipmentsNotificationsRepository = shipmentsNotificationsRepository;
   }
 
   public List<Shipments> findTop15ByUserId(UUID userId) {
@@ -61,13 +68,18 @@ public class ShipmentsService {
       // Eliminar registros en shipments_cintas asociados a este shipment
       shipmentsCintasRepository.deleteByShipments(shipment);
 
+      // Eliminar notificaciones asociadas a este shipmente
+      shipmentsNotificationsRepository.deleteByShipments(shipment);
+
       // Eliminar imagen de la firma asociada a este shipment
       Path filePath = Paths.get(imageUploadDir, shipment.getSignature().getPath());
-      if (Files.exists(filePath)) { try {
-        Files.delete(filePath);
-      } catch (IOException e) {
-        e.printStackTrace();
-      } }
+      if (Files.exists(filePath)) {
+        try {
+          Files.delete(filePath);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
 
       // Eliminar el shipment
       shipmentsRepository.delete(shipment);
