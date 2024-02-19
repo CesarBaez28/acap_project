@@ -12,7 +12,6 @@ import { useContext } from "react"
 import { UserContext } from "../contexts/userContext"
 import { AccessibleOption } from "../components/AccesibleOption"
 import { ACCESS } from "../constants"
-import { LoadingIndicator } from "../components/LoadingIndicator"
 import { ConditionalRender } from "../components/ConditionalRender"
 
 const Content = () => {

@@ -1,12 +1,14 @@
 package com.acap.api.service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.acap.api.Constants;
 import com.acap.api.model.Cintas;
 import com.acap.api.model.Locations;
 import com.acap.api.model.Status;
@@ -81,5 +83,41 @@ public class CintasService {
     for (UUID uuid : ids) {
       cintasRepository.changeLocation(uuid, location);  
     }
+  }
+
+  // Update status cintas to expired
+  public List<Cintas> updateStatusCintasExpired (LocalDateTime currentDate, Long locationId) {
+    Optional<Status> status = statusRepository.findById(Constants.EXPIRED_STATUS_ID);
+
+    if (!status.isPresent()) { return Collections.emptyList(); }
+
+    cintasRepository.updateStatusForExpiredCintas(currentDate, locationId, status.get());
+
+    return getExpiredCintas(currentDate, locationId);
+  }
+
+  // Update status cintas to retained
+  public List<Cintas> updateStatusCitasRetained (LocalDateTime currentDate, Long locationId) {
+    Optional<Status> status = statusRepository.findById(Constants.RETAINED_STATUS_ID);
+
+    if (!status.isPresent()) { return Collections.emptyList(); }
+
+    cintasRepository.updateStatusForRetainedCintas(currentDate, locationId, status.get());
+
+    return getRetainedCintas(currentDate, locationId);
+  }
+
+  // Find expired Cintas
+  public List<Cintas> getExpiredCintas (LocalDateTime currenDate, Long locationId) {
+    return cintasRepository.findByExpiryDateLessThanEqualAndStatusIsTrueAndLocation(currenDate, locationId);
+  }
+
+  // Find retained cintas
+  public List<Cintas> getRetainedCintas (LocalDateTime currentDate, Long locationId) {
+    Optional<Locations> location = locationsRepository.findById(locationId);
+
+    if (!location.isPresent()) { return Collections.emptyList(); }
+
+    return cintasRepository.findByRententionDateLessThanEqualAndStatusIsTrueAndLocation(currentDate, location.get());
   }
 }

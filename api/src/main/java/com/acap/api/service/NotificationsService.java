@@ -49,13 +49,13 @@ public class NotificationsService extends TextWebSocketHandler {
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
     
     JsonObject convertedObject = new Gson().fromJson(message.getPayload(), JsonObject.class);
-    String locationTo = convertedObject.get("location").getAsString();
+    String location = convertedObject.get("location").getAsString();
 
     for (WebSocketSession webSocketSession : sessions) {
 
       User targetUser = (User) webSocketSession.getAttributes().get("user");
 
-      if (Objects.equals(targetUser.getLocation().getLocation(), locationTo)) {
+      if (Objects.equals(targetUser.getLocation().getLocation(), location)) {
         webSocketSession.sendMessage(message);
       } 
     }

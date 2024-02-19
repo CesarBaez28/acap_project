@@ -26,6 +26,17 @@ public interface CintasRepository extends JpaRepository<Cintas, UUID> {
 
     List<Cintas> findByCreationDateBetweenAndStatus(LocalDateTime begin, LocalDateTime end, boolean status);
 
+    
+    @Query("SELECT c FROM Cintas c " + 
+           "JOIN c.statusCinta s " + 
+           "JOIN c.location l " + 
+           "WHERE c.expiryDate <= :expiryDate AND c.rententionDate > :expiryDate AND c.status = true AND l.id = :locationId")
+    List<Cintas> findByExpiryDateLessThanEqualAndStatusIsTrueAndLocation(
+        @Param("expiryDate") LocalDateTime expiryDate, 
+        @Param("locationId") Long locationId);
+
+    List<Cintas> findByRententionDateLessThanEqualAndStatusIsTrueAndLocation(LocalDateTime localDate, Locations location);
+
     @Query("SELECT c FROM Cintas c " +
             "JOIN c.statusCinta s " +
             "JOIN c.location l " +
@@ -54,4 +65,14 @@ public interface CintasRepository extends JpaRepository<Cintas, UUID> {
     @Modifying
     @Query("UPDATE Cintas c SET c.location = :newLocation WHERE c.id = :cintasId")
     void changeLocation(@Param("cintasId") UUID cintasId, @Param("newLocation") Locations location);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Cintas c SET c.statusCinta = :newState WHERE c.expiryDate <= :currentDate AND c.rententionDate > :currentDate AND c.status = true AND c.location.id = :locationId")
+    void updateStatusForExpiredCintas(@Param("currentDate") LocalDateTime currentDate, @Param("locationId") Long locationId, @Param("newState") Status newState);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Cintas c SET c.statusCinta = :newState WHERE c.rententionDate <= :currentDate AND c.status = true AND c.location.id = :locationId")
+    void updateStatusForRetainedCintas(@Param("currentDate") LocalDateTime currentDate, @Param("locationId") Long locationId, @Param("newState") Status newState);
 }

@@ -443,3 +443,20 @@ Content-Type: application/json
 
 ### Get all drivers
 GET Http://localhost:8080/drivers/findAll
+
+### update cintas to expired
+GET http://localhost:8080/cintas/getExpiredCintas/2024-02-16T00:00:00/1
+
+### update cintas to retained
+GET http://localhost:8080/cintas/getRetainedCintas/2031-02-16T00:00:00/1
+
+### save cintas notification
+POST http://localhost:8080/cintas/notifications/save
+Content-Type: application/json
+
+{
+  "message": "La cinta GR4D0L5 caducó"
+}
+
+### Find cintas notifications by location
+GET http://localhost:8080/cintas/notifications/findByLocation/1

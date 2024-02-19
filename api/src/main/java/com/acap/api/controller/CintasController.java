@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -170,4 +171,25 @@ public class CintasController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
   }
+
+  @GetMapping("/getExpiredCintas/{currentDate}/{locationId}")
+  public ResponseEntity<Object> getExpiredCintas (@PathVariable LocalDateTime currentDate, @PathVariable Long locationId) {
+    try {
+      List<Cintas> expiredCintas = cintasService.updateStatusCintasExpired(currentDate, locationId);
+      return ResponseEntity.status(HttpStatus.OK).body(expiredCintas);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error geting expired cintas: " + e);
+    }      
+  }
+
+  @GetMapping("/getRetainedCintas/{currentDate}/{locationId}")
+  public ResponseEntity<Object> getRetainedCintas (@PathVariable LocalDateTime currentDate, @PathVariable Long locationId) {
+    try {
+      List<Cintas> retainedCintas = cintasService.updateStatusCitasRetained(currentDate, locationId);
+      return ResponseEntity.status(HttpStatus.OK).body(retainedCintas);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error geting retained cintas: " + e);
+    }
+  }
+  
 }

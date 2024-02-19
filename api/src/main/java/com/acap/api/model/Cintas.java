@@ -32,6 +32,9 @@ public class Cintas {
   @OneToMany(mappedBy = "cintas")
   private Set<ShipmentsCintas> shipmentsCintas;
 
+  @OneToMany(mappedBy = "cinta")
+  private Set<CintasNotifications> cintasNotifications;
+
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "locations_id", nullable = false)
   private Locations location;

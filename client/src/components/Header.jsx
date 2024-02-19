@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { useNotifications } from '../hooks/useNotifications'
 import { useGetShipmentsNotifications } from '../hooks/useGetShipmentsNotifications'
 import { useState } from 'react'
+import { useGetCintasNotifications } from '../hooks/useGetCintasNotifications'
 
 export function Header() {
   const [showNotifications, setShowNotifications] = useState(false)
   const [notifications, setNotifications] = useNotifications()
   useGetShipmentsNotifications(notifications, setNotifications)
+  useGetCintasNotifications(notifications, setNotifications)
 
   const navigate = useNavigate()
 
