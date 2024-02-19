@@ -7,6 +7,8 @@ import { ButtonSecundary } from "./ButtonSecondary"
 import { useGetPositions } from "../hooks/useGetPositions"
 import { useGetPartialLocations } from "../hooks/useGetPartialLocations"
 
+import '../styles/components/contentDialogUser.css'
+
 import { savePosition } from "../api/savePosition"
 import { saveLocation } from "../api/saveLocation"
 import { editUserValidationSchema } from "../validactionsSchemas/userValidactionSchema"
@@ -108,7 +110,7 @@ export function ContentDialogUser({ data, setData, selectedItem, setModalShow })
           { value: 0, label: 'Inactivo' }]}
         />
 
-        <div className="button-container-create-user">
+        <div className="button-container-edit-user">
           <ButtonSecundary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecundary>
           <ButtonPrimary type="submit">Guardar</ButtonPrimary>
         </div>

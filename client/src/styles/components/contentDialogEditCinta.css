@@ -1,0 +1,5 @@
+.button-container-edit-cinta {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}

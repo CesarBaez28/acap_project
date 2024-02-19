@@ -5,6 +5,8 @@ import { CreatableInputSelect } from "./CreatableInputSelectFormik"
 import { ButtonPrimary } from "./ButtonPrimary"
 import { ButtonSecundary } from "./ButtonSecondary"
 
+import '../styles/components/contentDialogEditCinta.css'
+
 import { useGetLocations } from "../hooks/useGetLocations"
 import { useGetStatus } from "../hooks/useGetStatus"
 import { saveLocation } from "../api/saveLocation"
@@ -103,7 +105,7 @@ export function ContentDialogEditCinta({ setModalShow, selectedItem, setData, da
           type='date'
           autoComplete='rententionDate'
         />
-        <div className="button-container-create-cinta">
+        <div className="button-container-edit-cinta">
           <ButtonSecundary
             styles={{ backgroundColor: "#FFF" }}
             type="button"
