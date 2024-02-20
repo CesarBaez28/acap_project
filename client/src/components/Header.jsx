@@ -26,6 +26,9 @@ export function Header() {
   return (
     <div className="header-container">
       <header className="header">
+        <div className='header-title-container'>
+          <h1 className='header-title'>ABCS Application</h1>
+        </div>
         <div className='buttons-header-container'>
           <button onClick={handleNotifications} className='button-header button-notification'>
 
@@ -59,9 +62,6 @@ export function Header() {
 
           <button onClick={handleProfileButton} className='button-header button-profile'>
             <ProfileSvg />
-            <span>
-              Perfil de usuario
-            </span>
           </button>
         </div>
       </header>

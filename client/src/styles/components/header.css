@@ -14,6 +14,19 @@
   flex: 1 1 auto;
 }
 
+.header-title-container {
+  color: var(--text-white);
+  margin-left: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
 .buttons-header-container {
   display: flex;
   justify-content: flex-end;
