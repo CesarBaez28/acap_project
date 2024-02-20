@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acap.api.Constants;
@@ -28,9 +30,10 @@ public class CintasService {
     this.statusRepository = status;
   }
 
-  // Get all the cintas order by creation date
-  public List<Cintas> getCintas (boolean status) {
-    return cintasRepository.findAllByStatusOrderByCreationDateAsc(status);
+  // Get top 15 cintas order by creation date desc
+  public List<Cintas> getCintas (boolean status) { 
+    Pageable pageable = PageRequest.of(0, 15);
+    return cintasRepository.findAllByStatusOrderByCreationDateDesc(status, pageable);
   }
 
   // Search cintas without date

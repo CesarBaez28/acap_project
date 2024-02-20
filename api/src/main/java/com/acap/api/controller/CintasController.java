@@ -51,7 +51,7 @@ public class CintasController {
       List<Cintas> cintas = cintasService.getCintas(status);
       return ResponseEntity.status(HttpStatus.OK).body(cintas);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while saving a cinta");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while geting cintas");
     }
   }
 
