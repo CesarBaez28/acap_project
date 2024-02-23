@@ -55,6 +55,15 @@ Content-Type: application/json
   "password": "CesarBaez123#"
 }
 
+### Login security
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "acap2950",
+  "password": "CesarBaez123#"
+}
+
 ### Get all branchOffices
 GET http://localhost:8080/branchOffices/findAll
 
@@ -183,6 +192,8 @@ Content-Type: application/json
 
 ### Get all status
 GET http://localhost:8080/status/findAll
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwODY5OTA2OSwiZXhwIjoxNzA4Nzg1NDY5fQ.F5JjH34XsjpPQa44f0CSzJfJkSXGq0hrmV3n_WvlE0Y
+
 
 ### Save a status
 POST http://localhost:8080/status/save
@@ -224,6 +235,8 @@ Content-Type: application/json
 
 ### Get all cintas
 GET http://localhost:8080/cintas/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwODY5OTA2OSwiZXhwIjoxNzA4Nzg1NDY5fQ.F5JjH34XsjpPQa44f0CSzJfJkSXGq0hrmV3n_WvlE0Y
+
 
 ### get cinta by label
 GET http://localhost:8080/cintas/findByLabel/GR4JUEL6

@@ -22,6 +22,7 @@ export function LoginScreen() {
   const loginHandler = async (values, resetForm, setErrors) => {
     const { employeeNumber, password } = values
     const result = await login(employeeNumber, password, setErrors)
+    console.log(result)
     if ( result ) {
       const permissions = await getPermissions(result.position)
 

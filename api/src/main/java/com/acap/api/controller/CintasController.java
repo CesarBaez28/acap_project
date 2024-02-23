@@ -27,6 +27,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping(path = "cintas")
+@PreAuthorize("hasRole('Visualizar cintas')")
 public class CintasController {
 
   private final CintasService cintasService;
@@ -98,7 +100,6 @@ public class CintasController {
     }
   }
   
-
   @PostMapping
   public ResponseEntity<Object> saveCinta(@Valid @RequestBody Cintas cinta, BindingResult bindingResult) {
 
