@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.acap.api.repository.UserTokenRepository;
 import com.acap.api.service.UserDetailsServiceImpl;
 import com.acap.api.utils.JwtUtils;
 
@@ -22,10 +23,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
   private final JwtUtils jwtUtils;
   private final UserDetailsServiceImpl userDetailsServiceImpl;
+  private final UserTokenRepository userTokenRepository;
 
-  public JwtAuthorizationFilter(JwtUtils jwtUtils, UserDetailsServiceImpl userDetailsServiceImpl) {
+  public JwtAuthorizationFilter(JwtUtils jwtUtils, UserDetailsServiceImpl userDetailsServiceImpl, UserTokenRepository userTokenRepository) {
     this.jwtUtils = jwtUtils;
     this.userDetailsServiceImpl = userDetailsServiceImpl;
+    this.userTokenRepository = userTokenRepository;
   }
 
   @Override
@@ -38,7 +41,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
       String token = tokenHeader.substring(7);
 
-      if (jwtUtils.isTokenValid(token)) {
+      var isTokenValid = userTokenRepository.findByToken(token)
+        .map(t -> !t.getRevoked()) 
+        .orElse(false);
+ 
+      if (jwtUtils.isTokenValid(token) && Boolean.TRUE.equals(isTokenValid)) {
         String username = jwtUtils.getUsernameFromToken(token);
         UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
 
@@ -48,7 +55,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
       }
     }
-
-    filterChain.doFilter(request, response);
+ 
+    filterChain.doFilter(request, response); 
   }
 }

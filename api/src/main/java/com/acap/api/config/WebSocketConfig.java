@@ -11,7 +11,6 @@ import com.acap.api.service.NotificationsService;
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-
   private final NotificationsService notificationsService;
 
   public WebSocketConfig(NotificationsService notificationsService) {

@@ -15,14 +15,18 @@ import DownRow from '../assets/dowRow.svg?react'
 import { Option } from './Option'
 import { useContext } from 'react'
 import { UserContext } from '../contexts/userContext'
-import { ACCESS } from '../constants'
+import { ACCESS, TOKEN_NAME } from '../constants'
 import { AccessibleOption } from './AccesibleOption'
+import { deleteCookie } from '../utils/deleteCookie'
+import { logout } from '../api/logout'
 
 export function SideBar() {
   const { clearUser, permissions } = useContext(UserContext)
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     clearUser()
+    await logout()
+    deleteCookie(TOKEN_NAME)
   }
 
   return (

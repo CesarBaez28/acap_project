@@ -1,6 +1,9 @@
-import { API } from "../constants"
+import { API, TOKEN_NAME } from "../constants"
+import { getCookieValue } from "../utils/getCookieValue"
+
 
 export async function saveCinta(label, description, creationDate, expiryDate, rententionDate, location, statusCinta, id) {
+  const token = getCookieValue(TOKEN_NAME)
   creationDate = new Date(creationDate)
   expiryDate = new Date(expiryDate)
   rententionDate = new Date(rententionDate)
@@ -9,7 +12,8 @@ export async function saveCinta(label, description, creationDate, expiryDate, re
     const response = await fetch(API+'/cintas', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify({
         ...(id && { id }),

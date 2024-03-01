@@ -53,16 +53,21 @@ public class JwtUtils {
       Logger logger = Logger.getLogger(getClass().getName());
       logger.info("Token inválido: " + e.getMessage());
       return false;
-    }  
+    }
   }
 
-  // get username token 
-  public String getUsernameFromToken (String token) {
+  // get expiration date token
+  public Date getExpirationDateFromToken(String token) {
+    return getClaim(token, Claims::getExpiration);
+  }
+
+  // get username token
+  public String getUsernameFromToken(String token) {
     return getClaim(token, Claims::getSubject);
   }
 
   // Get just one claim
-  public <T> T getClaim (String token, Function<Claims, T> claimsFunction) {
+  public <T> T getClaim(String token, Function<Claims, T> claimsFunction) {
     Claims claims = extractAllClaims(token);
     return claimsFunction.apply(claims);
   }

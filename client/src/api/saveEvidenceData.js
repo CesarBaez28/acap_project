@@ -1,6 +1,9 @@
-import { API } from "../constants";
+import { API, TOKEN_NAME } from "../constants";
+import { getCookieValue } from '../utils/getCookieValue'
 
 export async function saveEvidenceData(folder, files) {
+  const token = getCookieValue(TOKEN_NAME)
+
   try {
     const filesArray = Array.isArray(files) ? files : [files]
 
@@ -18,7 +21,10 @@ export async function saveEvidenceData(folder, files) {
 
     const response = await fetch(API + '/evidence', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + token
+      },
       body: JSON.stringify({ folders: folder, evidence: evidence }),
     })
 

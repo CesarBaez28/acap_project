@@ -56,7 +56,7 @@ Content-Type: application/json
 }
 
 ### Login security
-POST http://localhost:8080/login
+POST http://localhost:8080/authenticate
 Content-Type: application/json
 
 {
@@ -64,17 +64,9 @@ Content-Type: application/json
   "password": "CesarBaez123#"
 }
 
-### Get all branchOffices
-GET http://localhost:8080/branchOffices/findAll
-
-### Save branchOffice
-POST http://localhost:8080/branchOffices/save
-Content-Type: application/json
-
-{
-  "name": "La vega",
-  "status": 1
-}
+### Logout
+POST http://localhost:8080/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwOTE0MjE0NSwiZXhwIjoxNzA5MjI4NTQ1fQ.IGDp8P8O54UkDAbsA4LOq99yPzlJJXvdW4Ozc3Yt2TM
 
 ### Search users
 GET http://localhost:8080/users/search?search=Empleado&userId=40579bbe-8a94-4049-9d0c-c9a7fcdbc5ef
@@ -187,12 +179,12 @@ Content-Type: application/json
   "location": {
     "id": "2",
     "location": "Centro de datos"
-  }
+  } 
 }
 
 ### Get all status
 GET http://localhost:8080/status/findAll
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwODY5OTA2OSwiZXhwIjoxNzA4Nzg1NDY5fQ.F5JjH34XsjpPQa44f0CSzJfJkSXGq0hrmV3n_WvlE0Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwOTE0MjE0NSwiZXhwIjoxNzA5MjI4NTQ1fQ.IGDp8P8O54UkDAbsA4LOq99yPzlJJXvdW4Ozc3Yt2TM
 
 
 ### Save a status
@@ -235,7 +227,7 @@ Content-Type: application/json
 
 ### Get all cintas
 GET http://localhost:8080/cintas/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwODY5OTA2OSwiZXhwIjoxNzA4Nzg1NDY5fQ.F5JjH34XsjpPQa44f0CSzJfJkSXGq0hrmV3n_WvlE0Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2FwMjk1MCIsImlhdCI6MTcwOTIyMDczMCwiZXhwIjoxNzA5MzA3MTMwfQ.kcV9j0kWMQ2XkjP7d21us5dNCPExFEi2eukXJ9iBRwI	
 
 
 ### get cinta by label

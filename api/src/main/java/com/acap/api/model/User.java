@@ -40,6 +40,9 @@ public class User {
   @OneToMany(mappedBy = "userReceived")
   private Set<CintasReceived> userReceived;
 
+  @OneToMany(mappedBy = "user")
+  private Set<UserToken> userToken;
+
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "position_id", nullable = false)
   private Positions position;
