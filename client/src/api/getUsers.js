@@ -8,7 +8,7 @@ export async function getUsers (state, usersId) {
   try {
     const response = await fetch(API+`/users/find/${state}/${usersId}`, { 
       method: 'GET',
-      headers: {'Authorization': 'Bearer: ' + token}
+      headers: {'Authorization': 'Bearer ' + token}
     })
     
     const data = await response.json()

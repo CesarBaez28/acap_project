@@ -2,6 +2,7 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.model.Shipments;
 import com.acap.api.service.ShipmentsService;
 
@@ -14,12 +15,14 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping(path = "shipments")
+@PreAuthorize("hasAnyRole('"+ Constants.Roles.VIEW_SHIPMENTS +"', '"+ Constants.Roles.RECEPTION +"', '"+ Constants.Roles.VIEW_HISTORY_SHIPMENTS +"')")
 public class ShipmentsController {
 
   private final ShipmentsService shipmentsService;

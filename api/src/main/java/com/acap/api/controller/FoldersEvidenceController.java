@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.acap.api.Constants;
 import com.acap.api.dto.EvidenceDTO;
 import com.acap.api.model.Folders;
 import com.acap.api.model.FoldersEvidence;
@@ -28,6 +29,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = "evidence")
+@PreAuthorize("hasRole('"+ Constants.Roles.VIEW_EVIDENCE +"')")
 public class FoldersEvidenceController {
   private final FoldersEvidenceService foldersEvidenceService;
 
@@ -119,6 +122,7 @@ public class FoldersEvidenceController {
   }
 
   @DeleteMapping("/deleteFile/{folderName}/{fileName:.+}")
+  @PreAuthorize("hasRole('"+ Constants.Roles.DELETE_EVIDENCE +"')")
   public ResponseEntity<String> deleteFile(@PathVariable String folderName, @PathVariable String fileName) {
     try {
       Path filePath = Paths.get(evidenceUploadDir, folderName, fileName);
@@ -136,6 +140,7 @@ public class FoldersEvidenceController {
   }
 
   @PutMapping("/renameFile/{folderName}/{oldFileName:.+}")
+  @PreAuthorize("hasRole('"+ Constants.Roles.EDIT_EVIDENCE +"')")
   public ResponseEntity<String> renameFile(
       @PathVariable String folderName,
       @PathVariable String oldFileName,

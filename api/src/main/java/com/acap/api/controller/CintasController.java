@@ -2,6 +2,7 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.dto.ChangeLocationsDTO;
 import com.acap.api.model.Cintas;
 import com.acap.api.model.Status;
@@ -39,7 +40,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping(path = "cintas")
-@PreAuthorize("hasRole('Visualizar cintas')")
+@PreAuthorize("hasRole('"+ Constants.Roles.VIEW_INVENTORY +"')")
 public class CintasController {
 
   private final CintasService cintasService;
@@ -100,7 +101,8 @@ public class CintasController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error geting cinta");
     }
   }
-  
+
+  @PreAuthorize("hasAnyRole('"+ Constants.Roles.CREATE_CINTA +"', '"+ Constants.Roles.EDIT_CINTA +"')")
   @PostMapping
   public ResponseEntity<Object> saveCinta(@Valid @RequestBody Cintas cinta, BindingResult bindingResult) {
 
@@ -152,6 +154,7 @@ public class CintasController {
   }
 
   // Delete cinta (change status to false and statusCinta to Eliminado)
+  @PreAuthorize("hasRole('"+ Constants.Roles.DELETE_CINTA +"')")
   @PutMapping("/delete/{id}")
   public ResponseEntity<Object> deleteCinta(@PathVariable UUID id, @RequestBody Status status) {
     try {
@@ -164,6 +167,7 @@ public class CintasController {
   }
 
   @PutMapping("/changeLocations")
+  @PreAuthorize("hasRole('"+ Constants.Roles.MOVE_DATA_CENTER +"')")
   public ResponseEntity<Object> changeLocation(@RequestBody ChangeLocationsDTO changeLocations) {
     try {
       cintasService.changeLocation(changeLocations.getIds(), changeLocations.getLocation());

@@ -3,6 +3,7 @@ package com.acap.api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.dto.ChangePasswordDTO;
 import com.acap.api.model.User;
 import com.acap.api.service.UserService;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +72,7 @@ public class UserController {
   }
 
   @PutMapping("/update/status/{id}/{state}")
+  @PreAuthorize("hasRole('"+ Constants.Roles.DELETE_USER +"')")
   public ResponseEntity<Object> updateStaus(@PathVariable UUID id, @PathVariable boolean state) {
     try {
       userService.updateStatus(id, state);
@@ -95,6 +98,7 @@ public class UserController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('"+ Constants.Roles.CREATE_USER +"')")
   public ResponseEntity<Object> registOrEditUser(
       @Validated(value = { UserRegister.class }) @RequestBody User user,
       BindingResult bindingResult) {
@@ -103,6 +107,7 @@ public class UserController {
   }
 
   @PutMapping
+  @PreAuthorize("hasRole('"+ Constants.Roles.EDIT_USER +"')")
   public ResponseEntity<Object> editUser(
       @Validated(value = { UserEdit.class }) @RequestBody User user,
       BindingResult bindingResult) {

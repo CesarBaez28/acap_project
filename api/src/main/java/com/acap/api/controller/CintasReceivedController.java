@@ -2,6 +2,7 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.model.CintasReceived;
 import com.acap.api.service.CintasReceivedService;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping(path = "receiveCintas")
+@PreAuthorize("hasAnyRole('"+ Constants.Roles.RECEPTION +"', '"+ Constants.Roles.VIEW_RECEIVED_SHIPMENTS +"')")
 public class CintasReceivedController {
   private final CintasReceivedService cintasReceivedService;
 

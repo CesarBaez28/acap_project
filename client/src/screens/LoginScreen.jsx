@@ -26,8 +26,7 @@ export function LoginScreen() {
 
     if ( result ) {
       const permissions = await getPermissions(result.position)
-      const auth = await authenticate(employeeNumber, password)
-      console.log(auth)
+      await authenticate(employeeNumber, password)
 
       const dataToStore = {
         user: result,

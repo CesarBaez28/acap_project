@@ -7,7 +7,7 @@ export async function updateNameEvidence (evidenceData, newName) {
     const response = await fetch(API+`/evidence/rename/${evidenceData.id}/${newName}`, {
       method: 'PUT',
       headers: {
-        'Auhorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + token
       }
     })
     const data = await response.text()

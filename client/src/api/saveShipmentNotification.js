@@ -1,8 +1,8 @@
-import { API } from "../constants"
+import { API, TOKEN_NAME } from "../constants"
 import { getCookieValue } from '../utils/getCookieValue'
 
 export async function saveShipmentNotification ({dataNotification}) {
-  const token = getCookieValue()
+  const token = getCookieValue(TOKEN_NAME)
   const date = new Date()
   date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
   const isoDateString = date.toISOString();
@@ -22,7 +22,6 @@ export async function saveShipmentNotification ({dataNotification}) {
     })
 
     const data = await response.json()
-    console.log(data)
     return data
   } catch (error) {
     throw new Error(error)

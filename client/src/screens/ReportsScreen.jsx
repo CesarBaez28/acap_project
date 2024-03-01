@@ -38,7 +38,7 @@ const Content = () => {
   const reportHandler = async (values, resetForm) => {
     let { initialDate, finalDate, statusCinta } = values
     statusCinta = status.find(({ id }) => id === statusCinta)
-    const [data] = await searchWithDates(statusCinta.state, initialDate, finalDate)
+    const data = await searchWithDates(statusCinta.state, initialDate, finalDate)
     if (option === 'excel') { await exportExcel(data) }
     if (option === 'pdf') { await exportPdf(data)}
     resetForm()
