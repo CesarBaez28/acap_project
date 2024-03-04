@@ -2,6 +2,7 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.dto.ShipmentDTO;
 import com.acap.api.model.ShipmentsCintas;
 import com.acap.api.service.ShipmentsCintasService;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +49,7 @@ public class ShipmentsCintasController {
   }
   
   @PostMapping("/save")
+  @PreAuthorize("hasRole('"+ Constants.Roles.REGISTER_SHIPMENT +"')")
   public ResponseEntity<Object> saveShipment(@RequestBody ShipmentDTO data) {
     try {
       List<ShipmentsCintas> shipmentCinta = shipmentsCintasService.saveShipmentsCintas(data);

@@ -21,7 +21,6 @@ export function Table({ columns, atributes, data, setData, processedData, setPro
 
   const handleEditClick = (item) => {
     setSelectedItem(item);
-    console.log(selectedItem)
     setModalShow(true)
   }
 

@@ -9,6 +9,7 @@ import { UserContext } from '../contexts/userContext.jsx'
 
 import { useContext } from 'react'
 import { getPermissions } from '../api/getPermissions.js'
+import { authenticate } from '../api/authenticate.js'
 
 const initialValues = {
   employeeNumber: '',
@@ -22,8 +23,10 @@ export function LoginScreen() {
   const loginHandler = async (values, resetForm, setErrors) => {
     const { employeeNumber, password } = values
     const result = await login(employeeNumber, password, setErrors)
+
     if ( result ) {
       const permissions = await getPermissions(result.position)
+      await authenticate(employeeNumber, password)
 
       const dataToStore = {
         user: result,

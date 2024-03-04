@@ -3,7 +3,8 @@ import { ACCESS } from './constants'
 import { lazyLoad } from './lazyLoad'
 import { Suspense } from 'react'
 import { LoadingScreen } from './screens/LoadingScreen'
-
+import { TokenExpirationNotifier } from '../src/utils/TokenExpirationNotifier'
+ 
 const LoginScreen = lazyLoad('./screens/LoginScreen', 'LoginScreen')
 const Dashboard = lazyLoad('./screens/DashboardScreen', 'Dashboard')
 const InventoryScreen = lazyLoad('./screens/InventoryScreen', 'InventoryScreen')
@@ -26,9 +27,12 @@ const ReceivedCintasDetailsScreen = lazyLoad('./screens/receivedCintasDetailsScr
 const ShipmentsHistoryScreen = lazyLoad('./screens/ShipmentsHistoryScreen', 'ShipmentsHistoryScreen')
 const ShippingRegisterScreen = lazyLoad('./screens/ShippingRegisterScreen', 'ShippingRegisterScreen')
 const AccessDeniedScreen = lazyLoad('./screens/AccessDeniedScreen', 'AccessDeniedScreen')
+const SessionExpiredScreen = lazyLoad('./screens/SessionExpiredScreen', 'SessionExpiredScreen')
 const PrivateRoute = lazyLoad('./components/PrivateRoute', 'PrivateRoute')
 
+
 function App() {
+  TokenExpirationNotifier()
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Routes>
@@ -55,6 +59,7 @@ function App() {
         <Route path='/changePassword' element={<PrivateRoute Element={ChangePasswordScreen} />} />
         <Route path='/permissions' element={<PrivateRoute Element={PermissionsScreen} requiredPermissions={ACCESS.ASSING_PRIVILEGES} />} />
         <Route path='/access/denied' element={<AccessDeniedScreen />} />
+        <Route path='/session/expired' element={<SessionExpiredScreen />} />
 
       </Routes>
     </Suspense>

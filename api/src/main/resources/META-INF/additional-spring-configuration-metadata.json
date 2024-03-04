@@ -8,5 +8,15 @@
     "name": "evidence.upload-signatures-dir",
     "type": "java.lang.String",
     "description": "A description for 'evidence.upload-signatures-dir'"
+  },
+  {
+    "name": "jwt.secret.key",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret.key'"
+  },
+  {
+    "name": "jwt.time.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.time.expiration'"
   }
 ]}

@@ -2,6 +2,7 @@ package com.acap.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acap.api.Constants;
 import com.acap.api.model.Evidence;
 import com.acap.api.service.EvidenceService;
 
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping(path = "evidence")
+@PreAuthorize("hasRole('"+ Constants.Roles.VIEW_EVIDENCE +"')")
 public class EvidenceController {
 
   private final EvidenceService evidenceService;
@@ -34,6 +37,7 @@ public class EvidenceController {
   }
 
   @PutMapping("/rename/{id}/{newName}")
+  @PreAuthorize("hasRole('"+ Constants.Roles.EDIT_EVIDENCE +"')")
   public ResponseEntity<String> renameFile(@PathVariable Long id, @PathVariable String newName) {
     try {
       evidenceService.renameEvidence(id, newName);
