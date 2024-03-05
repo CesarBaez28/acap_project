@@ -14,28 +14,52 @@ import com.acap.api.repository.FoldersRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Servicio para la gestión de relaciones entre carpetas y evidencias.
+ * Proporciona métodos para recuperar, guardar y eliminar evidencias asociadas a carpetas en el sistema.
+ */
 @Service
 public class FoldersEvidenceService {
+
   private final FoldersRepository foldersRepository;
   private final EvidenceRepository evidenceRepository;
   private final FoldersEvidenceRepository foldersEvidenceRepository;
 
+  /**
+   * Constructor que inyecta los repositorios necesarios para el servicio.
+   *
+   * @param foldersEvidenceRepository Repositorio de relaciones entre carpetas y evidencias.
+   * @param foldersRepository         Repositorio de carpetas.
+   * @param evidenceRepository        Repositorio de evidencias.
+   */
   public FoldersEvidenceService(FoldersEvidenceRepository foldersEvidenceRepository,
-      FoldersRepository foldersRepository, EvidenceRepository evidenceRepository) {
+                                FoldersRepository foldersRepository, EvidenceRepository evidenceRepository) {
     this.foldersEvidenceRepository = foldersEvidenceRepository;
     this.foldersRepository = foldersRepository;
     this.evidenceRepository = evidenceRepository;
   }
 
+  /**
+   * Recupera todas las relaciones entre una carpeta y sus evidencias asociadas.
+   *
+   * @param folders Carpeta para la cual se buscarán las relaciones.
+   * @return Lista de relaciones entre la carpeta y sus evidencias asociadas.
+   */
   public List<FoldersEvidence> findAllByFolder(Folders folders) {
     return foldersEvidenceRepository.findAllByFolders(folders);
   }
 
-  public Object saveFoldersEvidence (EvidenceDTO data) {
-    
+  /**
+   * Guarda las relaciones entre una carpeta y sus evidencias asociadas en el sistema.
+   *
+   * @param data Objeto EvidenceDTO que contiene información sobre la carpeta y las evidencias.
+   * @return Lista de relaciones entre la carpeta y las evidencias guardadas.
+   */
+  @SuppressWarnings("null")
+  public Object saveFoldersEvidence(EvidenceDTO data) {
     Folders folder = foldersRepository.save(data.getFolders());
-    
-    // Valida si solo suministran el nombre de la carpteta
+
+    // Valida si solo se suministra el nombre de la carpeta
     if (data.getEvidence() == null) {
       data.setFolders(folder);
       return data;
@@ -57,8 +81,14 @@ public class FoldersEvidenceService {
     return foldersEvidenceRepository.saveAll(evidenceList);
   }
 
-  public List<FoldersEvidence> removeEvidence (EvidenceDTO evidenceDTO) 
-  {
+  /**
+   * Elimina las evidencias asociadas a una carpeta en el sistema.
+   *
+   * @param evidenceDTO Objeto EvidenceDTO que contiene la carpeta y las evidencias a eliminar.
+   * @return Lista de relaciones restantes entre la carpeta y las evidencias asociadas.
+   */
+  @SuppressWarnings("null")
+  public List<FoldersEvidence> removeEvidence(EvidenceDTO evidenceDTO) {
     List<Evidence> evidence = evidenceDTO.getEvidence();
 
     List<FoldersEvidence> foldersEvidencesList = new ArrayList<>();
@@ -73,3 +103,4 @@ public class FoldersEvidenceService {
     return findAllByFolder(evidenceDTO.getFolders());
   }
 }
+

@@ -2,7 +2,6 @@ package com.acap.api.config;
 
 import java.util.Arrays;
 
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
@@ -32,6 +30,10 @@ import com.acap.api.utils.JwtUtils;
 
 import jakarta.servlet.http.HttpServletResponse;
 
+/*
+ * Clase para la configuración 
+ * de la seguridad de la aplicación 
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -58,25 +60,35 @@ public class SecurityConfig {
     this.jwtUtils = jwtUtils;
   }
 
+  // Configuración principal de seguridad
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager)
       throws Exception {
 
+    // Creación y configuración del filtro de autenticación JWT
     JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils, userTokenRepository,
         userRepository);
     jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
     jwtAuthenticationFilter.setFilterProcessesUrl("/authenticate");
 
     return httpSecurity
+        // Configuración de CORS
         .cors(Customizer.withDefaults())
+        // Desactivar CSRF
         .csrf(config -> config.disable())
+        // Configuración de autorización de solicitudes HTTP
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/users/login", "/privileges/get", "/authenticate/**", "/notifications").permitAll()
             .anyRequest().authenticated())
+        // Configuración de la gestión de sesiones (en este caso, sin sesiones)
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        // Agregar el filtro de autenticación JWT al filtro de seguridad
         .addFilter(jwtAuthenticationFilter)
+        // Agregar el filtro de autorización JWT antes del filtro de autenticación por
+        // nombre de usuario y contraseña
         .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+        // Configuración de la funcionalidad de cierre de sesión
         .logout(logout -> logout
             .logoutUrl("/logout")
             .addLogoutHandler(logoutHandler)
@@ -84,14 +96,17 @@ public class SecurityConfig {
               SecurityContextHolder.clearContext();
               response.setStatus(HttpServletResponse.SC_OK);
             }))
+        // Construir la configuración de seguridad
         .build();
   }
 
+  // Configuración del codificador de contraseñas BCrypt
   @Bean
   PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
+  // Configuración de CORS
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
@@ -105,6 +120,7 @@ public class SecurityConfig {
     return source;
   }
 
+  // Configuración del administrador de autenticación
   @Bean
   AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder)
       throws Exception {

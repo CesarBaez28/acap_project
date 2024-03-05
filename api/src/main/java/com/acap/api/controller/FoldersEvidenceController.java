@@ -37,12 +37,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/*
+ * Clase controlador que encarga de las operaciones
+ * relacionadas con las carpetas y evidencias de las mismas
+ * al momento de destuir las cintas
+ */
 @RestController
 @RequestMapping(path = "evidence")
-@PreAuthorize("hasRole('"+ Constants.Roles.VIEW_EVIDENCE +"')")
+@PreAuthorize("hasRole('" + Constants.Roles.VIEW_EVIDENCE + "')")
 public class FoldersEvidenceController {
+
   private final FoldersEvidenceService foldersEvidenceService;
 
+  // Ruta del directorio de carga de evidencia obtenida desde la configuración
   @Value("${evidence.upload-dir}")
   private String evidenceUploadDir;
 
@@ -50,6 +57,7 @@ public class FoldersEvidenceController {
     this.foldersEvidenceService = foldersEvidenceService;
   }
 
+  // Endpoint para guardar evidencia en carpetas
   @PostMapping
   public ResponseEntity<Object> saveFoldersEvidences(@RequestBody EvidenceDTO data) {
     try {
@@ -60,6 +68,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para eliminar evidencia de carpetas
   @PostMapping("/remove")
   public ResponseEntity<Object> removeFoldersEvidence(@RequestBody EvidenceDTO evidenceDTO) {
     try {
@@ -70,6 +79,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para buscar evidencia por carpeta
   @PostMapping("/search")
   public ResponseEntity<Object> findAllByFolder(@RequestBody Folders folder) {
     try {
@@ -80,6 +90,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para subir archivos a una carpeta de evidencia
   @PostMapping("/uploadFiles")
   public ResponseEntity<String> handleFileUpload(@RequestParam("folderName") String folderName,
       @RequestParam("files") MultipartFile[] files) {
@@ -104,6 +115,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para descargar un archivo de evidencia
   @GetMapping("/downdLoadFile/{folderName}/{fileName:.+}")
   public ResponseEntity<byte[]> downloadFile(@PathVariable String folderName, @PathVariable String fileName) {
     try {
@@ -121,8 +133,9 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para eliminar un archivo de evidencia
   @DeleteMapping("/deleteFile/{folderName}/{fileName:.+}")
-  @PreAuthorize("hasRole('"+ Constants.Roles.DELETE_EVIDENCE +"')")
+  @PreAuthorize("hasRole('" + Constants.Roles.DELETE_EVIDENCE + "')")
   public ResponseEntity<String> deleteFile(@PathVariable String folderName, @PathVariable String fileName) {
     try {
       Path filePath = Paths.get(evidenceUploadDir, folderName, fileName);
@@ -139,8 +152,9 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para renombrar un archivo de evidencia
   @PutMapping("/renameFile/{folderName}/{oldFileName:.+}")
-  @PreAuthorize("hasRole('"+ Constants.Roles.EDIT_EVIDENCE +"')")
+  @PreAuthorize("hasRole('" + Constants.Roles.EDIT_EVIDENCE + "')")
   public ResponseEntity<String> renameFile(
       @PathVariable String folderName,
       @PathVariable String oldFileName,
@@ -161,6 +175,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Endpoint para descargar una carpeta completa como archivo zip
   @GetMapping("/download/{folderName}")
   public ResponseEntity<byte[]> downloadFolder(@PathVariable String folderName) {
     try {
@@ -185,6 +200,7 @@ public class FoldersEvidenceController {
     }
   }
 
+  // Método auxiliar para listar archivos en un directorio
   private List<File> listFilesInDirectory(Path directory) throws IOException {
     List<File> files = new ArrayList<>();
     Files.walk(directory, FileVisitOption.FOLLOW_LINKS)
@@ -193,6 +209,7 @@ public class FoldersEvidenceController {
     return files;
   }
 
+  // Método auxiliar para agregar un archivo a un archivo zip
   private void addFileToZip(ZipArchiveOutputStream zos, Path sourceFolder, File file) throws IOException {
     String entryName = sourceFolder.relativize(file.toPath()).toString().replace(File.separator, "/");
     ZipArchiveEntry entry = new ZipArchiveEntry(entryName);

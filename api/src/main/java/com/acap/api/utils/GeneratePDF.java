@@ -15,18 +15,29 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * Clase para generar archivos PDF con datos de Cintas.
+ */
 public class GeneratePDF {
 
   private static Font titleSize = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
   private static Font normalSizeBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
   private static Font normalSize = new Font(Font.FontFamily.TIMES_ROMAN, 12);
 
+  /**
+   * Constructor privado para evitar instancias de la clase utilitaria.
+   */
   private GeneratePDF() {
   }
 
-  public static ByteArrayOutputStream generatePdfStream(List<Cintas> cintas)
-      throws DocumentException {
-
+  /**
+   * Genera un flujo de bytes que representa un archivo PDF con datos de Cintas.
+   *
+   * @param cintas Lista de objetos Cintas para incluir en el archivo PDF.
+   * @return ByteArrayOutputStream que contiene los datos del archivo PDF.
+   * @throws DocumentException Si ocurre un error al generar el archivo PDF.
+   */
+  public static ByteArrayOutputStream generatePdfStream(List<Cintas> cintas) throws DocumentException {
     Document document = new Document();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     PdfWriter.getInstance(document, outputStream);
@@ -67,17 +78,38 @@ public class GeneratePDF {
     return outputStream;
   }
 
+  /**
+   * Agrega un título al documento.
+   *
+   * @param document Documento al que se debe agregar el título.
+   * @param text     Texto del título.
+   * @throws DocumentException Si ocurre un error al agregar el título al
+   *                           documento.
+   */
   private static void addTitle(Document document, String text) throws DocumentException {
     Paragraph title = new Paragraph(text, titleSize);
     title.setAlignment(Element.ALIGN_CENTER);
     document.add(title);
   }
 
-  private static void addCellHeader (PdfPCell cell, PdfPTable table, String text) {
+  /**
+   * Agrega una celda de encabezado a la tabla.
+   *
+   * @param cell  Celda de encabezado.
+   * @param table Tabla a la que se debe agregar la celda de encabezado.
+   * @param text  Texto de la celda de encabezado.
+   */
+  private static void addCellHeader(PdfPCell cell, PdfPTable table, String text) {
     cell.setPhrase(new Phrase(text, normalSizeBold));
     table.addCell(cell);
   }
 
+  /**
+   * Agrega una celda con datos a la tabla.
+   *
+   * @param table Tabla a la que se debe agregar la celda con datos.
+   * @param data  Datos a agregar en la celda.
+   */
   private static void addCell(PdfPTable table, String data) {
     PdfPCell cell = new PdfPCell(new Phrase(data, normalSize));
     cell.setPadding(5);

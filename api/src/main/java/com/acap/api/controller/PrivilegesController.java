@@ -12,6 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/*
+ * Clase controlador encargada de la gestión 
+ * de privilegios
+ */
 @RestController
 @RequestMapping(path = "privileges")
 public class PrivilegesController {
@@ -22,6 +26,7 @@ public class PrivilegesController {
     this.privilegesService = privilegesService;
   }
 
+  // Endpoint para obtener el nombre de todos los privilegios
   @GetMapping("/findAll")
   public ResponseEntity<Object> findAll () {
     try {

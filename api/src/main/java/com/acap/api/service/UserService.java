@@ -14,55 +14,109 @@ import com.acap.api.repository.PositionsRepository;
 import com.acap.api.repository.UserRepository;
 import com.acap.api.utils.Encrypt;
 
+/**
+ * Servicio que gestiona las operaciones relacionadas con los usuarios en el sistema.
+ */
 @Service
 public class UserService {
+
+  // Repositorios necesarios para acceder a datos de usuarios, posiciones y ubicaciones.
   private final UserRepository userRepository;
   private final PositionsRepository positionsRepository;
   private final LocationRepository locationsRepository;
-  
-  public UserService (UserRepository userRepository, PositionsRepository positionsRepository, LocationRepository locationRepository) {
+
+  /**
+   * Constructor del servicio de usuario.
+   *
+   * @param userRepository        Repositorio para acceder a datos de usuarios.
+   * @param positionsRepository  Repositorio para acceder a datos de posiciones.
+   * @param locationRepository   Repositorio para acceder a datos de ubicaciones.
+   */
+  public UserService(UserRepository userRepository, PositionsRepository positionsRepository, LocationRepository locationRepository) {
     this.positionsRepository = positionsRepository;
     this.userRepository = userRepository;
     this.locationsRepository = locationRepository;
   }
 
-  public List<User> findUsersByStatus (boolean status, UUID userId) {
+  /**
+   * Busca usuarios por estado y el ID del usuario solicitante.
+   *
+   * @param status Estado del usuario (activo o inactivo).
+   * @param userId ID del usuario solicitante.
+   * @return Lista de usuarios encontrados.
+   */
+  public List<User> findUsersByStatus(boolean status, UUID userId) {
     return userRepository.findByStatus(status, userId);
   }
 
-  public List<User> searchUsers (String search, UUID userId) {
+  /**
+   * Busca usuarios que coincidan con el término de búsqueda y el ID del usuario solicitante.
+   *
+   * @param search Término de búsqueda.
+   * @param userId ID del usuario solicitante.
+   * @return Lista de usuarios encontrados.
+   */
+  public List<User> searchUsers(String search, UUID userId) {
     return userRepository.search(search, userId);
   }
 
-  public Optional<User> findUserById (UUID id) {
+  /**
+   * Busca un usuario por su ID.
+   *
+   * @param id ID del usuario.
+   * @return Usuario encontrado (si existe).
+   */
+  public Optional<User> findUserById(UUID id) {
     return userRepository.findById(id);
   }
 
-  public User saveUser (User user) {
+  /**
+   * Guarda o actualiza un usuario en la base de datos.
+   *
+   * @param user Usuario a guardar o actualizar.
+   * @return Usuario guardado o actualizado.
+   */
+  @SuppressWarnings("null")
+  public User saveUser(User user) {
     Optional<Positions> positionData = positionsRepository.findById(user.getPosition().getId());
-    Optional<Locations> locationsData = locationsRepository.findById(user.getLocation().getId()); 
-    Optional<User> userData;
+    Optional<Locations> locationsData = locationsRepository.findById(user.getLocation().getId());
 
-    if (positionData.isPresent()) { user.setPosition(positionData.get()); }
-    if (locationsData.isPresent()) { user.setLocation(locationsData.get()); }
+    if (positionData.isPresent()) {
+      user.setPosition(positionData.get());
+    }
+    if (locationsData.isPresent()) {
+      user.setLocation(locationsData.get());
+    }
 
-    if ("".equals(user.getPassword())) {  
-      userData = userRepository.findById(user.getId());
-      if (userData.isPresent()) { user.setPassword(userData.get().getPassword()); }
+    if ("".equals(user.getPassword())) {
+      Optional<User> userData = userRepository.findById(user.getId());
+      if (userData.isPresent()) {
+        user.setPassword(userData.get().getPassword());
+      }
       return userRepository.save(user);
     }
-  
+
     String encryptedPassword = Encrypt.encryptPassword(user.getPassword());
     user.setPassword(encryptedPassword);
     return userRepository.save(user);
   }
 
-  public User changePassword (UUID userId, String currentPassword, String newPassword) {
+  /**
+   * Cambia la contraseña de un usuario.
+   *
+   * @param userId          ID del usuario.
+   * @param currentPassword Contraseña actual del usuario.
+   * @param newPassword     Nueva contraseña del usuario.
+   * @return Usuario con la contraseña cambiada (si la operación fue exitosa).
+   */
+  public User changePassword(UUID userId, String currentPassword, String newPassword) {
     Optional<User> userData = userRepository.findById(userId);
     String passwordInDB = "";
 
-    if (userData.isPresent()) { passwordInDB = userData.get().getPassword(); }
-    
+    if (userData.isPresent()) {
+      passwordInDB = userData.get().getPassword();
+    }
+
     if (!Encrypt.matchesPasswords(currentPassword, passwordInDB)) {
       return null;
     }
@@ -73,24 +127,35 @@ public class UserService {
     return userData.get();
   }
 
-  public void updateStatus (UUID id, boolean state) {
+  /**
+   * Actualiza el estado (activo/inactivo) de un usuario.
+   *
+   * @param id    ID del usuario.
+   * @param state Nuevo estado del usuario.
+   */
+  public void updateStatus(UUID id, boolean state) {
     userRepository.updateStatus(id, state);
   }
 
-  public User getUserByEmployeeNumber (User user) {
+  /**
+   * Obtiene un usuario por número de empleado, verificando su existencia, estado y contraseña.
+   *
+   * @param user Usuario con número de empleado y contraseña.
+   * @return Usuario encontrado y válido (si existe y cumple con los criterios).
+   */
+  public User getUserByEmployeeNumber(User user) {
     User userData = userRepository.findByEmployeeNumber(user.getEmployeeNumber());
 
-    // Check if the user exist
+    // Verificar si el usuario existe.
     if (userData == null) { return null; }
 
-    // Check if the user is active
+    // Verificar si el usuario está activo.
     if (Boolean.FALSE.equals(userData.getStatus())) { return null; }
 
-    // Check if the password is correct
-    if (!Encrypt.matchesPasswords(user.getPassword(), userData.getPassword())) {
-      return null;
-    }
+    // Verificar si la contraseña es correcta.
+    if (!Encrypt.matchesPasswords(user.getPassword(), userData.getPassword())) { return null; }
 
     return userData;
   }
 }
+

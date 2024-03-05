@@ -11,20 +11,41 @@ import com.acap.api.model.PositionsPrivileges;
 import com.acap.api.model.Privileges;
 import com.acap.api.repository.PositionsPrivilegesRepository;
 
+/**
+ * Servicio que gestiona la asignación y eliminación de privilegios para una posición específica.
+ */
 @Service
 public class PositionsPrivilegesService {
+
+  // Repositorio para acceder a datos de relaciones entre posiciones y privilegios.
   private final PositionsPrivilegesRepository positionsPrivilegesRepository;
 
-
-  public PositionsPrivilegesService (PositionsPrivilegesRepository positionsPrivilegesRepository) {
+  /**
+   * Constructor del servicio de asignación de privilegios a posiciones.
+   *
+   * @param positionsPrivilegesRepository Repositorio para acceder a datos de relaciones entre posiciones y privilegios.
+   */
+  public PositionsPrivilegesService(PositionsPrivilegesRepository positionsPrivilegesRepository) {
     this.positionsPrivilegesRepository = positionsPrivilegesRepository;
   }
 
-  public List<PositionsPrivileges> findByPosition (Positions position) {
+  /**
+   * Obtiene la lista de relaciones entre una posición y sus privilegios asignados.
+   *
+   * @param position Posición para la cual se desea obtener los privilegios asignados.
+   * @return Lista de relaciones entre la posición y los privilegios asignados.
+   */
+  public List<PositionsPrivileges> findByPosition(Positions position) {
     return positionsPrivilegesRepository.findAllByPositions(position);
   }
 
-  public List<PositionsPrivileges> assingPrivileges (PrivilegesDTO privilegesDTO) {
+  /**
+   * Asigna una lista de privilegios a una posición específica.
+   *
+   * @param privilegesDTO DTO que contiene la posición y la lista de privilegios a asignar.
+   * @return Lista de relaciones entre la posición y los privilegios asignados.
+   */
+  public List<PositionsPrivileges> assignPrivileges(PrivilegesDTO privilegesDTO) {
     List<Privileges> privileges = privilegesDTO.getPrivileges();
 
     List<PositionsPrivileges> positionsPrivilegesList = new ArrayList<>();
@@ -33,10 +54,17 @@ public class PositionsPrivilegesService {
       positionsPrivilegesList.add(positionsPrivileges);
     }
 
+    // Guarda y devuelve la lista de relaciones entre la posición y los privilegios asignados.
     return positionsPrivilegesRepository.saveAll(positionsPrivilegesList);
   }
 
-  public List<PositionsPrivileges> removePrivileges (PrivilegesDTO privilegesDTO) {
+  /**
+   * Elimina una lista de privilegios de una posición específica.
+   *
+   * @param privilegesDTO DTO que contiene la posición y la lista de privilegios a eliminar.
+   * @return Lista de relaciones entre la posición y los privilegios restantes después de la eliminación.
+   */
+  public List<PositionsPrivileges> removePrivileges(PrivilegesDTO privilegesDTO) {
     List<Privileges> privileges = privilegesDTO.getPrivileges();
 
     List<PositionsPrivileges> positionsPrivilegesList = new ArrayList<>();
@@ -45,8 +73,11 @@ public class PositionsPrivilegesService {
       positionsPrivilegesList.add(positionsPrivileges);
     }
 
+    // Elimina las relaciones entre la posición y los privilegios especificados.
     positionsPrivilegesRepository.deleteAll(positionsPrivilegesList);
-    
+
+    // Devuelve la lista actualizada de relaciones entre la posición y los privilegios restantes.
     return positionsPrivilegesRepository.findAllByPositions(privilegesDTO.getPosition());
   }
 }
+

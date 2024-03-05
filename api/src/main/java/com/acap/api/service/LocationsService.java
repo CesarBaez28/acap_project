@@ -7,19 +7,42 @@ import org.springframework.stereotype.Service;
 import com.acap.api.model.Locations;
 import com.acap.api.repository.LocationRepository;
 
+/**
+ * Servicio para la gestión de ubicaciones en el sistema.
+ * Proporciona métodos para recuperar y almacenar ubicaciones en la base de datos.
+ */
 @Service
 public class LocationsService {
+
   private final LocationRepository locationRepository;
 
-  public LocationsService (LocationRepository locationRepository) {
+  /**
+   * Constructor que inyecta el repositorio necesario para el servicio.
+   *
+   * @param locationRepository Repositorio de ubicaciones.
+   */
+  public LocationsService(LocationRepository locationRepository) {
     this.locationRepository = locationRepository;
   }
 
-  public List<Locations> findAll () {
+  /**
+   * Recupera todas las ubicaciones almacenadas en el sistema.
+   *
+   * @return Lista de todas las ubicaciones en el sistema.
+   */
+  public List<Locations> findAll() {
     return locationRepository.findAll();
   }
 
-  public Locations saveLocation (Locations locations) {
+  /**
+   * Guarda una ubicación en el sistema.
+   *
+   * @param locations Ubicación que se va a guardar.
+   * @return Ubicación guardada en la base de datos.
+   */
+  @SuppressWarnings("null")
+  public Locations saveLocation(Locations locations) {
     return locationRepository.save(locations);
   }
 }
+

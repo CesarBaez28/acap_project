@@ -14,6 +14,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+/**
+ * Clase utilitaria para la gestión de tokens JWT (JSON Web Token).
+ */
 @Component
 public class JwtUtils {
 
@@ -23,7 +26,12 @@ public class JwtUtils {
   @Value("${jwt.time.expiration}")
   private String timeExpiration;
 
-  // Generate token
+  /**
+   * Genera un token de acceso JWT para el usuario especificado.
+   *
+   * @param username Nombre de usuario para el que se genera el token.
+   * @return Token JWT generado.
+   */
   public String generateAcessToken(String username) {
     return Jwts.builder()
         .subject(username)
@@ -33,13 +41,22 @@ public class JwtUtils {
         .compact();
   }
 
-  // Get signature key
+  /**
+   * Obtiene la clave de firma para la generación de tokens.
+   *
+   * @return Clave secreta para firmar los tokens.
+   */
   public SecretKey getSignatureKey() {
     byte[] keyBytes = Decoders.BASE64.decode(secretKey);
     return Keys.hmacShaKeyFor(keyBytes);
   }
 
-  // Validate token
+  /**
+   * Valida la autenticidad y vigencia de un token JWT.
+   *
+   * @param token Token JWT a validar.
+   * @return true si el token es válido, false de lo contrario.
+   */
   public boolean isTokenValid(String token) {
     try {
       Jwts.parser()
@@ -56,23 +73,45 @@ public class JwtUtils {
     }
   }
 
-  // get expiration date token
+  /**
+   * Obtiene la fecha de vencimiento de un token JWT.
+   *
+   * @param token Token JWT del que se obtendrá la fecha de vencimiento.
+   * @return Fecha de vencimiento del token.
+   */
   public Date getExpirationDateFromToken(String token) {
     return getClaim(token, Claims::getExpiration);
   }
 
-  // get username token
+  /**
+   * Obtiene el nombre de usuario asociado a un token JWT.
+   *
+   * @param token Token JWT del que se obtendrá el nombre de usuario.
+   * @return Nombre de usuario asociado al token.
+   */
   public String getUsernameFromToken(String token) {
     return getClaim(token, Claims::getSubject);
   }
 
-  // Get just one claim
+  /**
+   * Obtiene un reclamo específico de un token JWT.
+   *
+   * @param token          Token JWT del que se obtendrá el reclamo.
+   * @param claimsFunction Función que especifica el reclamo a obtener.
+   * @param <T>            Tipo de datos del reclamo.
+   * @return Reclamo específico del token.
+   */
   public <T> T getClaim(String token, Function<Claims, T> claimsFunction) {
     Claims claims = extractAllClaims(token);
     return claimsFunction.apply(claims);
   }
 
-  // Get all claims
+  /**
+   * Extrae todos los reclamos de un token JWT.
+   *
+   * @param token Token JWT del que se extraerán los reclamos.
+   * @return Reclamos del token.
+   */
   public Claims extractAllClaims(String token) {
     return Jwts.parser()
         .verifyWith(getSignatureKey())

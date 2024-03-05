@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.acap.api.model.Locations;
 
+/**
+ * Interfaz de repositorio para la entidad Locations.
+ * Extiende JpaRepository proporcionando operaciones CRUD estándar.
+ */
 @Repository
-public interface LocationRepository extends JpaRepository<Locations, Long>{
-
+public interface LocationRepository extends JpaRepository<Locations, Long> {
+  
 }
+

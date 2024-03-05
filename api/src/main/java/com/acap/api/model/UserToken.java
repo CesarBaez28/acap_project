@@ -13,6 +13,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase que representa un token de usuario en la base de datos.
+ */
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,17 +24,30 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_token")
 public class UserToken {
 
+  /**
+   * Identificador único del token.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  /**
+   * Valor del token, único y no nulo.
+   */
   @Column(name = "token", nullable = false, unique = true, length = 200)
   private String token;
 
+  /**
+   * Estado de revocación del token, con un valor predeterminado de no revocado.
+   */
   @Column(name = "revoked", columnDefinition = "boolean default false")
   private Boolean revoked;
 
+  /**
+   * Usuario asociado al token.
+   */
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
 }
+

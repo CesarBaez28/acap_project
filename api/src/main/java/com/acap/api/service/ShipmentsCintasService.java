@@ -29,8 +29,13 @@ import com.acap.api.repository.SignaturesRepository;
 import com.acap.api.repository.StatusRepository;
 import com.acap.api.repository.UserRepository;
 
+/**
+ * Servicio que gestiona las operaciones relacionadas con las asignaciones de cintas a envíos.
+ */
 @Service
 public class ShipmentsCintasService {
+
+  // Repositorios necesarios para acceder a datos.
   private final ShipmentsRepository shipmentsRepository;
   private final CintasRepository cintasRepository;
   private final ShipmentsCintasRepository shipmentsCintasRepository;
@@ -40,6 +45,18 @@ public class ShipmentsCintasService {
   private final LocationRepository locationRepository;
   private final StatusRepository statusRepository;
 
+  /**
+   * Constructor del servicio de asignaciones de cintas a envíos.
+   *
+   * @param shipmentsRepository       Repositorio para acceder a datos de envíos.
+   * @param cintasRepository          Repositorio para acceder a datos de cintas.
+   * @param shipmentsCintasRepository Repositorio para acceder a datos de asignaciones de cintas a envíos.
+   * @param userRepository            Repositorio para acceder a datos de usuarios.
+   * @param signaturesRepository      Repositorio para acceder a datos de firmas.
+   * @param driversRepository         Repositorio para acceder a datos de conductores.
+   * @param locationRepository        Repositorio para acceder a datos de ubicaciones.
+   * @param statusRepository          Repositorio para acceder a datos de estados.
+   */
   public ShipmentsCintasService(
       ShipmentsRepository shipmentsRepository,
       CintasRepository cintasRepository,
@@ -59,13 +76,27 @@ public class ShipmentsCintasService {
     this.statusRepository = statusRepository;
   }
 
-  public List<ShipmentsCintas> top15ShipmentsCintasByUser (UUID userId) {
+  /**
+   * Obtiene las 15 primeras asignaciones de cintas de un usuario.
+   *
+   * @param userId ID del usuario.
+   * @return Lista de las 15 primeras asignaciones de cintas del usuario.
+   */
+  public List<ShipmentsCintas> top15ShipmentsCintasByUser(UUID userId) {
     Pageable pageable = PageRequest.of(0, 15);
     return shipmentsCintasRepository.findTop15ByUserIdOrderByDesc(userId, pageable);
   }
 
-  public List<ShipmentsCintas> findAllByShipments(UUID uuid) throws NotFoundException {
-    Optional<Shipments> shipment = shipmentsRepository.findById(uuid);
+  /**
+   * Obtiene todas las asignaciones de cintas para un envío específico.
+   *
+   * @param shipmentId ID del envío.
+   * @return Lista de asignaciones de cintas para el envío.
+   * @throws NotFoundException Si el envío no se encuentra.
+   */
+  @SuppressWarnings("null")
+  public List<ShipmentsCintas> findAllByShipments(UUID shipmentId) throws NotFoundException {
+    Optional<Shipments> shipment = shipmentsRepository.findById(shipmentId);
 
     if (!shipment.isPresent()) {
       throw new NotFoundException();
@@ -74,18 +105,25 @@ public class ShipmentsCintasService {
     return shipmentsCintasRepository.findAllByShipments(shipment.get());
   }
 
+  /**
+   * Guarda las cintas para un envío específico.
+   *
+   * @param data Datos del envío y las cintas.
+   * @return Lista de asignaciones de cintas guardadas.
+   */
+  @SuppressWarnings("null")
   public List<ShipmentsCintas> saveShipmentsCintas(ShipmentDTO data) {
     Optional<User> userData = userRepository.findById(data.getShipment().getUser().getId());
     Optional<Signatures> signatureData = signaturesRepository.findById(data.getShipment().getSignature().getId());
     Optional<Drivers> driverData = driversRepository.findById(data.getShipment().getDriver().getId());
-    Optional<Locations> locatioFromData = locationRepository.findById(data.getShipment().getLocationFrom().getId());
+    Optional<Locations> locationFromData = locationRepository.findById(data.getShipment().getLocationFrom().getId());
     Optional<Locations> locationToData = locationRepository.findById(data.getShipment().getLocationTo().getId());
     Optional<Status> statusData = statusRepository.findById(data.getShipment().getStatus().getId());
 
     if (userData.isPresent()) { data.getShipment().setUser(userData.get()); }
     if (signatureData.isPresent()) { data.getShipment().setSignature(signatureData.get()); }
     if (driverData.isPresent()) { data.getShipment().setDriver(driverData.get()); }
-    if (locatioFromData.isPresent()) { data.getShipment().setLocationFrom(locatioFromData.get());}
+    if (locationFromData.isPresent()) { data.getShipment().setLocationFrom(locationFromData.get()); }
     if (locationToData.isPresent()) { data.getShipment().setLocationTo(locationToData.get()); }
     if (statusData.isPresent()) { data.getShipment().setStatus(statusData.get()); }
 
@@ -98,7 +136,6 @@ public class ShipmentsCintasService {
 
     List<Cintas> cintasData = cintasRepository.findAllById(
         cintas.stream().map(Cintas::getId).collect(Collectors.toList()));
-
 
     List<ShipmentsCintas> shipmentsCintas = new ArrayList<>();
     for (Cintas cinta : cintasData) {

@@ -10,26 +10,54 @@ import com.acap.api.model.ShipmentsNotifications;
 import com.acap.api.repository.ShipmentsNotificationsRepository;
 import com.acap.api.repository.ShipmentsRepository;
 
+/**
+ * Servicio que gestiona las notificaciones de envíos.
+ */
 @Service
 public class ShipmentsNotificationsService {
 
+  // Repositorios necesarios para acceder a datos.
   private final ShipmentsNotificationsRepository shipmentsNotificationsRepository;
   private final ShipmentsRepository shipmentsRepository;
 
-  public ShipmentsNotificationsService (ShipmentsNotificationsRepository shipmentsNotificationsRepository, ShipmentsRepository shipmentsRepository) {
+  /**
+   * Constructor del servicio de notificaciones de envíos.
+   *
+   * @param shipmentsNotificationsRepository Repositorio para acceder a datos de notificaciones de envíos.
+   * @param shipmentsRepository               Repositorio para acceder a datos de envíos.
+   */
+  public ShipmentsNotificationsService(
+      ShipmentsNotificationsRepository shipmentsNotificationsRepository,
+      ShipmentsRepository shipmentsRepository) {
     this.shipmentsNotificationsRepository = shipmentsNotificationsRepository;
     this.shipmentsRepository = shipmentsRepository;
   }
 
-  public ShipmentsNotifications save (ShipmentsNotifications shipmentsNotification) {
-    Optional<Shipments> shipmnetOptional = shipmentsRepository.findById(shipmentsNotification.getShipment().getId());
+  /**
+   * Guarda una notificación de envío.
+   *
+   * @param shipmentsNotification Notificación de envío a guardar.
+   * @return Notificación de envío guardada.
+   */
+  @SuppressWarnings("null")
+  public ShipmentsNotifications save(ShipmentsNotifications shipmentsNotification) {
+    Optional<Shipments> shipmentOptional = shipmentsRepository.findById(shipmentsNotification.getShipment().getId());
 
-    if (shipmnetOptional.isPresent()) { shipmentsNotification.setShipment(shipmnetOptional.get());  }
-    
+    if (shipmentOptional.isPresent()) {
+      shipmentsNotification.setShipment(shipmentOptional.get());
+    }
+
     return shipmentsNotificationsRepository.save(shipmentsNotification);
   }
 
-  public List<ShipmentsNotifications> findByLocationToId (Long locationId) {
+  /**
+   * Obtiene todas las notificaciones de envíos para una ubicación específica.
+   *
+   * @param locationId ID de la ubicación.
+   * @return Lista de notificaciones de envíos para la ubicación.
+   */
+  public List<ShipmentsNotifications> findByLocationToId(Long locationId) {
     return shipmentsNotificationsRepository.findByLocationToId(locationId);
   }
 }
+

@@ -7,6 +7,10 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import com.acap.api.service.NotificationsService;
 
+/*
+ * Clase para configurar WebSocket 
+ * en la aplicación
+ */
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
@@ -17,9 +21,15 @@ public class WebSocketConfig implements WebSocketConfigurer {
     this.notificationsService = notificationsService;
   }
 
+  // Método para registrar manejadores de WebSocket
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+
+    // Registrar el servicio de notificaciones como manejador de WebSocket en la
+    // ruta "/notifications"
     registry.addHandler(notificationsService, "/notifications")
+    
+        // Permitir solicitudes desde cualquier origen (CORS)
         .setAllowedOrigins("*");
   }
 }

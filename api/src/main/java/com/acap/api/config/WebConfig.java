@@ -12,22 +12,31 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/*
+ * Clase para configurar convertidores de mensajes http
+ */
 @EnableWebMvc
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+  // Método para configurar convertidores de mensajes HTTP
   @Override
   public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
+    // Agregar convertidor de mensajes para imágenes
     messageConverters.add(createImageHttpMessageConverter());
+    // Agregar convertidor de mensajes para matrices de bytes
     messageConverters.add(byteArrayHttpMessageConverter());
+    // Agregar convertidor de mensajes JSON usando Jackson
     messageConverters.add(new MappingJackson2HttpMessageConverter());
   }
 
+  // Bean para crear un convertidor de mensajes para BufferedImage
   @Bean
   public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {
     return new BufferedImageHttpMessageConverter();
   }
 
+  // Bean para crear un convertidor de mensajes para matrices de bytes
   @Bean
   public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
     return new ByteArrayHttpMessageConverter();
