@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import { TextInput } from "./TextInput";
 import { CreatableInputSelect } from "./CreatableInputSelectFormik";
 import { ButtonPrimary } from "./ButtonPrimary";
-import { ButtonSecondary } from "./ButtonSecondary";
+import { ButtonSecundary } from "./ButtonSecondary";
 import { useGetPositions } from "../hooks/useGetPositions";
 import { useGetPartialLocations } from "../hooks/useGetPartialLocations";
 
@@ -95,7 +95,7 @@ export function ContentDialogUser({ data, setData, selectedItem, setModalShow })
         <CreatableInputSelect
           data={locations}
           setData={setLocations}
-          attributes={['location']}
+          atributes={['location']}
           createFunction={saveLocation}
           label={'Sucursal: '}
           name='location'
@@ -103,7 +103,7 @@ export function ContentDialogUser({ data, setData, selectedItem, setModalShow })
         <CreatableInputSelect
           data={positions}
           setData={setPositions}
-          attributes={['position']}
+          atributes={['position']}
           createFunction={savePosition}
           label={'Puesto: '}
           name='position'
@@ -134,7 +134,7 @@ export function ContentDialogUser({ data, setData, selectedItem, setModalShow })
         {/* Contenedor de botones de acción */}
         <div className="button-container-edit-user">
           {/* Botón secundario para cancelar la edición del usuario */}
-          <ButtonSecondary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecondary>
+          <ButtonSecundary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecundary>
           {/* Botón primario para confirmar la edición del usuario */}
           <ButtonPrimary type="submit">Guardar</ButtonPrimary>
         </div>

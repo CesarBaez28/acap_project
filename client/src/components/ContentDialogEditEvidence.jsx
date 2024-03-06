@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import { ButtonPrimary } from "./ButtonPrimary";
 import { ButtonSecundary } from "./ButtonSecondary";
-import { evidenceValidationSchema } from '../validationsSchemas/evidenceValidationSchema.js';
+import { evidenceValidationSchema } from '../validactionsSchemas/evidenceValidationSchema.js';
 import { TextInput } from "./TextInput";
 
 import "../styles/components/contentDialogEvidence.css";

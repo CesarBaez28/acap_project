@@ -1,7 +1,7 @@
-import { ButtonSecondaryLink } from "./ButtonSecondaryLink";
+import { ButtonSecundaryLink } from "./ButtonSecondaryLink";
 import ZooInSvg from '../assets/zoomIn.svg?react';
 import '../styles/components/contentSummaryShipments.css';
-import { ButtonSecondary } from "./ButtonSecondary";
+import { ButtonSecundary } from "./ButtonSecondary";
 import { getSignatureImage } from "../api/getSignatureImage";
 
 /**
@@ -50,7 +50,7 @@ export function ContentSummaryShipmentsReceived({ shipments, detailsScreen }) {
 
         <div className='text-summary-container'>
           <p className='title-summary-content'>Firma</p>
-          <ButtonSecondary
+          <ButtonSecundary
             onClick={viewSignature}
             styles={{
               display: "flex",
@@ -63,7 +63,7 @@ export function ContentSummaryShipmentsReceived({ shipments, detailsScreen }) {
             }}
           >
             <span> Ver firma </span>
-          </ButtonSecondary>
+          </ButtonSecundary>
         </div>
 
         <div className='text-summary-container'>
@@ -92,14 +92,14 @@ export function ContentSummaryShipmentsReceived({ shipments, detailsScreen }) {
 
       {/* Botón para ver detalles adicionales */}
       <div className='view-details-summary'>
-        <ButtonSecondaryLink
+        <ButtonSecundaryLink
           state={shipments}
           href={detailsScreen}
           styles={{ display: "flex", alignItems: 'center', padding: ".4rem .6rem" }}
         >
           <ZooInSvg />
           <span> Ver detalles </span>
-        </ButtonSecondaryLink>
+        </ButtonSecundaryLink>
       </div>
     </>
   );

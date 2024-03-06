@@ -19,7 +19,7 @@ import { NOT_STATUS_CINTAS } from "../constants";
 import { processedCintasData } from "../utils/processedCintasData";
 import { setData as setDataCinta } from '../utils/setData';
 
-import { cintaValidationSchema } from "../validationsSchemas/cintaValidationSchema";
+import { cintaValidationSchema } from "../validactionsSchemas/cintaValidationSchema";
 
 /**
  * Componente que representa el contenido del diálogo para editar cintas.

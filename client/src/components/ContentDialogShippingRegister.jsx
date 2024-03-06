@@ -1,4 +1,4 @@
-import { ButtonSecondary } from "./ButtonSecondary";
+import { ButtonSecundary } from "./ButtonSecondary";
 import SearchSvg from '../assets/search.svg?react';
 import '../styles/components/contentDialogMoveCinta.css';
 import { useContext, useState } from "react";
@@ -82,10 +82,9 @@ export function ContentDialogShippingRegister({ data, setData, setModalShow }) {
       {searchData != null
         ?
         <section className="section-table-dialog-move-cinta">
-          {/* Componente Table para mostrar los resultados de la búsqueda */}
           <Table
             columns={['Label: ', 'Ubicación actual:', 'Descripción', 'Estado:']}
-            attributes={['label', 'location', 'description', 'statusCinta']}
+            atributes={['label', 'location', 'description', 'statusCinta']}
             data={searchData}
             setData={setSearchData}
             selectedItems={data}
@@ -98,7 +97,7 @@ export function ContentDialogShippingRegister({ data, setData, setModalShow }) {
       {/* Contenedor de botones de acción */}
       <div className="button-container-move-cinta">
         {/* Botón secundario para cancelar la acción */}
-        <ButtonSecondary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecondary>
+        <ButtonSecundary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecundary>
       </div>
     </>
   );

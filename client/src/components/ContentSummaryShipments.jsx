@@ -1,9 +1,9 @@
-import { ButtonSecondaryLink } from "./ButtonSecondaryLink";
+import { ButtonSecundaryLink } from "./ButtonSecondaryLink";
 import ZooInSvg from '../assets/zoomIn.svg?react';
 import TrashSvg from '../assets/trash.svg?react';
 import '../styles/components/contentSummaryShipments.css';
 import { PENDING_STATUS_ID } from "../constants";
-import { ButtonSecondary } from "./ButtonSecondary";
+import { ButtonSecundary } from "./ButtonSecondary";
 import { getSignatureImage } from "../api/getSignatureImage";
 
 /**
@@ -53,7 +53,7 @@ export function ContentSummaryShipments({ shipments, detailsScreen, deleteFuncti
 
         <div className='text-summary-container'>
           <p className='title-summary-content'>Firma</p>
-          <ButtonSecondary
+          <ButtonSecundary
             onClick={viewSignature}
             styles={{
               display: "flex",
@@ -66,7 +66,7 @@ export function ContentSummaryShipments({ shipments, detailsScreen, deleteFuncti
             }}
           >
             <span> Ver firma </span>
-          </ButtonSecondary>
+          </ButtonSecundary>
         </div>
 
         <div className='text-summary-container'>
@@ -85,23 +85,23 @@ export function ContentSummaryShipments({ shipments, detailsScreen, deleteFuncti
 
       {/* Detalles adicionales y botones */}
       <div className='view-details-summary'>
-        <ButtonSecondaryLink
+        <ButtonSecundaryLink
           state={shipments}
           href={detailsScreen}
           styles={{ display: "flex", alignItems: 'center', padding: ".4rem .6rem" }}
         >
           <ZooInSvg />
           <span> Ver detalles </span>
-        </ButtonSecondaryLink>
+        </ButtonSecundaryLink>
         {shipments.status.id === PENDING_STATUS_ID
           ?
-          <ButtonSecondary
+          <ButtonSecundary
             onClick={deleteFunction}
             styles={{ display: "flex", alignItems: 'center', padding: ".4rem .6rem", }}
           >
             <TrashSvg style={{ fill: "#0033a1" }} />
             <span> Cancelar envío </span>
-          </ButtonSecondary>
+          </ButtonSecundary>
           : null
         }
       </div>

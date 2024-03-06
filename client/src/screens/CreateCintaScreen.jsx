@@ -120,17 +120,16 @@ const Content = () => {
             <CreatableInputSelect
               data={locations}
               setData={setLocations}
-              attributes={['location']}
+              atributes={['location']}
               createFunction={saveLocation}
               label={'Ubicación: '}
               name='location'
             />
 
-            {/* Selector creatable para el estado */}
             <CreatableInputSelect
               data={status}
               setData={setStatus}
-              attributes={['state']}
+              atributes={['state']}
               createFunction={saveStatus}
               label={'Estado: '}
               name='statusCinta'

@@ -114,7 +114,7 @@ const Content = () => {
             <CreatableInputSelect
               data={locations}
               setData={setLocations}
-              attributes={['location']}
+              atributes={['location']}
               createFunction={saveLocation}
               label={'Sucursal: '}
               name='location'
@@ -124,7 +124,7 @@ const Content = () => {
             <CreatableInputSelect
               data={positions}
               setData={setPositions}
-              attributes={['position']}
+              atributes={['position']}
               createFunction={savePosition}
               label={'Puesto: '}
               name='position'

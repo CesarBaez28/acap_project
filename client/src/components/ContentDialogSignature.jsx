@@ -1,5 +1,5 @@
-import { ButtonSecondary } from "./ButtonSecondary";
-import '../styles/components/contentDialogSignature.css';
+import { ButtonSecundary } from "./ButtonSecondary";
+import '../styles/components/contentDialogSignature.css'
 import { startSigning, clearSign, doneSigning } from "../utils/singWithTopazSystem";
 
 /**
@@ -38,18 +38,18 @@ export function ContentDialogSignature({ setData, setModalShow }) {
   return (
     <>
       {/* Elemento Canvas para la captura de la firma */}
-      <canvas id="cnv" className="canvas-sign"></canvas>
+      <canvas id="cnv" className="canvas-sing"></canvas>
 
       {/* Contenedor de botones de acción */}
-      <div className="button-sign-container">
+      <div className="button-sing-container">
         {/* Botón secundario para cancelar el proceso de firma */}
-        <ButtonSecondary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecondary>
+        <ButtonSecundary type="button" onClick={() => setModalShow(false)}>Cancelar</ButtonSecundary>
         {/* Botón secundario para iniciar el proceso de firma */}
-        <ButtonSecondary type="button" onClick={handleSign}>Firmar</ButtonSecondary>
+        <ButtonSecundary type="button" onClick={handleSign}>Firmar</ButtonSecundary>
         {/* Botón secundario para borrar la firma en el área de firma */}
-        <ButtonSecondary type="button" onClick={handleErase}>Limpiar</ButtonSecondary>
+        <ButtonSecundary type="button" onClick={handleErase}>Limpiar</ButtonSecundary>
         {/* Botón secundario para finalizar el proceso de firma */}
-        <ButtonSecondary type="button" onClick={handleDone}>Terminar</ButtonSecondary>
+        <ButtonSecundary type="button" onClick={handleDone}>Terminar</ButtonSecundary>
       </div>
     </>
   );

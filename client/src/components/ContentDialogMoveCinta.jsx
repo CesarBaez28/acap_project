@@ -74,10 +74,9 @@ export function ContentDialogMoveCinta({ data, setData, setModalShow }) {
         <ConditionalRender isLoading={isLoading}>
           {/* Sección que contiene la tabla de cintas */}
           <section className="section-table-dialog-move-cinta">
-            {/* Componente Table para mostrar los resultados de la búsqueda */}
             <Table
               columns={['Label: ', 'Ubicación actual:', 'Descripción', 'Estado:']}
-              attributes={['label', 'location', 'description', 'statusCinta']}
+              atributes={['label', 'location', 'description', 'statusCinta']}
               data={searchData}
               setData={setSearchData}
               selectedItems={data}

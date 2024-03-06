@@ -1,6 +1,6 @@
 import { getSignatureImage } from '../api/getSignatureImage';
 import '../styles/components/contentSummaryShipments.css';
-import { ButtonSecondary } from './ButtonSecondary';
+import { ButtonSecundary } from './ButtonSecondary';
 
 /**
  * Componente que muestra los detalles resumidos de los envíos.
@@ -47,7 +47,7 @@ export function ContentSummaryShipmentsDetails({ shipments }) {
 
         <div className='text-summary-container'>
           <p className='title-summary-content'>Firma</p>
-          <ButtonSecondary
+          <ButtonSecundary
             onClick={viewSignature}
             styles={{
               display: "flex",
@@ -60,7 +60,7 @@ export function ContentSummaryShipmentsDetails({ shipments }) {
             }}
           >
             <span> Ver firma </span>
-          </ButtonSecondary>
+          </ButtonSecundary>
         </div>
 
         <div className='text-summary-container'>
