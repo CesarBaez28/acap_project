@@ -1,3 +1,10 @@
+/*
+* Objeto global para integrar pad de firma
+* Ver https://topazsystems.com/sdks/sigplusextlite.html
+*
+*/
+
+
 /** Global variable for storing the error message for GetLastError() function */
 let errorMessage = "";
 /** canvas context for live signing */

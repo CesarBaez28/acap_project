@@ -1,29 +1,44 @@
 import { useState, useEffect } from "react";
 import { API, TOKEN_NAME } from "../constants";
-import { getCookieValue } from '../utils/getCookieValue'
+import { getCookieValue } from '../utils/getCookieValue';
 
-export function useGetPrivileges () {
-  const token = getCookieValue(TOKEN_NAME)
-  const [privileges, setPrivileges] = useState()
+/**
+ * Hook personalizado para obtener una lista de privilegios desde la API.
+ *
+ * @returns {Array} - Un array que contiene la lista de privilegios y la función para actualizarla.
+ */
+export function useGetPrivileges() {
+  // Obtener el token de la cookie
+  const token = getCookieValue(TOKEN_NAME);
 
+  // Estado para almacenar la lista de privilegios
+  const [privileges, setPrivileges] = useState();
+
+  // Función para cargar la lista de privilegios desde la API
   const loadPrivileges = async () => {
     try {
-      const response = await fetch(API+'/privileges/findAll', {
+      // Realizar la solicitud a la API
+      const response = await fetch(API + '/privileges/findAll', {
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      const data = await response.json()
-      setPrivileges(data)
+          'Authorization': 'Bearer ' + token,
+        },
+      });
+
+      // Obtener y almacenar los datos de la respuesta
+      const data = await response.json();
+      setPrivileges(data);
     } catch (error) {
-      throw new Error(error)
+      // Manejar errores durante la carga de datos
+      throw new Error(error);
     }
-  }
+  };
 
-  useEffect( () => {
-    loadPrivileges()
-  }, [])
+  // Efecto para cargar la lista de privilegios al montar el componente
+  useEffect(() => {
+    loadPrivileges();
+  }, []);
 
-  return [privileges, setPrivileges]
+  // Devolver el estado y la función para actualizar la lista de privilegios
+  return [privileges, setPrivileges];
 }

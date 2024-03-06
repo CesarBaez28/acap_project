@@ -1,30 +1,48 @@
-import {useEffect, useState } from "react"
-import { API, TOKEN_NAME } from '../constants'
-import { getCookieValue } from '../utils/getCookieValue'
+import { useEffect, useState } from "react";
+import { API, TOKEN_NAME } from '../constants';
+import { getCookieValue } from '../utils/getCookieValue';
 
-export function useGetPartialLocations (filter) {
-  const token = getCookieValue(TOKEN_NAME)
-  const [locations, setLocations] = useState()
+/**
+ * Hook personalizado para obtener una lista filtrada de ubicaciones desde la API.
+ *
+ * @param {Array} filter - Un array que contiene las ubicaciones a excluir de la lista.
+ * @returns {Array} - Un array que contiene la lista de ubicaciones filtradas y la función para actualizarla.
+ */
+export function useGetPartialLocations(filter) {
+  // Obtener el token de la cookie
+  const token = getCookieValue(TOKEN_NAME);
 
+  // Estado para almacenar la lista de ubicaciones filtradas
+  const [locations, setLocations] = useState();
+
+  // Función para cargar la lista de ubicaciones desde la API y aplicar el filtro
   const loadLocations = async () => {
     try {
-      const response = await fetch(API+'/location/findAll', {
+      // Realizar la solicitud a la API
+      const response = await fetch(API + '/location/findAll', {
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      const data = await response.json()
-      const filterData = data.filter(item => !filter.includes(item.location))
-      setLocations(filterData)
+          'Authorization': 'Bearer ' + token,
+        },
+      });
+
+      // Obtener y almacenar los datos de la respuesta
+      const data = await response.json();
+
+      // Filtrar las ubicaciones según el array de filtro
+      const filterData = data.filter(item => !filter.includes(item.location));
+      setLocations(filterData);
     } catch (error) {
-      throw new Error(error)
+      // Manejar errores durante la carga de datos
+      throw new Error(error);
     }
-  }
+  };
 
+  // Efecto para cargar la lista de ubicaciones al montar el componente
   useEffect(() => {
-    loadLocations()
-  }, [])
+    loadLocations();
+  }, []);
 
-  return [locations, setLocations]
+  // Devolver el estado y la función para actualizar la lista de ubicaciones filtradas
+  return [locations, setLocations];
 }

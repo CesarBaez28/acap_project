@@ -21,15 +21,32 @@ import { RECEIVED_STATUS_ID } from '../constants'
 import { useContext, useState } from 'react'
 import { UserContext } from '../contexts/userContext'
 
+/**
+ * Contenido específico de la pantalla de detalles de recepción de envíos de cintas.
+ * Permite visualizar información detallada sobre la recepción de un envío de cintas y confirmar la recepción.
+ *
+ * @returns {JSX.Element} - Elemento JSX que contiene la interfaz de la pantalla de detalles de recepción de envíos de cintas.
+ */
 const Content = () => {
-  const { user } = useContext(UserContext)
+  // Contexto de usuario para acceder a la información del usuario actual
+  const { user } = useContext(UserContext);
+  // Ubicación actual de la aplicación para obtener el estado del envío de cintas
   const { state } = useLocation();
-  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.id)
+  // Hooks para obtener y gestionar la información de las cintas asociadas al envío
+  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.id);
+  // Estado para controlar la visualización del mensaje de confirmación de recepción
   const [modalMessage, setModalMessage] = useState(false);
-  const navigate = useNavigate()
+  // Función de navegación para redirigir a la pantalla de recepción después de la confirmación
+  const navigate = useNavigate();
 
+  /**
+   * Maneja la acción de confirmar la recepción del envío de cintas.
+   * Realiza una llamada a la API para marcar el envío como recibido.
+   *
+   * @returns {void}
+   */
   const handleConfirm = async () => {
-    const date = new Date()
+    const date = new Date();
     date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
     const isoDateString = date.toISOString();
     const data = await saveCintasReceived({
@@ -37,66 +54,81 @@ const Content = () => {
         status: { id: RECEIVED_STATUS_ID },
         shipment: { id: state.id },
         userReceived: { id: user.id },
-        dateReceived: isoDateString
-      }
-    })
-    setModalMessage(true)
-  }
+        dateReceived: isoDateString,
+      },
+    });
+    setModalMessage(true);
+  };
 
-  return <>
-    <h2 className='title-shipment-details'>Detalles del envío</h2>
+  // Renderizado del componente Content
+  return (
+    <>
+      <h2 className='title-shipment-details'>Detalles del envío</h2>
 
-    <div className='confirm-shipment-container'>
-      <ButtonSecundary onClick={handleConfirm} styles={{ display: "flex", gap: '.3rem', alignItems: 'center', padding: ".4rem .6rem" }}>
-        <CheckCircleSvg />
-        <span>
-          Marcar como recibido
-        </span>
-      </ButtonSecundary>
-    </div>
+      {/* Contenedor de confirmación de recepción */}
+      <div className='confirm-shipment-container'>
+        {/* Botón para confirmar la recepción del envío */}
+        <ButtonSecundary onClick={handleConfirm} styles={{ display: "flex", gap: '.3rem', alignItems: 'center', padding: ".4rem .6rem" }}>
+          <CheckCircleSvg />
+          <span>
+            Marcar como recibido
+          </span>
+        </ButtonSecundary>
+      </div>
 
-    <section className='shipment-details-section col-md-10'>
-      <Details
-        date={state.formattedDate}
-        title={"Movimiento de cinta"}
-        content={<ContentSummaryShipmentsDetails shipments={state} />}
-      />
+      {/* Sección de detalles del envío */}
+      <section className='shipment-details-section col-md-10'>
+        {/* Componente Details para mostrar información resumida del envío */}
+        <Details
+          date={state.formattedDate}
+          title={"Movimiento de cinta"}
+          content={<ContentSummaryShipmentsDetails shipments={state} />}
+        />
 
-      <Card>
-        <h4>Cintas enviadas</h4>
+        {/* Tarjeta para mostrar las cintas enviadas en el envío */}
+        <Card>
+          <h4>Cintas enviadas</h4>
 
-        <div className='table-details-shipments'>
-          <Table
-            columns={['Label:', "Descripción"]}
-            atributes={['label', 'description']}
-            data={shipmentsCintas}
-            setData={setShipmentsCintas}
-          />
-        </div>
+          {/* Tabla de detalles de cintas enviadas */}
+          <div className='table-details-shipments'>
+            <Table
+              columns={['Label:', 'Descripción']}
+              atributes={['label', 'description']}
+              data={shipmentsCintas}
+              setData={setShipmentsCintas}
+            />
+          </div>
+        </Card>
 
-      </Card>
+        {/* Diálogo para mostrar el mensaje de confirmación de recepción */}
+        <Dialog
+          ContentDialog={
+            <ContentDialogMessage
+              text={'Envío recibido correctamente'}
+              svg={<Check />}
+              onClick={() => navigate('/reception')}
+            />
+          }
+          title={'Mensaje'}
+          open={modalMessage}
+        />
+      </section>
+    </>
+  );
+};
 
-
-      <Dialog
-        ContentDialog={
-          <ContentDialogMessage
-            text={'Envío recibido correctamente'}
-            svg={<Check />}
-            onClick={() => navigate('/reception')}
-          />
-        }
-        title={'Mensaje'}
-        open={modalMessage}
-      />
-
-    </section>
-  </>
-}
-
+/**
+ * Componente que representa la pantalla de detalles de recepción de envíos de cintas.
+ *
+ * @returns {JSX.Element} - Elemento JSX que representa la pantalla de detalles de recepción de envíos de cintas.
+ */
 export function ReceptionDetailsScreen() {
-  return <>
-    <SideBar />
-    <Header />
-    <MainContent content={<Content />} />
-  </>
+  return (
+    <>
+      {/* Estructura principal de la página */}
+      <SideBar />
+      <Header />
+      <MainContent content={<Content />} />
+    </>
+  );
 }

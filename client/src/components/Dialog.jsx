@@ -1,10 +1,20 @@
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-import '../styles/components/dialog.css'
+import '../styles/components/dialog.css';
 
-export function Dialog({ContentDialog, ...props }) {
-
+/**
+ * Componente `Dialog` que proporciona un cuadro de diálogo modal con un título y contenido personalizado.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {JSX.Element} props.ContentDialog - Contenido del cuadro de diálogo.
+ * @param {string} props.title - Título del cuadro de diálogo.
+ * @param {Object} props.styles - Estilos personalizados para el cuadro de diálogo.
+ * @returns {JSX.Element} - Elemento JSX que representa el componente `Dialog`.
+ */
+export function Dialog({ ContentDialog, ...props }) {
+  // Estilos por defecto para el cuadro de diálogo.
   const style = {
     position: 'absolute',
     top: '50%',
@@ -14,7 +24,7 @@ export function Dialog({ContentDialog, ...props }) {
     bgcolor: '#FFF',
     boxShadow: 24,
     overflowY: 'auto',
-    ...props.styles
+    ...props.styles,
   };
 
   return (
@@ -34,5 +44,5 @@ export function Dialog({ContentDialog, ...props }) {
         </div>
       </Box>
     </Modal>
-  )
+  );
 }

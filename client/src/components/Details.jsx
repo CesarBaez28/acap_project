@@ -1,5 +1,15 @@
-import '../styles/components/details.css'
+import '../styles/components/details.css';
 
+/**
+ * Componente `Details` que representa un contenedor para mostrar detalles.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {string} props.date - Fecha para mostrar en el resumen.
+ * @param {string} props.title - Título para mostrar en el resumen.
+ * @param {JSX.Element} props.content - Contenido que se mostrará cuando se despliegue el detalle.
+ * @returns {JSX.Element} - Elemento JSX que representa el componente `Details`.
+ */
 export function Details({ date, title, content }) {
   return (
     <details>
@@ -13,5 +23,5 @@ export function Details({ date, title, content }) {
         {content}
       </article>
     </details>
-  )
+  );
 }

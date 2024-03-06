@@ -1,12 +1,15 @@
 import * as yup from "yup";
 
+/**
+ * Esquema de validación Yup para la entrada de datos de creación o edición de un usuario.
+ */
 export const userValidationSchema = yup.object().shape({
   username: yup
     .string()
     .required('Ingrese un nombre de usuario'),
   employeeNumber: yup
     .string()
-    .required('Ingre el número de empleado'),
+    .required('Ingrese el número de empleado'),
   email: yup
     .string()
     .email('El email no es válido')
@@ -16,10 +19,13 @@ export const userValidationSchema = yup.object().shape({
     .required('Seleccione la posición del usuario'),
   location: yup
     .string()
-    .required('Ingrese la sucursal a la que pertence el usuario')
-})
+    .required('Ingrese la sucursal a la que pertenece el usuario')
+});
 
-export const userValidationSchemaWithoutPositionAndbranchOffice = yup.object().shape(
+/**
+ * Esquema de validación Yup para la entrada de datos de creación o edición de un usuario sin incluir posición y sucursal.
+ */
+export const userValidationSchemaWithoutPositionAndBranchOffice = yup.object().shape(
   Object.keys(userValidationSchema.fields).reduce((acc, key) => {
     if (key !== 'position' && key !== 'location') {
       acc[key] = userValidationSchema.fields[key];
@@ -28,6 +34,9 @@ export const userValidationSchemaWithoutPositionAndbranchOffice = yup.object().s
   }, {})
 );
 
+/**
+ * Esquema de validación Yup para la entrada de datos de contraseña y confirmación de contraseña.
+ */
 const passwordSchema = yup.object().shape({
   password: yup
     .string()
@@ -38,8 +47,11 @@ const passwordSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden')
     .required('Confirme la contraseña')
-})
+});
 
+/**
+ * Esquema de validación Yup para la entrada de datos de contraseña y confirmación de contraseña, sin requerir la contraseña.
+ */
 const passwordSchemaNotRequired = yup.object().shape({
   password: yup
     .string()
@@ -48,7 +60,14 @@ const passwordSchemaNotRequired = yup.object().shape({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden')
-})
+});
 
-export const createUserValidationSchema = userValidationSchema.concat(passwordSchema)
-export const editUserValidationSchema = userValidationSchema.concat(passwordSchemaNotRequired)
+/**
+ * Esquema de validación Yup para la entrada de datos de creación de un usuario, incluyendo la validación de contraseña.
+ */
+export const createUserValidationSchema = userValidationSchema.concat(passwordSchema);
+
+/**
+ * Esquema de validación Yup para la entrada de datos de edición de un usuario, incluyendo la validación de contraseña (opcional).
+ */
+export const editUserValidationSchema = userValidationSchema.concat(passwordSchemaNotRequired);

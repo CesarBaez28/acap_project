@@ -22,71 +22,102 @@ const initialValues = {
   confirmPassword: ''
 }
 
+/**
+ * Contenido específico de la pantalla de cambio de contraseña.
+ *
+ * @returns {JSX.Element} - Elemento JSX que contiene el formulario y la información relacionada con el cambio de contraseña.
+ */
 const Content = () => {
-  const { user, setUser } = useContext(UserContext)
-  const navigate = useNavigate()
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const handleChangePassword =  async (values, setErrors) => {
-    const {currentPassword, newPassword } = values
-    const data = await changePassword(user.id, currentPassword, newPassword)
-    if (data?.error) { setErrors({currentPassword: data.error}); return; }
-    setUser(data)
-    navigate('/profile')
-  }
+  /**
+   * Manejador de cambio de contraseña que realiza la llamada a la API para cambiar la contraseña.
+   *
+   * @param {Object} values - Valores del formulario (contraseña actual, nueva contraseña y confirmación).
+   * @param {Function} setErrors - Función para establecer errores de validación.
+   */
+  const handleChangePassword = async (values, setErrors) => {
+    const { currentPassword, newPassword } = values;
+    const data = await changePassword(user.id, currentPassword, newPassword);
 
-  return <>
-    <h2 className='title-change-password'>Cambiar contraseña</h2>
+    if (data?.error) {
+      setErrors({ currentPassword: data.error });
+      return;
+    }
 
-    <section className='section-input-chage-password col-md-5 col-xl-4'>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={changePasswordValidationSchema}
-        onSubmit={(values, actions) => {
-          handleChangePassword(values, actions.setErrors)
-        }}
-      >
-        <Form>
-          <TextInput
-            label={'Contraseña actual: '}
-            name='currentPassword'
-            type='password'
-            autoComplete='currentPassword'
-          />
-          <TextInput
-            label={'Contraseña nueva: '}
-            name='newPassword'
-            type='password'
-            autoComplete='newPassword'
-          />
-          <TextInput
-            label={'Repita la contraseña: '}
-            name='confirmPassword'
-            type='password'
-            autoComplete='confirmPassword'
-          />
+    // Actualiza el contexto del usuario con la nueva información
+    setUser(data);
+    // Navega a la página de perfil después de cambiar la contraseña
+    navigate('/profile');
+  };
 
-          <Card>
-            <p className="p-info-card-password">
-              La contraseña debe cumplir con las siguientes características:
-            </p>
-            <ul>
-              <li>Debe tener al menos una minúscula.</li>
-              <li>Debe contener al menos una mayúscula.</li>
-              <li>Debe tener al menos un número. </li>
-              <li>Tiene que tener un mínumo de 8 caracteres.</li>
-            </ul>
-          </Card>
+  return (
+    <>
+      <h2 className='title-change-password'>Cambiar contraseña</h2>
 
-          <div className='buttons-container-change-password'>
-            <ButtonSecundaryLink href={"/profile"}>Cancelar</ButtonSecundaryLink>
-            <ButtonPrimary type='submit'>Guardar</ButtonPrimary>
-          </div>
-        </Form>
-      </Formik>
-    </section>
-  </>
-}
+      {/* Formulario Formik para gestionar el estado del formulario y las validaciones */}
+      <section className='section-input-chage-password col-md-5 col-xl-4'>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={changePasswordValidationSchema}
+          onSubmit={(values, actions) => {
+            handleChangePassword(values, actions.setErrors);
+          }}
+        >
+          <Form>
+            {/* Campos de entrada para la contraseña actual, nueva contraseña y confirmación */}
+            <TextInput
+              label={'Contraseña actual: '}
+              name='currentPassword'
+              type='password'
+              autoComplete='currentPassword'
+            />
+            <TextInput
+              label={'Contraseña nueva: '}
+              name='newPassword'
+              type='password'
+              autoComplete='newPassword'
+            />
+            <TextInput
+              label={'Repita la contraseña: '}
+              name='confirmPassword'
+              type='password'
+              autoComplete='confirmPassword'
+            />
 
+            {/* Información sobre las características de la contraseña en una tarjeta */}
+            <Card>
+              <p className="p-info-card-password">
+                La contraseña debe cumplir con las siguientes características:
+              </p>
+              <ul>
+                <li>Debe tener al menos una minúscula.</li>
+                <li>Debe contener al menos una mayúscula.</li>
+                <li>Debe tener al menos un número. </li>
+                <li>Tiene que tener un mínimo de 8 caracteres.</li>
+              </ul>
+            </Card>
+
+            {/* Botones para cancelar o guardar la nueva contraseña */}
+            <div className='buttons-container-change-password'>
+              <ButtonSecundaryLink href={"/profile"}>Cancelar</ButtonSecundaryLink>
+              <ButtonPrimary type='submit'>Guardar</ButtonPrimary>
+            </div>
+          </Form>
+        </Formik>
+      </section>
+    </>
+  );
+};
+
+/**
+ * Componente que representa la pantalla de cambio de contraseña.
+ * Muestra un formulario con campos para la contraseña actual, nueva contraseña y confirmación de contraseña.
+ * Incluye validaciones de esquema y realiza una llamada a la API para cambiar la contraseña del usuario.
+ *
+ * @returns {JSX.Element} - Elemento JSX que representa la pantalla de cambio de contraseña.
+ */
 export function ChangePasswordScreen() {
   return <>
     <SideBar />

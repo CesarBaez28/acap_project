@@ -20,14 +20,26 @@ import { AccessibleOption } from './AccesibleOption'
 import { deleteCookie } from '../utils/deleteCookie'
 import { logout } from '../api/logout'
 
+/**
+ * Componente `SideBar` para representar la barra lateral de opciones de navegación.
+ *
+ * @component
+ * @example
+ * return <SideBar />;
+ */
 export function SideBar() {
-  const { clearUser, permissions } = useContext(UserContext)
+  const { clearUser, permissions } = useContext(UserContext);
 
+  /**
+   * Manejador de eventos para cerrar sesión.
+   * @async
+   * @function
+   */
   const handleLogOut = async () => {
-    clearUser()
-    await logout()
-    deleteCookie(TOKEN_NAME)
-  }
+    clearUser();
+    await logout();
+    deleteCookie(TOKEN_NAME);
+  };
 
   return (
     <nav className='side-bar'>
@@ -97,5 +109,5 @@ export function SideBar() {
         <Option name={'Salir'} href={'/login'} onClickFunction={handleLogOut} svg={<Logout />} />
       </div>
     </nav>
-  )
+  );
 }

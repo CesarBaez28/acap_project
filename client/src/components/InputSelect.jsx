@@ -2,8 +2,23 @@
 
 import Select from 'react-select';
 
+/**
+ * Componente `InputSelect` que representa un campo de selección.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Array} props.options - Opciones disponibles para la selección.
+ * @param {Object} props.selectedOption - Opción seleccionada.
+ * @param {Function} props.setSelectedOption - Función para establecer la opción seleccionada.
+ * @param {Object} props.defaultValue - Valor predeterminado para el campo de selección.
+ * @param {Object} props.styles - Estilos personalizados para el componente.
+ * @returns {JSX.Element} - Elemento JSX que representa el componente `InputSelect`.
+ */
 export function InputSelect({ options, selectedOption, setSelectedOption, defaultValue, styles }) {
 
+  /**
+   * Estilos personalizados para el componente `Select`.
+   */
   const customStyles = {
     control: (defaultStyles) => ({
       ...defaultStyles,
@@ -12,7 +27,7 @@ export function InputSelect({ options, selectedOption, setSelectedOption, defaul
       borderRadius: "8px",
       ...styles
     })
-  }
+  };
 
   return (
     <Select
@@ -22,5 +37,5 @@ export function InputSelect({ options, selectedOption, setSelectedOption, defaul
       value={selectedOption}
       options={options}
     />
-  )
+  );
 }

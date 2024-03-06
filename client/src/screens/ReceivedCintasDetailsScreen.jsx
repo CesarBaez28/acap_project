@@ -12,43 +12,63 @@ import { useGetShipmentsCintas } from '../hooks/useGetShipmentsCintas'
 
 import { useLocation } from 'react-router-dom';
 
+/**
+ * Contenido específico de la pantalla de detalles de cintas recibidas.
+ * Permite visualizar información detallada sobre un envío de cintas recibidas.
+ *
+ * @returns {JSX.Element} - Elemento JSX que contiene la interfaz de la pantalla de detalles de cintas recibidas.
+ */
 const Content = () => {
+  // Obtención del estado de la ubicación actual, incluyendo la información del envío de cintas
   const { state } = useLocation();
-  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.shipment.id)
+  // Hook para obtener y gestionar la información de las cintas asociadas al envío
+  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.shipment.id);
 
-  return <>
-    <h2 className='title-shipment-details'>Detalles del envío</h2>
+  // Renderizado del componente Content
+  return (
+    <>
+      <h2 className='title-shipment-details'>Detalles del envío</h2>
 
-    <section className='shipment-details-section col-md-10'>
-      <Details
-        date={state.formattedDateShipmentReceived}
-        title={"Movimiento de cinta"}
-        content={<ContentSummaryReceivedShipmentsDetails shipments={state} />}
-      />
+      {/* Sección de detalles del envío */}
+      <section className='shipment-details-section col-md-10'>
+        {/* Componente Details para mostrar información resumida del envío */}
+        <Details
+          date={state.formattedDateShipmentReceived}
+          title={"Movimiento de cinta"}
+          content={<ContentSummaryReceivedShipmentsDetails shipments={state} />}
+        />
 
-      <Card>
-        <h4>Cintas enviadas</h4>
+        {/* Tarjeta para mostrar las cintas enviadas en el envío */}
+        <Card>
+          <h4>Cintas enviadas</h4>
 
-        <div className='table-details-shipments'>
-          <Table
-            columns={['Label:', "Descripción"]}
-            atributes={['label', 'description']}
-            data={shipmentsCintas}
-            setData={setShipmentsCintas}
-          />
-        </div>
+          {/* Tabla de detalles de cintas enviadas */}
+          <div className='table-details-shipments'>
+            <Table
+              columns={['Label:', 'Descripción']}
+              atributes={['label', 'description']}
+              data={shipmentsCintas}
+              setData={setShipmentsCintas}
+            />
+          </div>
+        </Card>
+      </section>
+    </>
+  );
+};
 
-      </Card>
-
-
-    </section>
-  </>
-}
-
+/**
+ * Componente que representa la pantalla de detalles de cintas recibidas.
+ *
+ * @returns {JSX.Element} - Elemento JSX que representa la pantalla de detalles de cintas recibidas.
+ */
 export function ReceivedCintasDetailsScreen() {
-  return <>
-    <SideBar />
-    <Header />
-    <MainContent content={<Content />} />
-  </>
+  return (
+    <>
+      {/* Estructura principal de la página */}
+      <SideBar />
+      <Header />
+      <MainContent content={<Content />} />
+    </>
+  );
 }

@@ -1,17 +1,34 @@
-import { API, TOKEN_NAME } from "../constants"
-import { getCookieValue } from "../utils/getCookieValue"
+import { API, TOKEN_NAME } from "../constants";
+import { getCookieValue } from "../utils/getCookieValue";
 
+/**
+ * Obtiene la lista de cintas desde el servidor.
+ *
+ * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
+ * @returns {Array} - Lista de cintas.
+ */
 export async function getCintas() {
-  const token = getCookieValue(TOKEN_NAME)
+  // Obtiene el token de la cookie
+  const token = getCookieValue(TOKEN_NAME);
 
   try {
-    const response = await fetch(API + '/cintas/1', { 
+    // Realiza una solicitud GET para obtener la lista de cintas
+    const response = await fetch(API + '/cintas/1', {
       method: 'GET',
       headers: {'Authorization': 'Bearer ' + token}
-    })
-    const data = await response.json()
-    return data
+    });
+
+    // Verifica si la respuesta fue exitosa
+    if (response.ok) {
+      // Parsea los datos de la respuesta como JSON y los retorna
+      const data = await response.json();
+      return data;
+    } else {
+      // En caso de respuesta no exitosa, lanza un error con el mensaje del servidor
+      throw new Error(`Error al obtener la lista de cintas: ${response.statusText}`);
+    }
   } catch (error) {
-    throw new Error(error)
+    // En caso de fallo, lanza un error con la descripción del error
+    throw new Error(error);
   }
 }

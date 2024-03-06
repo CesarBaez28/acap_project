@@ -1,31 +1,48 @@
-import { useContext, useEffect, useState } from "react"
-import { createSocket, onMessage } from "../api/webSocket"
-import { UserContext } from "../contexts/userContext"
-import NotificationSound from "../assets/notification-sound-7062.mp3"
+import { useContext, useEffect, useState } from "react";
+import { createSocket, onMessage } from "../api/webSocket";
+import { UserContext } from "../contexts/userContext";
+import NotificationSound from "../assets/notification-sound-7062.mp3";
 
-const notificationSound = new Audio(NotificationSound)
+// Instancia del sonido de notificación
+const notificationSound = new Audio(NotificationSound);
 
+/**
+ * Hook personalizado para gestionar las notificaciones mediante WebSocket.
+ *
+ * @returns {Array} - Estado que almacena las notificaciones, función para actualizar el estado de las notificaciones.
+ */
 export function useNotifications() {
-  const { user } = useContext(UserContext)
-  const [notifications, setNotifications] = useState([])
-  
+  // Obtener el usuario actual del contexto
+  const { user } = useContext(UserContext);
+
+  // Estado para almacenar las notificaciones
+  const [notifications, setNotifications] = useState([]);
+
+  // Efecto para configurar el socket y gestionar las notificaciones
   useEffect(() => {
-    const socketInstance = createSocket(user.id)
-  
+    // Crear una instancia del socket con el ID del usuario
+    const socketInstance = createSocket(user.id);
+
+    // Configurar la escucha de mensajes desde el socket
     onMessage((message) => {
-      const objectMessage = JSON.parse(message)
-      setNotifications((prevNotifications) => [...prevNotifications, objectMessage])
-      notificationSound.play()
+      // Parsear el mensaje JSON recibido
+      const objectMessage = JSON.parse(message);
+
+      // Actualizar el estado con la nueva notificación
+      setNotifications((prevNotifications) => [...prevNotifications, objectMessage]);
+
+      // Reproducir el sonido de notificación
+      notificationSound.play();
     });
-  
+
     // Limpia la conexión del socket cuando el componente se desmonta
     return () => {
       if (socketInstance) {
-        socketInstance.close()
+        socketInstance.close();
       }
-    }
+    };
+  }, [user]);
 
-  }, [user])
-
-  return [notifications, setNotifications]
+  // Devolver el estado y la función para actualizar las notificaciones
+  return [notifications, setNotifications];
 }

@@ -1,11 +1,29 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import Select from 'react-select';
-import { useEffect } from "react";
 
+/**
+ * Componente `InputSelect` que representa un campo de selección con opciones dinámicas.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Function} props.setData - Función para establecer los datos seleccionados.
+ * @param {Array} props.atributes - Atributos a mostrar en las opciones del campo de selección.
+ * @param {Object} props.filter - Filtro opcional para obtener opciones específicas.
+ * @param {Object} props.value - Valor seleccionado en el campo de selección.
+ * @param {Function} props.setValue - Función para establecer el valor seleccionado.
+ * @param {string} props.placeholder - Texto de marcador de posición del campo de selección.
+ * @param {Function} props.getOptionsFunction - Función para obtener las opciones del campo de selección.
+ * @param {Function} props.getDataFunction - Función para obtener datos adicionales basados en la opción seleccionada.
+ * @param {Object} props.styles - Estilos personalizados para el componente.
+ * @returns {JSX.Element} - Elemento JSX que representa el componente `InputSelect`.
+ */
 export function InputSelect({ setData, atributes, filter, value, setValue, placeholder, getOptionsFunction, getDataFunction, styles }) {
-  const [options, setOptions] = useState([])
-  const [optionsData, setOptionsData] = filter !== undefined ? getOptionsFunction(filter) : getOptionsFunction()
+  const [options, setOptions] = useState([]);
+  const [optionsData, setOptionsData] = filter !== undefined ? getOptionsFunction(filter) : getOptionsFunction();
 
+  /**
+   * Estilos personalizados para el componente `Select`.
+   */
   const customStyles = {
     control: (defaultStyles) => ({
       ...defaultStyles,
@@ -14,21 +32,28 @@ export function InputSelect({ setData, atributes, filter, value, setValue, place
       width: "205px",
       ...styles
     })
-  }
+  };
 
+  /**
+   * Maneja el cambio de selección y obtiene datos adicionales si está definida la función `getDataFunction`.
+   * @param {Object} selectedOption - Opción seleccionada.
+   */
   const handleOnChange = async (selectedOption) => {
-    setValue(selectedOption)
-    if (getDataFunction != undefined) {
-      if (selectedOption != null) {
-        const option = optionsData.find(({ id }) => id === selectedOption.value)
-        const evidence = await getDataFunction(option)
-        setData(evidence)
+    setValue(selectedOption);
+    if (getDataFunction !== undefined) {
+      if (selectedOption !== null) {
+        const option = optionsData.find(({ id }) => id === selectedOption.value);
+        const evidence = await getDataFunction(option);
+        setData(evidence);
       } else {
-        setData(null)
+        setData(null);
       }
     }
-  }
+  };
 
+  /**
+   * Actualiza las opciones del campo de selección cuando cambian los datos o atributos.
+   */
   useEffect(() => {
     if (optionsData) {
       const newOptions = optionsData.map((item) =>
@@ -50,5 +75,5 @@ export function InputSelect({ setData, atributes, filter, value, setValue, place
       options={options}
       isClearable={true}
     />
-  )
+  );
 }

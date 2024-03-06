@@ -14,97 +14,136 @@ import { ContentSummaryShipmentsReceived } from '../components/ContentSummaryShi
 import { ContentSummaryShipments } from '../components/ContentSummaryShipments'
 import { ConditionalRender } from '../components/ConditionalRender'
 
+/**
+ * Componente que representa la pantalla de historial de envíos.
+ * Permite buscar y mostrar un historial de envíos o recibos entre dos fechas.
+ *
+ * @returns {JSX.Element} - Elemento JSX que representa la pantalla de historial de envíos.
+ */
 const Content = () => {
-  const [shipments, setShipments] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [selectedOption, setSelectedOption] = useState({ value: 1, label: 'Envíos' })
-  const [option, setOption] = useState(1) // 1 = Envíos. 2 = Recibidos
-  const [initialDateValue, setInitialDateValue] = useState('')
-  const [finalDateValue, setFinalDateValue] = useState('')
+  // Estado para almacenar la lista de envíos o recibos
+  const [shipments, setShipments] = useState(null);
+  // Estado para indicar si la búsqueda está en curso
+  const [isLoading, setIsLoading] = useState(false);
+  // Estado para almacenar la opción seleccionada (Envíos o Recibidos)
+  const [selectedOption, setSelectedOption] = useState({ value: 1, label: 'Envíos' });
+  // Estado para indicar la opción actual (1 para Envíos, 2 para Recibidos)
+  const [option, setOption] = useState(1);
+  // Estado para almacenar la fecha inicial de la búsqueda
+  const [initialDateValue, setInitialDateValue] = useState('');
+  // Estado para almacenar la fecha final de la búsqueda
+  const [finalDateValue, setFinalDateValue] = useState('');
 
+  // Función para manejar cambios en la fecha inicial
   const handleInitialDateValue = (value) => {
-    setInitialDateValue(value)
+    setInitialDateValue(value);
   }
 
+  // Función para manejar cambios en la fecha final
   const handleFinalDateValue = (value) => {
-    setFinalDateValue(value)
+    setFinalDateValue(value);
   }
 
+  // Función para manejar la búsqueda de envíos o recibos
   const handleSearch = async () => {
     if (initialDateValue !== '' && finalDateValue !== '') {
-      setIsLoading(true)
+      setIsLoading(true);
 
-      // find shipments between date
+      // Buscar envíos entre las fechas especificadas
       if (selectedOption.value === 1) {
         const data = await getShipmentsBetweenDate(initialDateValue, finalDateValue);
-        setShipments(data); setOption(1); setIsLoading(false); return
+        setShipments(data);
+        setOption(1);
+        setIsLoading(false);
+        return;
       }
 
-      // find received shipments between date
+      // Buscar recibos entre las fechas especificadas
       if (selectedOption.value === 2) {
         const data = await getReceivedShipmentsBetweenDate(initialDateValue, finalDateValue);
-        setShipments(data); setOption(2); setIsLoading(false); return
+        setShipments(data);
+        setOption(2);
+        setIsLoading(false);
+        return;
       }
     }
   }
 
-  return <>
-    <h2 className='shipmets-history-title'>Historial de envíos</h2>
+  return (
+    <>
+      <h2 className='shipmets-history-title'>Historial de envíos</h2>
 
-    <div className='input-area-shipmets-history-screen'>
-      <input
-        onChange={e => handleInitialDateValue(e.target.value)}
-        value={initialDateValue}
-        className='input-date-search-shipmets-history'
-        type="date"
-      />
-      <input
-        onChange={e => handleFinalDateValue(e.target.value)}
-        value={finalDateValue}
-        className='input-date-search-shipmets-history'
-        type="date"
-      />
-      <InputSelect
-        styles={{ marginTop: '0', borderColor: '#0033A1', height: '100%', width: "130px" }}
-        defaultValue={selectedOption}
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-        options={[{ value: 1, label: 'Envíos' }, { value: 2, label: 'Recibidos' }]}
-      />
-      <ButtonSecundary onClick={handleSearch} styles={{ padding: '0.4rem 0.4rem' }} >
-        <span className='icon-search-shipmets-history-screen'>
-          {<SearchSvg />}
-        </span>
-      </ButtonSecundary>
-    </div>
+      {/* Área de entrada de fechas y opción de búsqueda */}
+      <div className='input-area-shipmets-history-screen'>
+        {/* Input para la fecha inicial */}
+        <input
+          onChange={e => handleInitialDateValue(e.target.value)}
+          value={initialDateValue}
+          className='input-date-search-shipmets-history'
+          type="date"
+        />
+        {/* Input para la fecha final */}
+        <input
+          onChange={e => handleFinalDateValue(e.target.value)}
+          value={finalDateValue}
+          className='input-date-search-shipmets-history'
+          type="date"
+        />
+        {/* Select para elegir entre Envíos o Recibidos */}
+        <InputSelect
+          styles={{ marginTop: '0', borderColor: '#0033A1', height: '100%', width: "130px" }}
+          defaultValue={selectedOption}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+          options={[{ value: 1, label: 'Envíos' }, { value: 2, label: 'Recibidos' }]}
+        />
+        {/* Botón para realizar la búsqueda */}
+        <ButtonSecundary onClick={handleSearch} styles={{ padding: '0.4rem 0.4rem' }} >
+          <span className='icon-search-shipmets-history-screen'>
+            {<SearchSvg />}
+          </span>
+        </ButtonSecundary>
+      </div>
 
-    <ConditionalRender isLoading={isLoading}>
-      <section className='shipments-history-list-section col-md-10'>
-        {shipments?.map((item) => (
-
-          option === 1
-            ? <Details
-              key={item.id}
-              date={item.formattedDate}
-              title={"Movimiento de cinta"}
-              content={<ContentSummaryShipments detailsScreen={'/shipments/details'} shipments={item} />}
-            />
-            : <Details
-              key={item.id}
-              date={item.formattedDateShipmentReceived}
-              title={"Movimiento de cinta"}
-              content={<ContentSummaryShipmentsReceived detailsScreen={'/receivedCintas/details'} shipments={item} />}
-            />
-        ))}
-      </section>
-    </ConditionalRender>
-  </>
+      {/* Condicionalmente renderiza la lista de envíos o recibos */}
+      <ConditionalRender isLoading={isLoading}>
+        <section className='shipments-history-list-section col-md-10'>
+          {/* Mapea y renderiza los detalles de cada envío o recibo */}
+          {shipments?.map((item) => (
+            option === 1
+              ? <Details
+                key={item.id}
+                date={item.formattedDate}
+                title={"Movimiento de cinta"}
+                content={<ContentSummaryShipments detailsScreen={'/shipments/details'} shipments={item} />}
+              />
+              : <Details
+                key={item.id}
+                date={item.formattedDateShipmentReceived}
+                title={"Movimiento de cinta"}
+                content={<ContentSummaryShipmentsReceived detailsScreen={'/receivedCintas/details'} shipments={item} />}
+              />
+          ))}
+        </section>
+      </ConditionalRender>
+    </>
+  );
 }
 
+/**
+ * Componente principal que representa la pantalla de historial de envíos.
+ *
+ * @returns {JSX.Element} - Elemento JSX que representa la pantalla de historial de envíos.
+ */
 export function ShipmentsHistoryScreen() {
-  return <>
-    <Header />
-    <SideBar />
-    <MainContent content={<Content />} />
-  </>
+  return (
+    <>
+      {/* Barra de encabezado */}
+      <Header />
+      {/* Barra lateral */}
+      <SideBar />
+      {/* Contenido principal que incluye el historial de envíos */}
+      <MainContent content={<Content />} />
+    </>
+  );
 }

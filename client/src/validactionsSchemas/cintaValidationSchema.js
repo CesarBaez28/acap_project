@@ -1,5 +1,8 @@
 import * as yup from "yup";
 
+/**
+ * Esquema de validación Yup para el registro de cintas.
+ */
 export const cintaValidationSchema = yup.object().shape({
   label: yup
     .string()
@@ -22,4 +25,4 @@ export const cintaValidationSchema = yup.object().shape({
   rententionDate: yup
     .string()
     .required('Seleccione la fecha de retención')
-})
+});

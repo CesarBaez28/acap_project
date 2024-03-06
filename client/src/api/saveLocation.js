@@ -1,10 +1,18 @@
-import { API, TOKEN_NAME } from "../constants"
-import { getCookieValue } from '../utils/getCookieValue'
+import { API, TOKEN_NAME } from "../constants";
+import { getCookieValue } from '../utils/getCookieValue';
 
-export async function saveLocation (location) {
-  const token = getCookieValue(TOKEN_NAME)
-  
+/**
+ * Realiza la solicitud para guardar una ubicación en el servidor.
+ *
+ * @param {string} location - Nombre de la ubicación que se va a guardar.
+ * @returns {Object} - Objeto JSON que contiene la información de la ubicación guardada.
+ * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
+ */
+export async function saveLocation(location) {
+  const token = getCookieValue(TOKEN_NAME);
+
   try {
+    // Realiza una solicitud POST para guardar una ubicación
     const response = await fetch(API+'/location/save', {
       method: 'POST',
       headers: {
@@ -12,10 +20,15 @@ export async function saveLocation (location) {
         'Authorization': 'Bearer ' + token
       },      
       body: JSON.stringify({location, description: "", status: 1})
-    })
-    const data = await response.json()
-    return data
+    });
+
+    // Parsea la respuesta del servidor como JSON
+    const data = await response.json();
+
+    // Retorna el objeto JSON con la información de la ubicación guardada
+    return data;
   } catch (error) {
-    throw new Error(error)
+    // En caso de fallo, lanza un error con la descripción del error
+    throw new Error(error);
   }
 }
