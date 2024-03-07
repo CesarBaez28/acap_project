@@ -29,6 +29,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,7 +118,7 @@ public class FoldersEvidenceController {
 
   // Endpoint para descargar un archivo de evidencia
   @GetMapping("/downdLoadFile/{folderName}/{fileName:.+}")
-  public ResponseEntity<byte[]> downloadFile(@PathVariable String folderName, @PathVariable String fileName) {
+  public ResponseEntity<byte[]> downloadFile(@PathVariable String folderName, @NonNull @PathVariable String fileName) {
     try {
       Path filePath = Paths.get(evidenceUploadDir, folderName, fileName);
       byte[] fileContent = java.nio.file.Files.readAllBytes(filePath);
@@ -203,9 +204,13 @@ public class FoldersEvidenceController {
   // Método auxiliar para listar archivos en un directorio
   private List<File> listFilesInDirectory(Path directory) throws IOException {
     List<File> files = new ArrayList<>();
-    Files.walk(directory, FileVisitOption.FOLLOW_LINKS)
-        .filter(path -> !Files.isDirectory(path))
-        .forEach(path -> files.add(path.toFile()));
+
+    try (var fileStream = Files.walk(directory, FileVisitOption.FOLLOW_LINKS)
+        .filter(path -> !Files.isDirectory(path))) {
+
+      fileStream.forEach(path -> files.add(path.toFile()));
+    }
+
     return files;
   }
 

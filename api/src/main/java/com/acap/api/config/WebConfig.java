@@ -9,6 +9,7 @@ import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
 
   // Método para configurar convertidores de mensajes HTTP
   @Override
-  public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
+  public void configureMessageConverters(@NonNull List<HttpMessageConverter<?>> messageConverters) {
     // Agregar convertidor de mensajes para imágenes
     messageConverters.add(createImageHttpMessageConverter());
     // Agregar convertidor de mensajes para matrices de bytes

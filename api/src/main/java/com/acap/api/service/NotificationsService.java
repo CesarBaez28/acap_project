@@ -46,6 +46,7 @@ public class NotificationsService extends TextWebSocketHandler {
    * @param session WebSocketSession que representa la sesión WebSocket establecida.
    * @throws Exception Excepción en caso de errores durante la conexión.
    */
+  @SuppressWarnings("null")
   @Override
   public void afterConnectionEstablished(@NonNull WebSocketSession session) throws Exception {
     // Obtiene el parámetro 'userId' de la URL de la conexión.

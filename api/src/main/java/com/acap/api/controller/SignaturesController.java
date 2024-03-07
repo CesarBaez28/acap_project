@@ -97,6 +97,7 @@ public class SignaturesController {
   }
 
   // Endpoint para descargar una firma
+  @SuppressWarnings("null")
   @PostMapping("/downLoad")
   public ResponseEntity<Object> downLoadSignature(@RequestBody SignatureDownLoadDTO signature) {
     try {

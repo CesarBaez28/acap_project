@@ -1,6 +1,7 @@
 package com.acap.api.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -22,8 +23,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
   }
 
   // Método para registrar manejadores de WebSocket
+  @SuppressWarnings("null")
   @Override
-  public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+  public void registerWebSocketHandlers(@NonNull WebSocketHandlerRegistry registry) {
 
     // Registrar el servicio de notificaciones como manejador de WebSocket en la
     // ruta "/notifications"

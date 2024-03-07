@@ -43,6 +43,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
    * @param id Identificador único del usuario.
    * @return Un Optional que contiene el usuario encontrado o está vacío si no hay coincidencia.
    */
+  @SuppressWarnings("null")
   Optional<User> findById(UUID id);
 
   /**

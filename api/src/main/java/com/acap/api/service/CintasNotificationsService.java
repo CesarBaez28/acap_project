@@ -37,6 +37,7 @@ public class CintasNotificationsService {
    * @param cintasNotifications La notificación de cintas a guardar.
    * @return La notificación de cintas guardada.
    */
+  @SuppressWarnings("null")
   public CintasNotifications save(CintasNotifications cintasNotifications) {
     Optional<Cintas> cinta = cintasRepository.findById(cintasNotifications.getCinta().getId());
 

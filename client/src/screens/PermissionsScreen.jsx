@@ -47,10 +47,11 @@ const Content = () => {
 
     if (!isChecked) {
       const data = await assignPrivileges(position, item);
-      setUserpermissions([...userpermissions, { ...data[0] }]);
-
+      const newPermisios = [... userpermissions, {...data[0]}]
+      setUserpermissions(newPermisios);
+    
       if (user.position.position === position.position) {
-        updatePermissions(userpermissions);
+        updatePermissions(newPermisios);
       }
 
       return;

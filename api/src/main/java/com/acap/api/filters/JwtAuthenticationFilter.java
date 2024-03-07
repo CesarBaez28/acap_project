@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -54,8 +52,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       user = new ObjectMapper().readValue(request.getInputStream(), User.class);
       username = user.getUsername();
       password = user.getPassword();
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+    } catch (IOException e) {
+        e.printStackTrace();
     }
 
     // Crear un token de autenticación con el nombre de usuario y la contraseña
@@ -67,6 +65,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   }
 
   // Método que se ejecuta cuando la autenticación es exitosa
+  @SuppressWarnings("null")
   @Override
   protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
       Authentication authResult) throws IOException, ServletException {
