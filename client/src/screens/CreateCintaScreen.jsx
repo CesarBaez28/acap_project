@@ -81,7 +81,15 @@ const Content = () => {
     statusCinta = status.find(({ id }) => id === statusCinta);
 
     // Llama a la API para guardar la cinta
-    await saveCinta(label, description, creationDate, expireDate, rententionDate, location, statusCinta);
+    await saveCinta({
+      label: label,
+      description: description,
+      creationDate: creationDate,
+      expiryDate: expireDate,
+      rententionDate: rententionDate,
+      location: location,
+      statusCinta: statusCinta
+    });
 
     // Navega a la página de inventario y resetea el formulario
     navigate('/inventory');

@@ -57,7 +57,16 @@ export function ContentDialogEditCinta({ setModalShow, selectedItem, setData, da
     statusCinta = status.find(({ id }) => id === statusCinta);
 
     // Guarda los datos actualizados de la cinta utilizando la función saveCinta de la API
-    const dataCinta = await saveCinta(label, description, creationDate, expireDate, rententionDate, location, statusCinta, selectedItem.id);
+    const dataCinta = await saveCinta({
+      label: label,
+      description: description,
+      creationDate: creationDate,
+      expiryDate: expireDate,
+      rententionDate: rententionDate,
+      location: location,
+      statusCinta: statusCinta,
+      id: selectedItem.id
+    });
 
     // Procesa los nuevos datos de cintas
     const newData = processedCintasData(dataCinta);
