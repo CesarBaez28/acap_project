@@ -44,7 +44,7 @@ export function SideBar() {
   return (
     <nav className='side-bar'>
       <div className='options'>
-        <Option name={'Inicio'} href={'/dashboard'} svg={<Home />} />
+        <Option name={'Inicio'} href={'/'} svg={<Home />} />
 
         <AccessibleOption
           permissions={permissions}

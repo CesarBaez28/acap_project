@@ -17,10 +17,10 @@ export function AccessDeniedScreen() {
 
   /**
    * Función que se ejecuta al hacer clic en el botón de "Regresar a la página de inicio".
-   * Navega a la ruta '/dashboard'.
+   * Navega a la ruta '/'.
    */
   const handleGoHome = () => {
-    navigate('/dashboard');
+    navigate('/');
   };
 
   // Renderiza la pantalla de "Acceso Denegado"

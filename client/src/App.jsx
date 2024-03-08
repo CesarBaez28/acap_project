@@ -38,7 +38,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<LoginScreen />} />
 
-        <Route path='/dashboard' element={<PrivateRoute Element={Dashboard} />} />
+        <Route path='/' element={<PrivateRoute Element={Dashboard} />} />
         <Route path='/inventory' element={<PrivateRoute Element={InventoryScreen} requiredPermissions={ACCESS.VIEW_INVENTORY} />} />
         <Route path='/move' element={<PrivateRoute Element={MoveScreen} requiredPermissions={ACCESS.MOVE_DATA_CENTER} />} />
         <Route path='/shipments' element={<PrivateRoute Element={ShipmentsScreen} requiredPermissions={ACCESS.VIEW_SHIPMENTS} />} />

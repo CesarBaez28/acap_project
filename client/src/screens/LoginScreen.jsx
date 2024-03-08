@@ -57,7 +57,7 @@ export function LoginScreen() {
 
       // Restablece el formulario y navega al panel de control del usuario
       resetForm();
-      navigate('/dashboard');
+      navigate('/');
     }
   };
 
