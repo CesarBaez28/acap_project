@@ -50,7 +50,7 @@ export function ContentDialogMoveCinta({ data, setData, setModalShow }) {
   return (
     <>
       {/* Contenedor de entrada de búsqueda */}
-      <div className="input-search-dialog-move-cinta-container">
+      <div className="input-search-dialog-move-cinta-container col-12 col-md-6 col-lg-4">
         <div className="input-search-dialog-move-cinta">
           {/* Entrada de búsqueda */}
           <input

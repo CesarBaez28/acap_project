@@ -70,7 +70,7 @@ import { downloadFolderOfEvidence } from "../api/downLoadFolderOfEvidence"
                   privilegesId={ACCESS.ADD_EVIDENCE}
                   Option={
                     <ButtonSecundary
-                      styles={{ padding: "0.56rem 1rem" }}
+                      styles={{ padding: "0.56rem 1rem", minWidth: "160px"}}
                       type="button"
                       onClick={() => setModalShow(true)}
                     >
@@ -81,7 +81,7 @@ import { downloadFolderOfEvidence } from "../api/downLoadFolderOfEvidence"
                 
                 {/* Botón para descargar la carpeta de evidencias seleccionada */}
                 <ButtonSecundary
-                  styles={{ padding: "0.56rem 1rem" }}
+                  styles={{ padding: "0.56rem 1rem", minWidth: "170px" }}
                   type="button"
                   onClick={handleDownLoadFolder}
                 >
