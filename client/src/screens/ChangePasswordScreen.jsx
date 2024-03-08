@@ -41,8 +41,8 @@ const Content = () => {
     const { currentPassword, newPassword } = values;
     const data = await changePassword(user.id, currentPassword, newPassword);
 
-    if (data?.error) {
-      setErrors({ currentPassword: data.error });
+    if (data === 'Contraseña actual incorrecta') {
+      setErrors({ currentPassword: data});
       return;
     }
 
