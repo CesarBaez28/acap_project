@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar un usuario en el servidor.
  *
  * @param {Object} userData - Datos del usuario que se van a guardar.
- * @returns {Object} - Objeto JSON que contiene la información del usuario guardado.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información del usuario guardado.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveUser({ userData }) {

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import  { useState, useContext } from 'react';
 import EditSvg from '../assets/edit.svg?react';
 import TrashSvg from '../assets/trash.svg?react';
@@ -59,8 +60,8 @@ export function Table({ columns, atributes, data, setData }) {
           <table className="col-12">
             <thead>
               <tr>
-                {columns.map((name, index) => (
-                  <th key={index}>{name}</th>
+                {columns.map((name) => (
+                  <th key={name}>{name}</th>
                 ))}
                 {permissions.some(({ privileges }) => privileges.id === ACCESS.EDIT_USER || privileges.id === ACCESS.DELETE_USER) && (
                   <th>Acciones:</th>
@@ -68,11 +69,10 @@ export function Table({ columns, atributes, data, setData }) {
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data.map((item) => (
+              {data?.map((item) => (
                   <tr key={item.id}>
-                    {atributes.map((atribute, index) => (
-                      <td key={index}>{item[atribute]}</td>
+                    {atributes.map((atribute) => (
+                      <td key={atribute + item.id}>{item[atribute]}</td>
                     ))}
                     <td>
                       <div className="button-actions-table">
@@ -117,4 +117,11 @@ export function Table({ columns, atributes, data, setData }) {
       />
     </>
   );
+}
+
+Table.propTypes = {
+  columns: PropTypes.array,
+  atributes: PropTypes.array,
+  data: PropTypes.array,
+  setData: PropTypes.func
 }

@@ -5,7 +5,7 @@ import { getCookieValue } from "../utils/getCookieValue";
  * Realiza la solicitud para guardar información de un conductor en el servidor.
  *
  * @param {string} name - Nombre del conductor a ser guardado.
- * @returns {Object} - Objeto JSON que contiene la información del conductor guardado.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información del conductor guardado.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveDriver(name) {

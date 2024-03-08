@@ -12,6 +12,7 @@
  */
 
 import { createContext, useState, useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Contexto de usuario para gestionar la información del usuario y sus permisos.
@@ -104,3 +105,7 @@ export const UserContextProvider = ({ children }) => {
   // Devolver el proveedor de contexto con los componentes hijos, condicionalmente renderizados
   return <UserContext.Provider value={contextValue}>{isDataLoaded ? children : null}</UserContext.Provider>;
 };
+
+UserContextProvider.propTypes = {
+  children: PropTypes.element
+}

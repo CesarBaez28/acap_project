@@ -22,7 +22,7 @@ const Content = () => {
   // Obtener el estado de la ubicación desde el componente de enrutamiento
   const { state } = useLocation();
   // Estado para almacenar la información de las cintas del envío
-  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.id);
+  const [shipmentsCintas] = useGetShipmentsCintas(state.id);
 
   return (
     <>
@@ -47,7 +47,6 @@ const Content = () => {
               columns={['Label:', 'Descripción']}
               atributes={['label', 'description']}
               data={shipmentsCintas}
-              setData={setShipmentsCintas}
             />
           </div>
         </Card>

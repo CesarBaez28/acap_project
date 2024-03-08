@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar una carpeta en el servidor.
  *
  * @param {string} folder - Nombre de la carpeta que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información de la carpeta guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la carpeta guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveFolder(folder) {

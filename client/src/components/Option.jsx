@@ -1,5 +1,6 @@
 import '../styles/components/option.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 /**
  * Componente `Option` que representa una opción de navegación o acción.
@@ -32,4 +33,11 @@ export function Option({ name, href, svg, onClickFunction }) {
       </div>
     </Link>
   );
+}
+
+Option.propTypes = {
+  name: PropTypes.string,
+  href: PropTypes.string,
+  svg: PropTypes.node,
+  onClickFunction: PropTypes.func
 }

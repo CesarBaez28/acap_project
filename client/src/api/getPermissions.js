@@ -6,7 +6,7 @@ import { API } from "../constants";
  * @async
  * @param {Object} position - Información del cargo para el cual se desean obtener los permisos.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de permisos asociados al cargo proporcionado.
+ * @returns {Promise<Array>} - Lista de permisos asociados al cargo proporcionado.
  */
 export async function getPermissions(position) {
   try {

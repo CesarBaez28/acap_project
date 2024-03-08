@@ -1,4 +1,5 @@
 import '../styles/components/buttonCreate.css'
+import PropTypes from 'prop-types';
 
 /**
  * Componente de botón de creación con texto y un ícono SVG.
@@ -23,4 +24,10 @@ export function ButtonCreate({ text, svg, onClick }) {
       </button>
     </div>
   );
+}
+
+ButtonCreate.propTypes = {
+  text: PropTypes.string,
+  svg: PropTypes.element,
+  onClick: PropTypes.func
 }

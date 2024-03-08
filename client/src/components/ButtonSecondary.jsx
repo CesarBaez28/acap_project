@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 import { useState } from 'react';
 
@@ -40,4 +40,11 @@ export function ButtonSecundary(props) {
       {props.children}
     </button>
   );
+}
+
+ButtonSecundary.propTypes = {
+  styles: PropTypes.object,
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  children: PropTypes.node
 }

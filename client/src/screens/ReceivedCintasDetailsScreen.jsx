@@ -22,7 +22,7 @@ const Content = () => {
   // Obtención del estado de la ubicación actual, incluyendo la información del envío de cintas
   const { state } = useLocation();
   // Hook para obtener y gestionar la información de las cintas asociadas al envío
-  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.shipment.id);
+  const [shipmentsCintas] = useGetShipmentsCintas(state.shipment.id);
 
   // Renderizado del componente Content
   return (
@@ -48,7 +48,6 @@ const Content = () => {
               columns={['Label:', 'Descripción']}
               atributes={['label', 'description']}
               data={shipmentsCintas}
-              setData={setShipmentsCintas}
             />
           </div>
         </Card>

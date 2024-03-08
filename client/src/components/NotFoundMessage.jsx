@@ -1,4 +1,5 @@
 import Dissatisfied from '../assets/dissatisfied.svg?react';
+import PropTypes from 'prop-types'
 import '../styles/components/notFoundMessage.css';
 
 /**
@@ -18,4 +19,8 @@ export function NotFoundMessage({ text }) {
       </div>
     </div>
   );
+}
+
+NotFoundMessage.propTypes = {
+  text: PropTypes.string
 }

@@ -6,7 +6,7 @@ import '../styles/screens/moveScreen.css'
 import { ButtonSecundary } from '../components/ButtonSecondary'
 import SearchSvg from '../assets/search.svg?react'
 import { InputSelect } from '../components/InputSelectWithData'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Dialog } from '../components/Dialog'
 import { ContentDialogMoveCinta } from '../components/ContentDialogMoveCinta'
 import { updateCintasLocation } from '../api/updateCintasLocation'
@@ -34,7 +34,7 @@ const Content = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modalMessage, setModalMessage] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [setLocations] = useState(null);
+  const setLocations = useMemo(() => null, []);
 
   // Función para manejar el escaneo de códigos de barras y actualizar el estado de las cintas
   const handleBarCode = async (barCode) => {

@@ -4,7 +4,7 @@ import { getCookieValue } from '../utils/getCookieValue';
 /**
  * Realiza la solicitud de cierre de sesión para un usuario autenticado.
  *
- * @returns {number} - Código de estado HTTP que indica el resultado de la solicitud de cierre de sesión.
+ * @returns {Promise<Number>} - Código de estado HTTP que indica el resultado de la solicitud de cierre de sesión.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function logout() {

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { ButtonSecundaryLink } from "./ButtonSecondaryLink";
 import ZooInSvg from '../assets/zoomIn.svg?react';
 import '../styles/components/contentSummaryShipments.css';
@@ -103,4 +104,9 @@ export function ContentSummaryShipmentsReceived({ shipments, detailsScreen }) {
       </div>
     </>
   );
+}
+
+ContentSummaryShipmentsReceived.propTypes = {
+  shipments: PropTypes.object,
+  detailsScreen: PropTypes.string
 }

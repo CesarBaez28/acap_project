@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/components/table.css';
+import PropTypes from 'prop-types'
 
 /**
  * Componente `Table` que representa una tabla con datos de cintas
@@ -45,17 +46,17 @@ export function Table({ columns, atributes, data, setData, selectedItems, setSel
         <table className="col-12">
           <thead>
             <tr>
-              {columns.map((name, index) => (
-                <th key={index}>{name}</th>
+              {columns.map((name) => (
+                <th key={name}>{name}</th>
               ))}
               <th>Seleccionar:</th>
             </tr>
           </thead>
           <tbody>
-            {data && data.map((item) => (
+            {data?.map((item) => (
               <tr key={item.id}>
-                {atributes.map((atribute, index) => (
-                  <td key={index}>{item[atribute]}</td>
+                {atributes.map((atribute) => (
+                  <td key={atribute + item.id}>{item[atribute]}</td>
                 ))}
                 <td>
                   <div className="button-actions-table">
@@ -74,4 +75,13 @@ export function Table({ columns, atributes, data, setData, selectedItems, setSel
       </div>
     </section>
   )
+}
+
+Table.propTypes = {
+  columns: PropTypes.array, 
+  atributes: PropTypes.array,
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  selectedItems: PropTypes.array,
+  setSelectedItems: PropTypes.func
 }

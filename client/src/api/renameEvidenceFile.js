@@ -7,7 +7,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} folderName - Nombre de la carpeta donde se encuentra el archivo de evidencia.
  * @param {string} oldFileName - Nombre actual del archivo de evidencia que se desea cambiar.
  * @param {string} newFileName - Nuevo nombre que se asignará al archivo de evidencia.
- * @returns {string} - Mensaje de confirmación o respuesta del servidor después de cambiar el nombre del archivo.
+ * @returns {Promise<string>} - Mensaje de confirmación o respuesta del servidor después de cambiar el nombre del archivo.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function renameEvidenceFile(folderName, oldFileName, newFileName) {

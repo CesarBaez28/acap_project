@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 import CreatableSelect from 'react-select/creatable';
 import { useField } from "formik"
 import { useState, useEffect } from 'react';
@@ -97,4 +97,14 @@ export function CreatableInputSelect({ label, data, setData, atributes, createFu
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+}
+
+CreatableInputSelect.propTypes = {
+  label: PropTypes.string,
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  atributes: PropTypes.array,
+  createFunction: PropTypes.func,
+  id: PropTypes.any,
+  name: PropTypes.string
 }

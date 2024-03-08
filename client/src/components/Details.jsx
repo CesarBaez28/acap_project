@@ -1,4 +1,5 @@
 import '../styles/components/details.css';
+import PropTypes from 'prop-types'
 
 /**
  * Componente `Details` que representa un contenedor para mostrar detalles.
@@ -24,4 +25,10 @@ export function Details({ date, title, content }) {
       </article>
     </details>
   );
+}
+
+Details.propTypes = {
+  date: PropTypes.string,
+  title: PropTypes.string,
+  content: PropTypes.node
 }

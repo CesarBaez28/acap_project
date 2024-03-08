@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar una posición en el servidor.
  *
  * @param {string} position - Nombre de la posición que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información de la posición guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la posición guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function savePosition(position) {

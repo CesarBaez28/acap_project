@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import SearchSvg from '../assets/search.svg?react';
 import PdfSvg from '../assets/pdf.svg?react';
 import ExcelSvg from '../assets/excel.svg?react';
@@ -26,7 +27,7 @@ import { processedCintasData } from '../utils/processedCintasData';
  * @param {Function} props.setIsLoading - Función para establecer el estado de carga.
  * @returns {JSX.Element} - Elemento JSX que representa el componente `InputAreaCinta`.
  */
-export function InputAreaCinta({ cintas, setCintas, processedCintas, setProcessedCintas, setIsLoading }) {
+export function InputAreaCinta({ cintas, setCintas, setProcessedCintas, setIsLoading }) {
   const { user } = useContext(UserContext);
   const [searchValue, setSearchValue] = useState('');
   const [initialDateValue, setInitialDateValue] = useState('');
@@ -140,4 +141,11 @@ export function InputAreaCinta({ cintas, setCintas, processedCintas, setProcesse
       </div>
     </div>
   );
+}
+
+InputAreaCinta.propTypes = {
+  cintas: PropTypes.array,
+  setCintas: PropTypes.func,
+  setProcessedCintas: PropTypes.func,
+  setIsLoading: PropTypes.func
 }

@@ -1,4 +1,5 @@
 import '../styles/components/mainContent.css';
+import PropTypes from 'prop-types'
 
 /**
  * Componente `MainContent` que representa el contenido principal de la aplicación.
@@ -16,4 +17,8 @@ export function MainContent({ content }) {
       </div>
     </main>
   );
+}
+
+MainContent.propTypes = {
+  content: PropTypes.node
 }

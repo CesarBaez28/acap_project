@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { getSignatureImage } from '../api/getSignatureImage';
 import '../styles/components/contentSummaryShipments.css';
 import { ButtonSecundary } from './ButtonSecondary';
@@ -88,4 +89,8 @@ export function ContentSummaryReceivedShipmentsDetails({ shipments }) {
       </div>
     </>
   );
+}
+
+ContentSummaryReceivedShipmentsDetails.propTypes = {
+  shipments: PropTypes.object
 }

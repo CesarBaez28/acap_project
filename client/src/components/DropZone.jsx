@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
 import '../styles/components/dropZone.css';
 import UpLoadSvg from '../assets/upload.svg?react';
@@ -15,7 +16,7 @@ export function DropZone(props) {
   // Función de devolución de llamada para manejar la carga de archivos aceptados.
   const onDrop = useCallback(acceptedFiles => {
     props.setFiles(acceptedFiles);
-  }, []);
+  }, [props]);
 
   // Configuración de la biblioteca react-dropzone.
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -40,4 +41,8 @@ export function DropZone(props) {
       </aside>
     </section>
   );
+}
+
+DropZone.propTypes = {
+  setFiles: PropTypes.func
 }

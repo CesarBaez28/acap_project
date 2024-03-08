@@ -1,17 +1,18 @@
 // Importa componentes y estilos necesarios
-import { ButtonPrimary } from "./ButtonPrimary";
-import { ButtonSecundary } from "./ButtonSecondary";
-import { DropZone } from "../components/DropZone";
-import "../styles/components/contentDialogAddEvidence.css";
+import { ButtonPrimary } from "./ButtonPrimary"
+import { ButtonSecundary } from "./ButtonSecondary"
+import { DropZone } from "../components/DropZone"
+import "../styles/components/contentDialogAddEvidence.css"
 
 import { useState } from "react";
+import PropTypes from 'prop-types'
 
 // Importa funciones de la API y utilidades
-import { fileUpload } from "../api/fileUpload";
-import { saveEvidenceData } from "../api/saveEvidenceData";
+import { fileUpload } from "../api/fileUpload"
+import { saveEvidenceData } from "../api/saveEvidenceData"
 
 // Importa una función de utilidad para procesar datos de evidencia
-import { processedEvidenceData } from "../utils/processedEvidenceData";
+import { processedEvidenceData } from "../utils/processedEvidenceData"
 
 /**
  * Componente que representa el contenido del cuadro diálogo para agregar evidencias de cintas.
@@ -24,29 +25,29 @@ import { processedEvidenceData } from "../utils/processedEvidenceData";
  */
 export function ContentDialogAddEvidence({ setModalShow, setData, data }) {
   // Estado para almacenar archivos seleccionados
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState(null)
 
   // Manejador para la carga de archivos y guardado de evidencia
   const handleUpLoad = async () => {
     // Obtiene el nombre del directorio de la primera carpeta en los datos actuales
-    const folderName = data[0].folders.name;
+    const folderName = data[0].folders.name
     // Obtiene la información de la carpeta
-    const folder = data[0].folders;
+    const folder = data[0].folders
 
     // Sube los archivos al servidor mediante la función fileUpload de la API
-    await fileUpload(files, folderName);
+    await fileUpload(files, folderName)
 
     // Guarda los datos de la evidencia utilizando la función saveEvidenceData de la API
-    const evidence = await saveEvidenceData(folder, files);
+    const evidence = await saveEvidenceData(folder, files)
 
     // Procesa los datos de evidencia mediante la función processedEvidenceData de utilidad
-    const processedEvidence = processedEvidenceData(evidence);
+    const processedEvidence = processedEvidenceData(evidence)
 
     // Actualiza los datos de evidencia con los nuevos datos procesados
-    setData([...data, { ...processedEvidence[0]}]);
+    setData([...data, { ...processedEvidence[0]}])
 
     // Oculta el diálogo de agregar evidencia
-    setModalShow(false);
+    setModalShow(false)
   };
 
   // Retorna el contenido JSX del diálogo para agregar evidencia
@@ -74,4 +75,10 @@ export function ContentDialogAddEvidence({ setModalShow, setData, data }) {
       </div>
     </>
   );
+}
+
+ContentDialogAddEvidence.propTypes = {
+  setModalShow: PropTypes.func,
+  setData: PropTypes.func,
+  data: PropTypes.array
 }

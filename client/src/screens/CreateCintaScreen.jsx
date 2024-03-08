@@ -71,10 +71,10 @@ const Content = () => {
    * @param {Object} actions - Funciones del formulario proporcionadas por Formik.
    */
   const createCintaHandler = async (values, actions) => {
-    let { label, description, creationDate, expireDate, rententionDate, location, statusCinta } = values;
+    let { label, description, creationDate, rententionDate, location, statusCinta } = values;
 
     // Actualiza la fecha de expiración con la fecha con años adicionados
-    expireDate = addYears;
+    let expireDate = addYears;
 
     // Obtiene la ubicación y el estado correspondientes a los IDs seleccionados
     location = locations.find(({ id }) => id === location);

@@ -1,5 +1,6 @@
 import '../styles/components/contentDialogMessage.css';
 import { ButtonPrimary } from './ButtonPrimary';
+import PropTypes from 'prop-types'
 
 /**
  * Componente que representa un diálogo de mensaje con un ícono, texto y un botón de aceptar.
@@ -29,4 +30,10 @@ export function ContentDialogMessage({ svg, text, ...props }) {
       </div>
     </>
   );
+}
+
+ContentDialogMessage.propTypes = {
+  svg: PropTypes.node,
+  text: PropTypes.string,
+  onClick: PropTypes.func
 }

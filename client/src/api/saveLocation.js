@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar una ubicación en el servidor.
  *
  * @param {string} location - Nombre de la ubicación que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información de la ubicación guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la ubicación guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveLocation(location) {

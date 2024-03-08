@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -42,4 +42,12 @@ export function ButtonSecundaryLink(props) {
       {props.children}
     </Link>
   );
+}
+
+ButtonSecundaryLink.propTypes = {
+  styles: PropTypes.object,
+  href: PropTypes.string,
+  state: PropTypes.object,
+  type: PropTypes.string,
+  children: PropTypes.node
 }

@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar un estado en el servidor.
  *
  * @param {string} state - Estado que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información del estado guardado.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información del estado guardado.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveStatus(state) {

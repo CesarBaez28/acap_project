@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {string} label - Etiqueta de la cinta a buscar.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Object} - Información de la cinta encontrada.
+ * @returns {Promise} -  promesa con información de la cinta encontrada.
  */
 export async function getCintaByLabel(label) {
   // Obtiene el token de la cookie

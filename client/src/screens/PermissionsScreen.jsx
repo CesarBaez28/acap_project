@@ -47,9 +47,9 @@ const Content = () => {
 
     if (!isChecked) {
       const data = await assignPrivileges(position, item);
-      const newPermisios = [... userpermissions, {...data[0]}]
+      const newPermisios = [...userpermissions, { ...data[0] }]
       setUserpermissions(newPermisios);
-    
+
       if (user.position.position === position.position) {
         updatePermissions(newPermisios);
       }
@@ -66,25 +66,26 @@ const Content = () => {
     setUserpermissions(data);
   };
 
-  /**
-   * Activa los checkboxes según los privilegios asignados al usuario.
-   *
-   * @returns {void}
-   */
-  const activateCheckboxes = () => {
-    if (userpermissions && privileges) {
-      const newCheckboxStates = privileges.map((privilege) =>
-        userpermissions.some(
-          (userPrivilege) => userPrivilege.privileges.privilege === privilege.privilege
-        )
-      );
-      setCheckboxStates(newCheckboxStates);
-    }
-  };
-
   // Efecto para activar los checkboxes al cargar los permisos o privilegios
   useEffect(() => {
-    activateCheckboxes();
+
+    /**
+    * Activa los checkboxes según los privilegios asignados al usuario.
+    *
+    * @returns {void}
+    */
+    const activateCheckboxes = () => {
+      if (userpermissions && privileges) {
+        const newCheckboxStates = privileges.map((privilege) =>
+          userpermissions.some(
+            (userPrivilege) => userPrivilege.privileges.privilege === privilege.privilege
+          )
+        );
+        setCheckboxStates(newCheckboxStates);
+      }
+    };
+
+    activateCheckboxes()
   }, [userpermissions, privileges]);
 
   // Renderizado del componente Content
@@ -114,7 +115,7 @@ const Content = () => {
             <div className="checkbox-group-permissions">
               {userpermissions &&
                 privileges.map((item, index) => (
-                  <div className="checkbox-container" key={index}>
+                  <div className="checkbox-container" key={item.id}>
                     <input
                       className="checkBox-permissions"
                       key={item.id}

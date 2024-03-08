@@ -103,7 +103,7 @@ const Content = () => {
       const signature = await saveSignaturePath(filePath);
       const shipment = await saveShipment({ dataShipment: { user, signature, driver, locationFrom, locationTo }, cintas: cintas });
       const message = "Tiene un envío a su sucursal";
-      const shipmetNotification = await saveShipmentNotification({ dataNotification: { shipment: shipment[0].shipments, message } });
+      await saveShipmentNotification({ dataNotification: { shipment: shipment[0].shipments, message } });
 
       const dataObject = getDataObject(shipment[0].shipments.date);
       const formattedDate = formatDate(dataObject);

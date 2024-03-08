@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar la ruta de la firma en el servidor.
  *
  * @param {string} path - Ruta de la firma que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información de la ruta de la firma guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la ruta de la firma guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveSignaturePath(path) {

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 import { Formik, Form } from "formik";
 import { TextInput } from "./TextInput";
 import { CreatableInputSelect } from "./CreatableInputSelectFormik";
@@ -141,4 +141,11 @@ export function ContentDialogUser({ data, setData, selectedItem, setModalShow })
       </Form>
     </Formik>
   );
+}
+
+ContentDialogUser.propTypes = {
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  selectedItem: PropTypes.object,
+  setModalShow: PropTypes.func 
 }

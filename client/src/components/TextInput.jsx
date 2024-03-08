@@ -1,4 +1,5 @@
 import { useField } from 'formik';
+import PropTypes from 'prop-types'
 import '../styles/components/Input.css';
 
 /**
@@ -25,4 +26,11 @@ export function TextInput({ label, ...props }) {
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+}
+
+TextInput.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  value: PropTypes.string,
 }

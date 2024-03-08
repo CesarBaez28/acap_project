@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {Object} dataShipment - Información del envío que se va a guardar.
  * @param {Array} cintas - Lista de cintas asociadas al envío.
- * @returns {Object} - Objeto JSON que contiene la información del envío guardado.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información del envío guardado.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveShipment({ dataShipment, cintas }) {

@@ -1,4 +1,5 @@
 import { LoadingIndicator } from "./LoadingIndicator";
+import PropTypes from 'prop-types'
 
 /**
  * Componente para renderizar condicionalmente el contenido o un indicador de carga.
@@ -11,4 +12,9 @@ import { LoadingIndicator } from "./LoadingIndicator";
 export function ConditionalRender({ isLoading, children }) {
   // Renderiza un indicador de carga si isLoading es verdadero, de lo contrario, renderiza el contenido proporcionado
   return isLoading ? <LoadingIndicator /> : children;
+}
+
+ConditionalRender.propTypes = {
+  isLoading: PropTypes.bool,
+  children: PropTypes.node
 }

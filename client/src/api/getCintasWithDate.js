@@ -7,7 +7,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} initialDate - Fecha inicial del rango (formato: 'YYYY-MM-DD').
  * @param {string} finalDate - Fecha final del rango (formato: 'YYYY-MM-DD').
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de cintas dentro del rango de fechas especificado.
+ * @returns {Promise<Array>} - Promesa con la Lista de cintas dentro del rango de fechas especificado.
  */
 export async function getCintasWithDates(initialDate, finalDate) {
   // Obtiene el token de la cookie

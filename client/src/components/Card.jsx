@@ -1,4 +1,5 @@
 import "../styles/components/card.css";
+import PropTypes from "prop-types";
 
 /**
  * Componente de tarjeta que envuelve y estiliza su contenido.
@@ -17,4 +18,8 @@ export function Card({ children }) {
       </div>
     </div>
   );
+}
+
+Card.propTypes = {
+  children: PropTypes.node
 }

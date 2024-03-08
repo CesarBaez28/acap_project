@@ -1,8 +1,9 @@
-import { Formik, Form } from "formik";
-import { ButtonPrimary } from "./ButtonPrimary";
+import PropTypes from 'prop-types'
+import { Formik, Form } from "formik"
+import { ButtonPrimary } from "./ButtonPrimary"
 import { ButtonSecundary } from "./ButtonSecondary";
 import { evidenceValidationSchema } from '../validactionsSchemas/evidenceValidationSchema.js';
-import { TextInput } from "./TextInput";
+import { TextInput } from "./TextInput"
 
 import "../styles/components/contentDialogEvidence.css";
 import { updateNameEvidence } from "../api/updateNameEvidence.js";
@@ -66,4 +67,11 @@ export function ContentDialogEditEvidence({ setModalShow, selectedItem, setData,
       </Form>
     </Formik>
   );
+}
+
+ContentDialogEditEvidence.propTypes = {
+  setModalShow: PropTypes.func,
+  selectedItem: PropTypes.object,
+  setData: PropTypes.func,
+  data: PropTypes.array
 }

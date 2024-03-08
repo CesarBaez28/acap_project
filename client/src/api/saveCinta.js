@@ -12,8 +12,9 @@ import { getCookieValue } from "../utils/getCookieValue";
  * @param {string} location - Ubicación de la cinta.
  * @param {string} statusCinta - Estado de la cinta.
  * @param {string} id - Identificador de la cinta (opcional, utilizado para actualizar).
- * @returns {Object} - Objeto JSON que contiene la información de la cinta guardada o actualizada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la cinta guardada o actualizada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
+ * 
  */
 export async function saveCinta(label, description, creationDate, expiryDate, rententionDate, location, statusCinta, id) {
   const token = getCookieValue(TOKEN_NAME);

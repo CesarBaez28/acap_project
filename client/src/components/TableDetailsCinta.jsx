@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types'
 import '../styles/components/tableDetailsCinta.css';
 
 /**
@@ -20,8 +20,7 @@ import '../styles/components/tableDetailsCinta.css';
  *   />
  * );
  */
-export function Table({ columns, atributes, data, setData }) {
-  const [selectedItem, setSelectedItem] = useState(null);
+export function Table({ columns, atributes, data }) {
 
   return (
     <section className="col-12">
@@ -29,19 +28,18 @@ export function Table({ columns, atributes, data, setData }) {
         <table className="col-12">
           <thead>
             <tr>
-              {columns.map((name, index) => (
-                <th className='th' key={index}>
+              {columns.map((name) => (
+                <th className='th' key={name}>
                   {name}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.map((item) => (
+            {data?.map((item) => (
                 <tr key={item.id}>
-                  {atributes.map((atribute, index) => (
-                    <td className='td' key={index}>
+                  {atributes.map((atribute) => (
+                    <td className='td' key={atribute + item.id}>
                       {item[atribute]}
                     </td>
                   ))}
@@ -52,4 +50,10 @@ export function Table({ columns, atributes, data, setData }) {
       </div>
     </section>
   );
+}
+
+Table.propTypes = {
+  columns: PropTypes.array,
+  atributes: PropTypes.array,
+  data: PropTypes.array,
 }

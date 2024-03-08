@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {Object} userData - Datos actualizados del usuario.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Object} - Datos del usuario después de la edición.
+ * @returns {Promise<Object>} - promesas con los datos del usuario después de la edición.
  */
 export async function editUser({ userData }) {
   // Obtiene el token de la cookie

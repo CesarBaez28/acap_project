@@ -33,7 +33,7 @@ const Content = () => {
   // Ubicación actual de la aplicación para obtener el estado del envío de cintas
   const { state } = useLocation();
   // Hooks para obtener y gestionar la información de las cintas asociadas al envío
-  const [shipmentsCintas, setShipmentsCintas] = useGetShipmentsCintas(state.id);
+  const [shipmentsCintas] = useGetShipmentsCintas(state.id);
   // Estado para controlar la visualización del mensaje de confirmación de recepción
   const [modalMessage, setModalMessage] = useState(false);
   // Función de navegación para redirigir a la pantalla de recepción después de la confirmación
@@ -49,7 +49,7 @@ const Content = () => {
     const date = new Date();
     date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
     const isoDateString = date.toISOString();
-    const data = await saveCintasReceived({
+    await saveCintasReceived({
       shipmetData: {
         status: { id: RECEIVED_STATUS_ID },
         shipment: { id: state.id },
@@ -95,7 +95,6 @@ const Content = () => {
               columns={['Label:', 'Descripción']}
               atributes={['label', 'description']}
               data={shipmentsCintas}
-              setData={setShipmentsCintas}
             />
           </div>
         </Card>

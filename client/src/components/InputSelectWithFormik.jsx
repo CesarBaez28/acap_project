@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 import Select from 'react-select';
 import { useField } from 'formik';
 import '../styles/components/Input.css';
@@ -64,4 +64,13 @@ export function InputSelect({ label, options, defaultValue, styles, ...props }) 
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+}
+
+InputSelect.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.array,
+  defaultValue: PropTypes.object,
+  styles: PropTypes.object,
+  id: PropTypes.any,
+  name: PropTypes.string
 }

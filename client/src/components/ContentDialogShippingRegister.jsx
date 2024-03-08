@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { ButtonSecundary } from "./ButtonSecondary";
 import SearchSvg from '../assets/search.svg?react';
 import '../styles/components/contentDialogMoveCinta.css';
@@ -101,4 +102,10 @@ export function ContentDialogShippingRegister({ data, setData, setModalShow }) {
       </div>
     </>
   );
+}
+
+ContentDialogShippingRegister.propTypes = {
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  setModalShow: PropTypes.func
 }

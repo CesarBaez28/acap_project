@@ -8,7 +8,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} begin - Fecha de inicio del rango en formato ISO (por ejemplo, '2022-03-01T00:00:00').
  * @param {string} end - Fecha de fin del rango en formato ISO (por ejemplo, '2022-03-31T23:59:59').
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de envíos realizados por el usuario en el rango de fechas especificado.
+ * @returns {Promise<Array>} - Lista de envíos realizados por el usuario en el rango de fechas especificado.
  */
 export async function getShipmentsByUserAndBetweenDates(userId, begin, end) {
   const token = getCookieValue(TOKEN_NAME);

@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar una notificación de envío en el servidor.
  *
  * @param {Object} dataNotification - Información de la notificación de envío que se va a guardar.
- * @returns {Object} - Objeto JSON que contiene la información de la notificación de envío guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la notificación de envío guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveShipmentNotification({ dataNotification }) {

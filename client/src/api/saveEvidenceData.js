@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {Object} folder - Objeto que representa la carpeta de evidencia a la que se agregarán los archivos.
  * @param {(File|File[])} files - Archivo o array de archivos a ser guardados como evidencia.
- * @returns {Object} - Objeto JSON que contiene la información de la evidencia guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la evidencia guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveEvidenceData(folder, files) {

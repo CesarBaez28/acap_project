@@ -7,7 +7,7 @@ import { getCookieValue } from '../utils/getCookieValue'
  * @param {FileList} files - Lista de archivos a cargar.
  * @param {string} folder - Nombre de la carpeta donde se almacenarán los archivos.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Object} - Datos de la respuesta del servidor después de la carga de archivos.
+ * @returns {Promise<Array>} - Promesas con los datos de la respuesta del servidor después de la carga de archivos.
  */
 export async function fileUpload(files, folder) {
   // Obtiene el token de la cookie

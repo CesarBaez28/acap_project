@@ -8,7 +8,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} begin - Fecha de inicio del rango (formato: 'YYYY-MM-DD').
  * @param {string} end - Fecha de fin del rango (formato: 'YYYY-MM-DD').
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de envíos recibidos en la ubicación y rango de fechas proporcionados.
+ * @returns {Promise<Array>} - Lista de envíos recibidos en la ubicación y rango de fechas proporcionados.
  */
 export async function getReceivedShipmentByLocationAndDate(locationId, begin, end) {
   const token = getCookieValue(TOKEN_NAME);

@@ -6,7 +6,7 @@ import { API } from '../constants';
  * @param {string} employeeNumber - Número de empleado del usuario.
  * @param {string} password - Contraseña del usuario.
  * @param {function} setErrors - Función para establecer errores en el estado del componente.
- * @returns {(Object|boolean)} - Objeto con la información del usuario autenticado si es exitoso, o `false` en caso de error.
+ * @returns {Promise<(Object|boolean)>} - Objeto con la información del usuario autenticado si es exitoso, o `false` en caso de error.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function login(employeeNumber, password, setErrors) {

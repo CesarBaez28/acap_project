@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza una búsqueda de cintas en el servidor basada en un término de búsqueda.
  *
  * @param {string} search - Término de búsqueda para buscar cintas en el servidor.
- * @returns {Object} - Objeto JSON que contiene la información de las cintas encontradas.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de las cintas encontradas.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function searchCinta(search) {

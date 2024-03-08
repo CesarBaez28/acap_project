@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 import { Formik, Form } from 'formik'
 import { userValidationSchemaWithoutPositionAndBranchOffice } from '../validactionsSchemas/userValidactionSchema'
 import { TextInput } from "../components/TextInput"
@@ -76,4 +76,10 @@ export function ContentDialogProfile({ setModalShow, setData, data }) {
       </Form>
     </Formik>
   );
+}
+
+ContentDialogProfile.propTypes = {
+  setModalShow: PropTypes.func,
+  setData: PropTypes.func,
+  data: PropTypes.object
 }

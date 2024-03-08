@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {string} position - Identificador del cargo al que se le van a remover privilegios.
  * @param {string} privileges - Privilegios que se van a remover del cargo.
- * @returns {Object} - Objeto JSON que contiene la respuesta de la solicitud.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la respuesta de la solicitud.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function removePrivileges(position, privileges) {

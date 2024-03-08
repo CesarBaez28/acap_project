@@ -9,7 +9,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} folder.folderName - Nombre de la carpeta.
  * @param {string} folder.locationId - ID de la ubicación asociada a la carpeta.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de evidencias procesadas para la carpeta especificada.
+ * @returns {Promise<Array>} - Promesa con la lista de evidencias procesadas para la carpeta especificada.
  */
 export async function getEvidence(folder) {
   // Obtiene el token de la cookie

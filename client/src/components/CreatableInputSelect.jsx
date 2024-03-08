@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import CreatableSelect from 'react-select/creatable';
 import { useState, useEffect } from 'react';
 import '../styles/components/Input.css';
@@ -10,7 +11,7 @@ import '../styles/components/Input.css';
  * @param {function} props.setData - Función para establecer los datos asociados a la opción seleccionada.
  * @param {Array} props.optionsData - Datos de las opciones existentes.
  * @param {function} props.setOptionsData - Función para establecer los datos de las opciones existentes.
- * @param {string} props.value - Valor seleccionado.
+ * @param {Number} props.value - Valor seleccionado.
  * @param {function} props.setValue - Función para establecer el valor seleccionado.
  * @param {Array} props.atributes - Atributos a mostrar de las opciones existentes.
  * @param {function} props.createFunction - Función para crear una nueva opción.
@@ -58,11 +59,9 @@ export function CreatableInputSelect({
         const data = await getDataFunction(option);
         setData(data);
       }
-    } else {
-      if (setData !== undefined) {
+    } else if (setData !== undefined) {
         setData(null);
       }
-    }
   };
 
   /**
@@ -110,4 +109,17 @@ export function CreatableInputSelect({
       />
     </div>
   );
+}
+
+CreatableInputSelect.propTypes = {
+  setData: PropTypes.func,
+  optionsData: PropTypes.array,
+  setOptionsData: PropTypes.func,
+  value: PropTypes.number,
+  setValue: PropTypes.func,
+  atributes: PropTypes.array,
+  createFunction: PropTypes.func,
+  getDataFunction: PropTypes.func,
+  placeholder: PropTypes.string,
+  style: PropTypes.object
 }

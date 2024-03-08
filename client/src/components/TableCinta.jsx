@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 import EditSvg from '../assets/edit.svg?react'
 import TrashSvg from '../assets/trash.svg?react'
 import BarCodeSvg from '../assets/barcode.svg?react'
@@ -13,7 +13,6 @@ import { AccessibleOption } from './AccesibleOption';
 import { ContentDialogEditCinta } from './ContentDialogEditCinta';
 import { UserContext } from '../contexts/userContext';
 import { ACCESS } from '../constants';
-
 
 /**
  * Componente `Table` para mostrar datos de las cintas en forma de tabla
@@ -70,18 +69,17 @@ export function Table({ columns, atributes, data, setData, processedData, setPro
           <table className="col-12">
             <thead>
               <tr>
-                {columns.map((name, index) => (
-                  <th key={index}>{name}</th>
+                {columns.map((name) => (
+                  <th key={name}>{name}</th>
                 ))}
                 <th>Acciones:</th>
               </tr>
             </thead>
             <tbody>
-              {processedData &&
-                processedData.map((item) => (
+              {processedData?.map((item) => (
                   <tr key={item.id}>
-                    {atributes.map((atribute, index) => (
-                      <td key={index}>{item[atribute]}</td>
+                    {atributes.map((atribute) => (
+                      <td key={item.id + atribute}>{item[atribute]}</td>
                     ))}
                     <td>
                       <div className="button-actions-table">
@@ -131,4 +129,13 @@ export function Table({ columns, atributes, data, setData, processedData, setPro
       />
     </>
   );
+}
+
+Table.propTypes = {
+  columns: PropTypes.array,
+  atributes: PropTypes.array,
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  processedData: PropTypes.array,
+  setProcessedData: PropTypes.func
 }

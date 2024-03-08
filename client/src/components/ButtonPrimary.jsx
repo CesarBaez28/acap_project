@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 /**
  * Componente de botón primario con estilo personalizado.
@@ -35,4 +35,12 @@ export function ButtonPrimary(props) {
       {props.children}
     </button>
   );
+}
+
+ButtonPrimary.propTypes = {
+  styles: PropTypes.object,
+  additionalStyles: PropTypes.object,
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  children: PropTypes.node
 }

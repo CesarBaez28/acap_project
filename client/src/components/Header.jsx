@@ -59,8 +59,8 @@ export function Header() {
               <div className='notifications-pop-up-container'>
                 <div className='notifications-pop-up'>
                   {notifications.length !== 0
-                    ? notifications.map((item, index) => (
-                      <div className='notification-text' key={index}>
+                    ? notifications.map((item) => (
+                      <div className='notification-text' key={item.message}>
                         <div>{item.message}</div>
                         <div>Fecha: {item.date}</div>
                       </div>

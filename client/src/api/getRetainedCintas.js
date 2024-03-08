@@ -6,7 +6,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {string} locationId - Identificador de la ubicación para la cual se obtendrán las cintas retenidas.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de cintas retenidas para la ubicación y fecha especificadas.
+ * @returns {Promise<Array>} - Lista de cintas retenidas para la ubicación y fecha especificadas.
  */
 export async function getRetainedCintas(locationId) {
   const token = getCookieValue(TOKEN_NAME);

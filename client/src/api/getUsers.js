@@ -7,7 +7,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  *
  * @param {string} state - Estado de los usuarios que se desea obtener (ej. 'active', 'inactive').
  * @param {string[]} usersId - Arreglo de identificadores de usuarios que se desean obtener.
- * @returns {Object[]} - Arreglo de objetos con la información procesada de los usuarios obtenidos.
+ * @returns {Promise<Object[]>} - Arreglo de objetos con la información procesada de los usuarios obtenidos.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los usuarios.
  */
 export async function getUsers(state, usersId) {

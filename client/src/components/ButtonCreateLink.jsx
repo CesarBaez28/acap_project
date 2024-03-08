@@ -1,5 +1,6 @@
 import '../styles/components/buttonCreate.css'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 /**
  * Componente de enlace de botón de creación con texto y un ícono SVG.
@@ -24,4 +25,10 @@ export function ButtonCreateLink({ text, svg, href }) {
       </Link>
     </div>
   );
+}
+
+ButtonCreateLink.propTypes = {
+  text: PropTypes.string,
+  svg: PropTypes.element,
+  href: PropTypes.string
 }

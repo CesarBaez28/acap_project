@@ -1,5 +1,6 @@
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types'
 
 import '../styles/components/dialog.css';
 
@@ -45,4 +46,10 @@ export function Dialog({ ContentDialog, ...props }) {
       </Box>
     </Modal>
   );
+}
+
+Dialog.propTypes = {
+  ContentDialog: PropTypes.node,
+  styles: PropTypes.object,
+  title: PropTypes.string
 }

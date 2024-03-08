@@ -1,5 +1,6 @@
 import '../styles/components/cardMenu.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 /**
  * Componente de tarjeta de menú que muestra un título y opciones de enlace.
@@ -22,8 +23,8 @@ export function CardMenu({ title, options }) {
         </div>
         <div className='card-options'>
           {/* Mapea las opciones y crea enlaces con las propiedades proporcionadas */}
-          {options.map((option, index) => (
-            <Link to={option.href} key={index} className='option-link'>
+          {options.map((option) => (
+            <Link to={option.href} key={option.href} className='option-link'>
               {option.label}
             </Link>
           ))}
@@ -31,4 +32,9 @@ export function CardMenu({ title, options }) {
       </div>
     </article>
   );
+}
+
+CardMenu.propTypes = {
+  title: PropTypes.string,
+  options: PropTypes.array
 }

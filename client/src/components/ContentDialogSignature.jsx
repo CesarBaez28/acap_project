@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { ButtonSecundary } from "./ButtonSecondary";
 import '../styles/components/contentDialogSignature.css'
 import { startSigning, clearSign, doneSigning } from "../utils/singWithTopazSystem";
@@ -53,4 +54,9 @@ export function ContentDialogSignature({ setData, setModalShow }) {
       </div>
     </>
   );
+}
+
+ContentDialogSignature.propTypes = {
+  setData: PropTypes.func,
+  setModalShow: PropTypes.func
 }

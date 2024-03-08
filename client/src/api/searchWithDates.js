@@ -7,7 +7,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * @param {string} search - Término de búsqueda para buscar elementos en el servidor.
  * @param {Date} initialDate - Fecha de inicio del rango de búsqueda.
  * @param {Date} finalDate - Fecha de fin del rango de búsqueda.
- * @returns {Object} - Objeto JSON que contiene la información de los elementos encontrados.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de los elementos encontrados.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function searchWithDates(search, initialDate, finalDate) {

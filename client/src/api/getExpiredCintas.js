@@ -6,7 +6,7 @@ import { getCookieValue } from "../utils/getCookieValue";
  *
  * @param {string} locationId - ID de la ubicación para la cual se desea obtener las cintas vencidas.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de información de cintas vencidas para la ubicación especificada.
+ * @returns {Promise<Array>} - Promesa con la Lista de información de cintas vencidas para la ubicación especificada.
  */
 export async function getExpiredCintas(locationId) {
   // Obtiene el token de la cookie

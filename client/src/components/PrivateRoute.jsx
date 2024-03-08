@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom"
 import { useContext } from "react"
 import { UserContext } from "../contexts/userContext"
+import PropTypes from 'prop-types'
 
 /**
  * Componente `PrivateRoute` para gestionar las rutas privadas y controlar los permisos de acceso.
@@ -28,4 +29,9 @@ export function PrivateRoute({ Element, requiredPermissions }) {
 
   // Redirigir a la página de acceso denegado si no se cumplen las condiciones anteriores
   return <Navigate to="/access/denied"/>
+}
+
+PrivateRoute.propTypes = {
+  Element: PropTypes.elementType,
+  requiredPermissions: PropTypes.number
 }

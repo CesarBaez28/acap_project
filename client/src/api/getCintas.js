@@ -5,7 +5,7 @@ import { getCookieValue } from "../utils/getCookieValue";
  * Obtiene la lista de cintas desde el servidor.
  *
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o procesamiento de los datos.
- * @returns {Array} - Lista de cintas.
+ * @returns {Promise<Array>} - Promesa con la Lista de cintas.
  */
 export async function getCintas() {
   // Obtiene el token de la cookie

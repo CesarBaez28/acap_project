@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 
 import Select from 'react-select';
 
@@ -38,4 +38,12 @@ export function InputSelect({ options, selectedOption, setSelectedOption, defaul
       options={options}
     />
   );
+}
+
+InputSelect.propTypes = {
+  options: PropTypes.array,
+  selectedOption: PropTypes.object,
+  setSelectedOption: PropTypes.func,
+  defaultValue: PropTypes.object,
+  styles: PropTypes.object 
 }

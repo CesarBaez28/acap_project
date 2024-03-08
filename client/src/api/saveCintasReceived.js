@@ -5,7 +5,7 @@ import { getCookieValue } from '../utils/getCookieValue';
  * Realiza la solicitud para guardar información sobre cintas recibidas en el servidor.
  *
  * @param {Object} shipmetData - Datos de la cinta recibida a ser guardados.
- * @returns {Object} - Objeto JSON que contiene la información de la cinta recibida guardada.
+ * @returns {Promise<Object>} - Objeto JSON que contiene la información de la cinta recibida guardada.
  * @throws {Error} - Error lanzado en caso de fallo en la solicitud o error en el servidor.
  */
 export async function saveCintasReceived({ shipmetData }) {

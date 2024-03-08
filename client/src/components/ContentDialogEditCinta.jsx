@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'
 
 import { Formik, Form } from "formik";
 import { TextInput } from "./TextInput";
@@ -40,13 +40,13 @@ export function ContentDialogEditCinta({ setModalShow, selectedItem, setData, da
 
   // Valores iniciales basados en el elemento seleccionado
   const initialValues = {
-    label: selectedItem && selectedItem.label,
-    description: selectedItem && selectedItem.description,
+    label: selectedItem?.label,
+    description: selectedItem?.description,
     creationDate: selectedItem && new Date(selectedItem.creationDateFull).toISOString().split('T')[0],
     expireDate: selectedItem && new Date(selectedItem.expiryDateFull).toISOString().split('T')[0],
     rententionDate: selectedItem && new Date(selectedItem.rententionDateFull).toISOString().split('T')[0],
-    location: selectedItem && selectedItem.id_location,
-    statusCinta: selectedItem && selectedItem.id_statusCinta
+    location: selectedItem?.id_location,
+    statusCinta: selectedItem?.id_statusCinta
   };
 
   // Manejador para editar una cinta
@@ -103,4 +103,13 @@ export function ContentDialogEditCinta({ setModalShow, selectedItem, setData, da
       </Form>
     </Formik>
   );
+}
+
+ContentDialogEditCinta.propTypes = {
+  setModalShow: PropTypes.func,
+  selectedItem: PropTypes.object,
+  setData: PropTypes.func,
+  data: PropTypes.array,
+  processedData: PropTypes.array,
+  setProcessedData: PropTypes.func
 }

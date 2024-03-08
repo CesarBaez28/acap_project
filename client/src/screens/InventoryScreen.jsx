@@ -40,7 +40,6 @@ const Content = () => {
       <InputAreaCinta
         cintas={cintas}
         setCintas={setCintas}
-        processedCintas={processedCintas}
         setProcessedCintas={setProcessedCintas}
         setIsLoading={setIsLoading}
       />
