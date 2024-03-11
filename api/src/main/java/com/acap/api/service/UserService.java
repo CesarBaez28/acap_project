@@ -110,21 +110,19 @@ public class UserService {
    * @return Usuario con la contraseña cambiada (si la operación fue exitosa).
    */
   public User changePassword(UUID userId, String currentPassword, String newPassword) {
-    Optional<User> userData = userRepository.findById(userId);
-    String passwordInDB = "";
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NullPointerException("Usuario no encontrado con ID: " + userId));    
 
-    if (userData.isPresent()) {
-      passwordInDB = userData.get().getPassword();
-    }
+    String passwordInDB = user.getPassword();
 
     if (!Encrypt.matchesPasswords(currentPassword, passwordInDB)) {
       return null;
     }
 
     String encryptedPassword = Encrypt.encryptPassword(newPassword);
-    userData.get().setPassword(encryptedPassword);
+    user.setPassword(encryptedPassword);
     userRepository.changePassword(userId, encryptedPassword);
-    return userData.get();
+    return user;
   }
 
   /**
