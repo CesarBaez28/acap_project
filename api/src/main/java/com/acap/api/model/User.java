@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -30,7 +31,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = @Index(name = "username_index", columnList = "username"))
 public class User {
 
   /**
@@ -76,7 +77,7 @@ public class User {
    * Nombre de usuario único y no nulo.
    */
   @NotBlank(message = "Ingrese su nombre de usuario", groups = {UserRegister.class, UserEdit.class})
-  @Column(name = "username", nullable=false, length=100, unique = true)
+  @Column(name = "username", nullable=false, length=100)
   private String username;
 
   /**
