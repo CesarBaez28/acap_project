@@ -4,7 +4,7 @@ import { userValidationSchemaWithoutPositionAndBranchOffice } from '../validacti
 import { TextInput } from "../components/TextInput"
 import { ButtonPrimary } from './ButtonPrimary'
 import { ButtonSecundary } from './ButtonSecondary'
-import { editUser } from '../api/editUser'
+import { editUserProfile } from '../api/editUserProfile'
 
 import '../styles/components/contentDialogProfile.css'
 
@@ -30,7 +30,7 @@ export function ContentDialogProfile({ setModalShow, setData, data }) {
     let { username, employeeNumber, email } = values;
 
     // Realiza la edición del usuario mediante la función editUser de la API
-    const user = await editUser({
+    const user = await editUserProfile({
       userData: {
         id: data.id,
         username,

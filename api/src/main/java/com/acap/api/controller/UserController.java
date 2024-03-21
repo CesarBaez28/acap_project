@@ -149,6 +149,15 @@ public class UserController {
     return handleValidationAndSaveUser(user, bindingResult);
   }
 
+  // Endpoint para editar el perfil propio de usuario
+  @PutMapping("/profile")
+  public ResponseEntity<Object> editUserProfile(
+    @Validated(value = {UserEdit.class}) @RequestBody User user,
+    BindingResult bindingResult) {      
+
+      return handleValidationAndSaveUser(user, bindingResult);
+  }
+
   // Endpoint para iniciar sesión de usuario
   @PostMapping("/login")
   public ResponseEntity<Object> logUser(@Validated(LoginUser.class) @RequestBody User user,
